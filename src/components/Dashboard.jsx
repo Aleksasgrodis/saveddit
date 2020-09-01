@@ -1,24 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 import URLParse from 'url-parse';
 import { UserContext } from '../context/UserContext';
-import { useSelector, useDispatch } from 'react-redux';
-import { addToken, addUsername, addSaved } from '../actions';
 import { useState } from 'react';
 
-//! Persist needs to be reworked
-//! Fetching /saved returns empty listing json
 //TODO Keep track of token expires
 const Dashboard = () => {
   const url = new URLParse(window.location, true);
   // const { user, setUser } = useContext(UserContext);
   const seed = localStorage.getItem('seed');
-
-  const user = useSelector(state => state.user);
-  const data = useSelector(state => state.data);
-
+  const { setUser, user } = useContext(UserContext);
   const [after, setAfter] = useState(null);
   const [count, setCount] = useState(100);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchUserToken = code => {
@@ -26,7 +18,7 @@ const Dashboard = () => {
         fetch(`/api/token?code=${code}`)
           .then(res => res.json())
           .then(data => {
-            dispatch(addToken(data.access_token));
+            setUser({ ...user, token: data.access_token });
             fetchUserName(data.access_token);
           })
           .catch(err => console.log(err));
@@ -34,38 +26,45 @@ const Dashboard = () => {
     };
 
     const fetchUserName = token => {
-        fetch(`/api/username`, {
-          method: 'POST',
-          body: JSON.stringify({
-            token: token,
-          }),
-        })
-          .then(res => res.json())
-          .then(data => {
-            dispatch(addUsername(data.name));
-            fetchSaved();
-          })
-          .catch(err => console.log(err));
-    };
-
-    const fetchSaved = () => {
-      fetch(`/api/fetch`, {
+      fetch(`/api/username`, {
         method: 'POST',
         body: JSON.stringify({
-          token: user.token,
-          username: user.username,
+          token: token,
         }),
       })
         .then(res => res.json())
-        .then(({ data }) => {
-          console.log('data got');
-
-          dispatch(addSaved(data.children.map(a => a.data)));
-          setAfter(data.after);
-          setCount(data.dist);
+        .then(data => {
+          setUser(prevstate => {
+            return { ...prevstate, name: data.name };
+          });
+          // fetchSaved();
         })
         .catch(err => console.log(err));
     };
+
+    if (user.token && user.name) {
+      const fetchSaved = () => {
+        console.log('fetch saved');
+        fetch(`/api/fetch`, {
+          method: 'POST',
+          body: JSON.stringify({
+            token: user.token,
+            username: user.name,
+          }),
+        })
+          .then(res => res.json())
+          .then(({ data }) => {
+            console.log('data got');
+            setUser(prevstate => {
+              return { ...prevstate, data: data.children.map(a => a.data) };
+            });
+            setAfter(data.after);
+            setCount(data.dist);
+          })
+          .catch(err => console.log(err));
+      };
+      fetchSaved();
+    }
 
     if (url && url.query.state === seed) {
       fetchUserToken(url.query.code);
@@ -74,33 +73,33 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchSaved = () => {
-      if (user.token && user.username) {
         fetch(`/api/fetch`, {
           method: 'POST',
           body: JSON.stringify({
             token: user.token,
-            username: user.username,
+            username: user.name,
             after,
           }),
         })
           .then(res => res.json())
           .then(({ data }) => {
-            console.log(data);
-            dispatch(addSaved(data.children.map(a => a.data)));
+            setUser(prevstate=> {
+              return {...prevstate, data: [...prevstate.data, ...data.children.map(a => a.data)] }
+            })
             setAfter(data.after);
             setCount(data.dist);
           })
           .catch(err => console.log(err));
-      }
+      
     };
-    if (after && count === 100) {
-      fetchSaved();
-    }
-  }, [after, count, user.username, user.token, dispatch]);
+    // if (after && count === 100) {
+    //   fetchSaved();
+    // }
+  }, [after, count, user.username, user.token]);
 
   return (
     <div className="dashboard">
-      <h2>Welcome, {user.username ? user.username : 'person!'}</h2>
+      <h2>Welcome, {user.name ? user.name : 'person!'}</h2>
     </div>
   );
 };
