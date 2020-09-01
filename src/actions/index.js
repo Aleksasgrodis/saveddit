@@ -18,3 +18,16 @@ export const addCode = code => {
     code
   }
 }
+
+export const addSaved = data => {
+  return {
+    type: 'ADD_SAVED',
+    data
+  }
+}
+
+export const getSaved = () => {
+  return {
+    type: 'GET_SAVED',
+  }
+}

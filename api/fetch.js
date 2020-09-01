@@ -14,7 +14,7 @@ module.exports = (req, res) => {
   };
 
   fetch(
-    `https://oauth.reddit.com/user/${username.toLowerCase()}/saved/?limit=25${
+    `https://oauth.reddit.com/user/${username.toLowerCase()}/saved/?limit=100${
       after ? `&after=${after}` : ''
     }`,
     config,

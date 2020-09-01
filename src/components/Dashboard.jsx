@@ -2,11 +2,12 @@ import React, { useContext, useEffect } from 'react';
 import URLParse from 'url-parse';
 import { UserContext } from '../context/UserContext';
 import { useSelector, useDispatch } from 'react-redux';
-import { addToken, addUsername } from '../actions';
+import { addToken, addUsername, addSaved } from '../actions';
+import { useState } from 'react';
 
 //! Persist needs to be reworked
 //! Fetching /saved returns empty listing json
-//TODO Keep track of token expires 
+//TODO Keep track of token expires
 const Dashboard = () => {
   const url = new URLParse(window.location, true);
   // const { user, setUser } = useContext(UserContext);
@@ -14,6 +15,9 @@ const Dashboard = () => {
 
   const user = useSelector(state => state.user);
   const data = useSelector(state => state.data);
+
+  const [after, setAfter] = useState(null);
+  const [count, setCount] = useState(100);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,33 +27,52 @@ const Dashboard = () => {
           .then(res => res.json())
           .then(data => {
             dispatch(addToken(data.access_token));
+            fetchUserName(data.access_token);
           })
           .catch(err => console.log(err));
-      } else {
-        fetchUserName(user.token);
       }
     };
 
     const fetchUserName = token => {
-      if (user.token && !user.username) {
-        console.log('no username');
         fetch(`/api/username`, {
           method: 'POST',
           body: JSON.stringify({
-            token: user.token,
+            token: token,
           }),
         })
           .then(res => res.json())
           .then(data => {
             dispatch(addUsername(data.name));
+            fetchSaved();
           })
           .catch(err => console.log(err));
-      }
-      if (user.token && user.username) {
-        fetchSaved();
-      }
     };
 
+    const fetchSaved = () => {
+      fetch(`/api/fetch`, {
+        method: 'POST',
+        body: JSON.stringify({
+          token: user.token,
+          username: user.username,
+        }),
+      })
+        .then(res => res.json())
+        .then(({ data }) => {
+          console.log('data got');
+
+          dispatch(addSaved(data.children.map(a => a.data)));
+          setAfter(data.after);
+          setCount(data.dist);
+        })
+        .catch(err => console.log(err));
+    };
+
+    if (url && url.query.state === seed) {
+      fetchUserToken(url.query.code);
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchSaved = () => {
       if (user.token && user.username) {
         fetch(`/api/fetch`, {
@@ -57,20 +80,23 @@ const Dashboard = () => {
           body: JSON.stringify({
             token: user.token,
             username: user.username,
+            after,
           }),
         })
           .then(res => res.json())
-          .then(data => {
+          .then(({ data }) => {
             console.log(data);
+            dispatch(addSaved(data.children.map(a => a.data)));
+            setAfter(data.after);
+            setCount(data.dist);
           })
           .catch(err => console.log(err));
       }
     };
-
-    if (url && url.query.state === seed) {
-      fetchUserToken(url.query.code);
+    if (after && count === 100) {
+      fetchSaved();
     }
-  }, []);
+  }, [after, count, user.username, user.token, dispatch]);
 
   return (
     <div className="dashboard">

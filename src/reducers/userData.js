@@ -1,11 +1,11 @@
-const userDataReducer = (state = false, action) => {
+const userDataReducer = (state = [], action) => {
   // saved links
   // remove etc etc
   switch (action.type) {
-    case 'ADD_IN':
-      return true;
-    case 'SIGN_OUT':
-      return false;
+    case 'ADD_SAVED':
+      return [...state, ...action.data]
+    case 'GET_SAVED':
+      return state;
     default: 
       return state;
   }
