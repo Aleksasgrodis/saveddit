@@ -3,6 +3,10 @@ import URLParse from 'url-parse';
 import { UserContext } from '../context/UserContext';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToken, addUsername } from '../actions';
+
+//! Persist needs to be reworked
+//! Fetching /saved returns empty listing json
+//TODO Keep track of token expires 
 const Dashboard = () => {
   const url = new URLParse(window.location, true);
   // const { user, setUser } = useContext(UserContext);
@@ -28,6 +32,7 @@ const Dashboard = () => {
 
     const fetchUserName = token => {
       if (user.token && !user.username) {
+        console.log('no username');
         fetch(`/api/username`, {
           method: 'POST',
           body: JSON.stringify({
