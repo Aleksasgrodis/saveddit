@@ -12,7 +12,7 @@ const userReducer = (
     case 'GET_TOKEN':
       return state.token;
     case 'ADD_USERNAME':
-      return { ...state, username: action.code };
+      return { ...state, username: action.username };
     case 'GET_USERNAME':
       return state.username;
     default:

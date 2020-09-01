@@ -4,14 +4,23 @@ import './assets/main.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './reducers';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+// import * as storage from 'redux-storage';
+import { persistStore, persistReducer } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
+import { PersistGate } from 'redux-persist/integration/react';
+import storage from 'redux-persist-indexeddb-storage';
+const persistConfig = {
+  key: 'root',
+  storage: storage('persistDB'),
+};
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 // STORE - GLOBALIZED STATE
+
+let store = createStore(persistedReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+let persistor = persistStore(store);
 
 // // ACTION -
 
@@ -96,7 +105,9 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

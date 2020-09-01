@@ -4,17 +4,19 @@ const { qs } = require('url-parse');
 const { default: fetch } = require('node-fetch');
 
 module.exports = (req, res) => {
-  const { token, username, after } = req.body;
-
+  
+  const { token, username, after } = JSON.parse(req.body);
+  console.log(token, username, after)
   var config = {
-    method: 'post',
+    method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
   fetch(
-    `https://oauth.reddit.com/user/${username}/saved?limit=100&after=${after}`,
+    // `https://oauth.reddit.com/user/${username}/saved?limit=100&after=${after}`,
+    `https://oauth.reddit.com/user/${username}/saved?limit=100`,
     config,
   )
     .then(response => response.json(response))

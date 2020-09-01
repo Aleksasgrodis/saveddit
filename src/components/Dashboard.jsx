@@ -5,67 +5,71 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addToken, addUsername } from '../actions';
 const Dashboard = () => {
   const url = new URLParse(window.location, true);
-  const { user, setUser } = useContext(UserContext);
+  // const { user, setUser } = useContext(UserContext);
   const seed = localStorage.getItem('seed');
 
-  const userr = useSelector(state => state.user);
+  const user = useSelector(state => state.user);
+  const data = useSelector(state => state.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchUserToken = code => {
-      fetch(`/api/token?code=${code}`)
-        .then(res => res.json())
-        .then(data => {
-          dispatch(addToken(data.access_token))
-          fetchUserName(data.access_token)})
-        .catch(err => console.log(err));
+      if (!user.token) {
+        fetch(`/api/token?code=${code}`)
+          .then(res => res.json())
+          .then(data => {
+            dispatch(addToken(data.access_token));
+          })
+          .catch(err => console.log(err));
+      } else {
+        fetchUserName(user.token);
+      }
     };
 
     const fetchUserName = token => {
-      fetch(`/api/username`, {
-        method: 'POST',
-        body: JSON.stringify({
-          token: token
+      if (user.token && !user.username) {
+        fetch(`/api/username`, {
+          method: 'POST',
+          body: JSON.stringify({
+            token: user.token,
+          }),
         })
-      })
-        .then(res => res.json())
-        .then(data => {
-          // CONTINUE HERE
-          // Take name and anything else necessary from response into state 
-          // then fetch data
-          dispatch(addUsername(data.name))
-          setUser({...user, name: data.name})
-        })
-        .catch(err => console.log(err));
-    }
+          .then(res => res.json())
+          .then(data => {
+            dispatch(addUsername(data.name));
+          })
+          .catch(err => console.log(err));
+      }
+      if (user.token && user.username) {
+        fetchSaved();
+      }
+    };
 
     const fetchSaved = () => {
-      fetch(`/api/username`, {
-        method: 'POST',
-        body: JSON.stringify({
-          // token: token
+      if (user.token && user.username) {
+        fetch(`/api/fetch`, {
+          method: 'POST',
+          body: JSON.stringify({
+            token: user.token,
+            username: user.username,
+          }),
         })
-      })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-          // CONTINUE HERE
-          // Take name and anything else necessary from response into state 
-          // then fetch data
-          setUser({...user, name: data.name})
-        })
-        .catch(err => console.log(err));
-    }
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+          })
+          .catch(err => console.log(err));
+      }
+    };
 
     if (url && url.query.state === seed) {
-      setUser({ ...user, code: url.query.code });
       fetchUserToken(url.query.code);
     }
   }, []);
 
   return (
     <div className="dashboard">
-      <h2>Welcome, { user.name ? user.name : 'person!' }</h2>
+      <h2>Welcome, {user.username ? user.username : 'person!'}</h2>
     </div>
   );
 };

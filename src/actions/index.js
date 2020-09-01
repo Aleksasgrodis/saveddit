@@ -7,14 +7,14 @@ export const addToken = token => {
 
 export const addUsername = username => {
   return {
-    type: 'ADD_TOKEN',
+    type: 'ADD_USERNAME',
     username
   }
 }
 
 export const addCode = code => {
   return {
-    type: 'ADD_TOKEN',
+    type: 'ADD_CODE',
     code
   }
 }
