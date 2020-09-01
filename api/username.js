@@ -3,7 +3,8 @@ const { default: fetch } = require('node-fetch');
 
 module.exports = (req, res) => {
   const { body } = req;
-  const { token } = JSON.parse(body)
+  const { token } = JSON.parse(body);
+  console.log(token)
   var config = {
     method: 'GET',
     headers: {
@@ -13,7 +14,9 @@ module.exports = (req, res) => {
   };
 
   fetch(`https://oauth.reddit.com/api/v1/me`, config)
-    .then(response => response.json())
+    .then(response => {
+      console.log(response)
+      return response.json()})
     .then(data => res.json(data))
     .catch(error => console.log(error));
 };
