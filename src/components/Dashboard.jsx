@@ -12,6 +12,40 @@ const Dashboard = () => {
   const [after, setAfter] = useState(null);
   const [count, setCount] = useState(100);
 
+  const minifyReponse = array => {
+    return array.map(
+      ({
+        author,
+        archived,
+        clicked,
+        created_utc,
+        domain,
+        id,
+        num_comments,
+        over_18,
+        permalink,
+        score,
+        subreddit_name_prefixed,
+        title,
+        url,
+      }) => ({
+        author,
+        archived,
+        clicked,
+        created_utc,
+        domain,
+        id,
+        num_comments,
+        over_18,
+        permalink,
+        score,
+        subreddit_name_prefixed,
+        title,
+        url,
+      }),
+    );
+  };
+
   useEffect(() => {
     const fetchUserToken = code => {
       if (!user.token) {
@@ -42,6 +76,8 @@ const Dashboard = () => {
         .catch(err => console.log(err));
     };
 
+    
+
     if (user.token && user.name) {
       const fetchSaved = () => {
         console.log('fetch saved');
@@ -54,9 +90,9 @@ const Dashboard = () => {
         })
           .then(res => res.json())
           .then(({ data }) => {
-            console.log('data got');
+            console.log('data got', data);
             setUser(prevstate => {
-              return { ...prevstate, data: data.children.map(a => a.data) };
+              return { ...prevstate, data: minifyReponse(data.children.map(a => (a.data))) };
             });
             setAfter(data.after);
             setCount(data.dist);
@@ -73,28 +109,31 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchSaved = () => {
-        fetch(`/api/fetch`, {
-          method: 'POST',
-          body: JSON.stringify({
-            token: user.token,
-            username: user.name,
-            after,
-          }),
+      fetch(`/api/fetch`, {
+        method: 'POST',
+        body: JSON.stringify({
+          token: user.token,
+          username: user.name,
+          after,
+        }),
+      })
+        .then(res => res.json())
+        .then(({ data }) => {
+          setUser(prevstate => {
+            return {
+              ...prevstate,
+              data: [...prevstate.data, ...minifyReponse(data.children.map(a => a.data))],
+            };
+          });
+          setAfter(data.after);
+          setCount(data.dist);
         })
-          .then(res => res.json())
-          .then(({ data }) => {
-            setUser(prevstate=> {
-              return {...prevstate, data: [...prevstate.data, ...data.children.map(a => a.data)] }
-            })
-            setAfter(data.after);
-            setCount(data.dist);
-          })
-          .catch(err => console.log(err));
-      
+        .catch(err => console.log(err));
     };
-    // if (after && count === 100) {
-    //   fetchSaved();
-    // }
+    if (after && count === 100) {
+      console.log('fetched hunna');
+      fetchSaved();
+    }
   }, [after, count, user.username, user.token]);
 
   return (
