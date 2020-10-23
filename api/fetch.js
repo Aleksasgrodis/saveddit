@@ -1,5 +1,3 @@
-// https://oauth.reddit.com
-
 const { qs } = require('url-parse');
 const { default: fetch } = require('node-fetch');
 
