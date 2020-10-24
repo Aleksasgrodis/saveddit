@@ -1,1 +1,1 @@
-export const ADD_NEW = 'ADD_NEW';
+export const ADD_LINKS = 'ADD_LINKS';

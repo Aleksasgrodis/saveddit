@@ -21,6 +21,7 @@
     "redux-persist-indexeddb-storage": "^1.0.4",
     "redux-storage": "^4.1.2",
     "redux-storage-engine-indexed-db": "^1.0.0",
+    "reselect": "^4.0.0",
     "url-parse": "^1.4.7",
     "uuid": "^8.3.0"
   },

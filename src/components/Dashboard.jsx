@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import URLParse from 'url-parse';
 import { UserContext } from '../context/UserContext';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addLinks } from '../redux/actions';
 
 //TODO Keep track of token expires
 const Dashboard = () => {
@@ -14,6 +16,8 @@ const Dashboard = () => {
   const [saved, setSaved] = useState(
     JSON.parse(localStorage.getItem('user')) || [],
   );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     localStorage.setItem('saved', JSON.stringify(saved));
@@ -94,7 +98,9 @@ const Dashboard = () => {
           .then(res => res.json())
           .then(({ data }) => {
             setLoading(true);
-            setSaved(minifyReponse(data.children.map(a => a.data)));
+            const links = minifyReponse(data.children.map(a => a.data));
+            setSaved(links);
+            dispatch(addLinks({ links }));
             setAfter(data.after);
             setCount(data.dist);
           })
@@ -106,6 +112,7 @@ const Dashboard = () => {
     if (url && url.query.state === seed) {
       fetchUserToken(url.query.code);
     }
+    console.log('first effect');
   }, []);
 
   useEffect(() => {
@@ -120,12 +127,11 @@ const Dashboard = () => {
       })
         .then(res => res.json())
         .then(({ data }) => {
+          const links = minifyReponse(data.children.map(a => a.data));
           setSaved(prevstate => {
-            return [
-              ...prevstate,
-              ...minifyReponse(data.children.map(a => a.data)),
-            ];
+            return [...prevstate, ...links];
           });
+          dispatch(addLinks({ links }));
           setAfter(data.after);
           setCount(data.dist);
         })
@@ -137,7 +143,9 @@ const Dashboard = () => {
     if (count < 100) {
       setLoading(false);
     }
-  }, [after, count, user]);
+    console.log('second effect');
+
+  }, [after, count, user, dispatch]);
 
   const signOut = () => {
     localStorage.clear();
