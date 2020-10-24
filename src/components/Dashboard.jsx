@@ -6,18 +6,18 @@ import { useState } from 'react';
 //TODO Keep track of token expires
 const Dashboard = () => {
   const url = new URLParse(window.location, true);
-  // const { user, setUser } = useContext(UserContext);
   const seed = localStorage.getItem('seed');
   const { setUser, user } = useContext(UserContext);
   const [after, setAfter] = useState(null);
   const [count, setCount] = useState(100);
   const [loading, setLoading] = useState(false);
-  const [saved, setSaved] = useState(JSON.parse(localStorage.getItem('user')) || [],)
+  const [saved, setSaved] = useState(
+    JSON.parse(localStorage.getItem('user')) || [],
+  );
 
   useEffect(() => {
     localStorage.setItem('saved', JSON.stringify(saved));
   }, [saved]);
-
 
   const minifyReponse = array => {
     return array.map(
@@ -78,16 +78,12 @@ const Dashboard = () => {
           setUser(prevstate => {
             return { ...prevstate, name: data.name };
           });
-          // fetchSaved();
         })
         .catch(err => console.log(err));
     };
 
-    
-
     if (user.token && user.name) {
       const fetchSaved = () => {
-        console.log('fetch saved');
         fetch(`/api/fetch`, {
           method: 'POST',
           body: JSON.stringify({
@@ -97,8 +93,8 @@ const Dashboard = () => {
         })
           .then(res => res.json())
           .then(({ data }) => {
-            setLoading(true)
-            setSaved(minifyReponse(data.children.map(a => (a.data))));
+            setLoading(true);
+            setSaved(minifyReponse(data.children.map(a => a.data)));
             setAfter(data.after);
             setCount(data.dist);
           })
@@ -111,9 +107,6 @@ const Dashboard = () => {
       fetchUserToken(url.query.code);
     }
   }, []);
-
-
-
 
   useEffect(() => {
     const fetchSaved = () => {
@@ -130,7 +123,7 @@ const Dashboard = () => {
           setSaved(prevstate => {
             return [
               ...prevstate,
-              ...minifyReponse(data.children.map(a => a.data))
+              ...minifyReponse(data.children.map(a => a.data)),
             ];
           });
           setAfter(data.after);
@@ -139,18 +132,16 @@ const Dashboard = () => {
         .catch(err => console.log(err));
     };
     if (after && count === 100) {
-      console.log('fetched hunna');
       fetchSaved();
     }
-    if(count < 100) {
-      console.log('done fetching');
-      setLoading(false)
+    if (count < 100) {
+      setLoading(false);
     }
-  }, [after, count, user.name, user.token]);
+  }, [after, count, user]);
 
   const signOut = () => {
     localStorage.clear();
-  }
+  };
 
   return (
     <div className="dashboard">
