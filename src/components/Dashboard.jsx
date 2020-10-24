@@ -37,6 +37,7 @@ const Dashboard = () => {
         permalink,
         score,
         subreddit_name_prefixed,
+        subreddit,
         title,
         url,
       }) => ({
@@ -51,6 +52,7 @@ const Dashboard = () => {
         permalink,
         score,
         subreddit_name_prefixed,
+        subreddit,
         title,
         url,
       }),
@@ -96,13 +98,13 @@ const Dashboard = () => {
           }),
         })
           .then(res => res.json())
-          .then(({ data }) => {
+          .then(({after, dist, saved}) => {
+            console.log(saved);
             setLoading(true);
-            const links = minifyReponse(data.children.map(a => a.data));
-            setSaved(links);
-            dispatch(addLinks({ links }));
-            setAfter(data.after);
-            setCount(data.dist);
+            setSaved(saved);
+            dispatch(addLinks({ saved: saved }));
+            setAfter(after);
+            setCount(dist);
           })
           .catch(err => console.log(err));
       };
@@ -126,14 +128,13 @@ const Dashboard = () => {
         }),
       })
         .then(res => res.json())
-        .then(({ data }) => {
-          const links = minifyReponse(data.children.map(a => a.data));
+        .then(({after, dist, saved}) => {
           setSaved(prevstate => {
-            return [...prevstate, ...links];
+            return [...prevstate, ...saved];
           });
-          dispatch(addLinks({ links }));
-          setAfter(data.after);
-          setCount(data.dist);
+          dispatch(addLinks({ saved: saved }));
+          setAfter(after);
+          setCount(dist);
         })
         .catch(err => console.log(err));
     };

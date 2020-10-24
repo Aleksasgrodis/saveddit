@@ -1,9 +1,44 @@
 const { qs } = require('url-parse');
 const { default: fetch } = require('node-fetch');
 
+const minifyReponse = array => {
+  return array.map(
+    ({
+      author,
+      archived,
+      clicked,
+      created_utc,
+      domain,
+      id,
+      num_comments,
+      over_18,
+      permalink,
+      score,
+      subreddit_name_prefixed,
+      subreddit,
+      title,
+      url,
+    }) => ({
+      author,
+      archived,
+      clicked,
+      created_utc,
+      domain,
+      id,
+      num_comments,
+      over_18,
+      permalink,
+      score,
+      subreddit_name_prefixed,
+      subreddit,
+      title,
+      url,
+    }),
+  );
+};
+
 module.exports = (req, res) => {
   const { token, username, after } = JSON.parse(req.body);
-  console.log(token, username, after);
   var config = {
     method: 'GET',
     headers: {
@@ -18,9 +53,17 @@ module.exports = (req, res) => {
     config,
   )
     .then(response => {
-      console.log(response);
       return response.json(response);
     })
-    .then(data => res.json(data))
+    .then(({ data }) => {
+      const { dist, after, children, before } = data;
+
+      return res.json({
+        dist,
+        after,
+        before,
+        saved: minifyReponse(children.map(a => a.data)),
+      });
+    })
     .catch(error => console.log(error));
 };

@@ -15,7 +15,6 @@ module.exports = (req, res) => {
 
   fetch(`https://oauth.reddit.com/api/v1/me`, config)
     .then(response => {
-      console.log(response)
       return response.json()})
     .then(data => res.json(data))
     .catch(error => console.log(error));
