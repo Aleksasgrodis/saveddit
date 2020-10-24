@@ -11,6 +11,7 @@ const Dashboard = () => {
   const { setUser, user } = useContext(UserContext);
   const [after, setAfter] = useState(null);
   const [count, setCount] = useState(100);
+  const [loading, setLoading] = useState(false);
 
   const minifyReponse = array => {
     return array.map(
@@ -90,7 +91,7 @@ const Dashboard = () => {
         })
           .then(res => res.json())
           .then(({ data }) => {
-            console.log('data got', data);
+            setLoading(true)
             setUser(prevstate => {
               return { ...prevstate, data: minifyReponse(data.children.map(a => (a.data))) };
             });
@@ -134,11 +135,20 @@ const Dashboard = () => {
       console.log('fetched hunna');
       fetchSaved();
     }
-  }, [after, count, user.username, user.token]);
+    if(count < 100) {
+      setLoading(false)
+    }
+  }, [after, count, user.name, user.token, setUser]);
+
+  const signOut = () => {
+    localStorage.clear();
+  }
 
   return (
     <div className="dashboard">
       <h2>Welcome, {user.name ? user.name : 'person!'}</h2>
+      <p>{loading ? 'Loading' : 'Finished'}</p>
+      <button onClick={() => signOut()}>Log out</button>
     </div>
   );
 };
