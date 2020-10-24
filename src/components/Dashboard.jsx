@@ -12,6 +12,12 @@ const Dashboard = () => {
   const [after, setAfter] = useState(null);
   const [count, setCount] = useState(100);
   const [loading, setLoading] = useState(false);
+  const [saved, setSaved] = useState(JSON.parse(localStorage.getItem('user')) || [],)
+
+  useEffect(() => {
+    localStorage.setItem('saved', JSON.stringify(saved));
+  }, [saved]);
+
 
   const minifyReponse = array => {
     return array.map(
@@ -92,9 +98,7 @@ const Dashboard = () => {
           .then(res => res.json())
           .then(({ data }) => {
             setLoading(true)
-            setUser(prevstate => {
-              return { ...prevstate, data: minifyReponse(data.children.map(a => (a.data))) };
-            });
+            setSaved(minifyReponse(data.children.map(a => (a.data))));
             setAfter(data.after);
             setCount(data.dist);
           })
@@ -108,6 +112,9 @@ const Dashboard = () => {
     }
   }, []);
 
+
+
+
   useEffect(() => {
     const fetchSaved = () => {
       fetch(`/api/fetch`, {
@@ -120,11 +127,11 @@ const Dashboard = () => {
       })
         .then(res => res.json())
         .then(({ data }) => {
-          setUser(prevstate => {
-            return {
+          setSaved(prevstate => {
+            return [
               ...prevstate,
-              data: [...prevstate.data, ...minifyReponse(data.children.map(a => a.data))],
-            };
+              ...minifyReponse(data.children.map(a => a.data))
+            ];
           });
           setAfter(data.after);
           setCount(data.dist);
@@ -136,9 +143,10 @@ const Dashboard = () => {
       fetchSaved();
     }
     if(count < 100) {
+      console.log('done fetching');
       setLoading(false)
     }
-  }, [after, count, user.name, user.token, setUser]);
+  }, [after, count, user.name, user.token]);
 
   const signOut = () => {
     localStorage.clear();
