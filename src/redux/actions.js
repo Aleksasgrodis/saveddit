@@ -1,6 +1,11 @@
 import * as Types from './actionTypes';
 
-export const addLinks = ({ saved }) => ({
+export const addLinks = ({ links }) => ({
   type: Types.ADD_LINKS,
-  saved,
+  links,
+});
+
+export const hasFinished = ({ status }) => ({
+  type: 'HAS_FINISHED',
+  status,
 });

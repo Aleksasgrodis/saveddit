@@ -9,6 +9,8 @@
     "axios": "^0.20.0",
     "dexie": "^3.0.2",
     "dotenv": "^8.2.0",
+    "lodash": "^4.17.20",
+    "lodash.throttle": "^4.1.1",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-detect-offline": "^2.4.0",

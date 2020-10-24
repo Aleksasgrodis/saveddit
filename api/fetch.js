@@ -62,7 +62,7 @@ module.exports = (req, res) => {
         dist,
         after,
         before,
-        saved: minifyReponse(children.map(a => a.data)),
+        links: minifyReponse(children.map(a => a.data)),
       });
     })
     .catch(error => console.log(error));

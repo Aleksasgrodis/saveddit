@@ -3,63 +3,19 @@ import URLParse from 'url-parse';
 import { UserContext } from '../context/UserContext';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addLinks } from '../redux/actions';
+import { addLinks, hasFinished } from '../redux/actions';
 
 //TODO Keep track of token expires
 const Dashboard = () => {
-  const url = new URLParse(window.location, true);
-  const seed = localStorage.getItem('seed');
   const { setUser, user } = useContext(UserContext);
   const [after, setAfter] = useState(null);
   const [count, setCount] = useState(100);
   const [loading, setLoading] = useState(false);
-  const [saved, setSaved] = useState(
-    JSON.parse(localStorage.getItem('user')) || [],
-  );
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    localStorage.setItem('saved', JSON.stringify(saved));
-  }, [saved]);
-
-  const minifyReponse = array => {
-    return array.map(
-      ({
-        author,
-        archived,
-        clicked,
-        created_utc,
-        domain,
-        id,
-        num_comments,
-        over_18,
-        permalink,
-        score,
-        subreddit_name_prefixed,
-        subreddit,
-        title,
-        url,
-      }) => ({
-        author,
-        archived,
-        clicked,
-        created_utc,
-        domain,
-        id,
-        num_comments,
-        over_18,
-        permalink,
-        score,
-        subreddit_name_prefixed,
-        subreddit,
-        title,
-        url,
-      }),
-    );
-  };
-
-  useEffect(() => {
+    const url = new URLParse(window.location, true);
+    const seed = localStorage.getItem('seed');
     const fetchUserToken = code => {
       if (!user.token) {
         fetch(`/api/token?code=${code}`)
@@ -87,7 +43,13 @@ const Dashboard = () => {
         })
         .catch(err => console.log(err));
     };
+    
+    if (url && url.query.state === seed) {
+      fetchUserToken(url.query.code);
+    }
+  }, [setUser, user]);
 
+  useEffect(() => {
     if (user.token && user.name) {
       const fetchSaved = () => {
         fetch(`/api/fetch`, {
@@ -98,11 +60,10 @@ const Dashboard = () => {
           }),
         })
           .then(res => res.json())
-          .then(({after, dist, saved}) => {
-            console.log(saved);
+          .then(({ after, dist, links }) => {
+            console.log(links);
             setLoading(true);
-            setSaved(saved);
-            dispatch(addLinks({ saved: saved }));
+            dispatch(addLinks({ links: links }));
             setAfter(after);
             setCount(dist);
           })
@@ -110,12 +71,7 @@ const Dashboard = () => {
       };
       fetchSaved();
     }
-
-    if (url && url.query.state === seed) {
-      fetchUserToken(url.query.code);
-    }
-    console.log('first effect');
-  }, []);
+  }, [user, dispatch]);
 
   useEffect(() => {
     const fetchSaved = () => {
@@ -128,11 +84,8 @@ const Dashboard = () => {
         }),
       })
         .then(res => res.json())
-        .then(({after, dist, saved}) => {
-          setSaved(prevstate => {
-            return [...prevstate, ...saved];
-          });
-          dispatch(addLinks({ saved: saved }));
+        .then(({ after, dist, links }) => {
+          dispatch(addLinks({ links: links }));
           setAfter(after);
           setCount(dist);
         })
@@ -143,9 +96,9 @@ const Dashboard = () => {
     }
     if (count < 100) {
       setLoading(false);
+      dispatch(hasFinished({ status: true }));
     }
     console.log('second effect');
-
   }, [after, count, user, dispatch]);
 
   const signOut = () => {
