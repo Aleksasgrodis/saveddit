@@ -49,7 +49,7 @@ const Dashboard = () => {
   }, [setUser, user]);
 
   useEffect(() => {
-    if (user.token && user.name) {
+    if (user.token && user.name && !localStorage.getItem('saved')) {
       const fetchSaved = () => {
         fetch(`/api/fetch`, {
           method: 'POST',
@@ -61,6 +61,7 @@ const Dashboard = () => {
           .then(res => res.json())
           .then(({ after, dist, links }) => {
             console.log('this is fine');
+            dispatch(setLoadingStatus({ status: true }));
             dispatch(addBatch({ links: links, count: dist, after: after }));
             console.log('this is fine 2');
           })
@@ -88,14 +89,14 @@ const Dashboard = () => {
         })
         .catch(err => console.log(err));
     };
-    if (after && fetchCount === 100) {
+    if (after && fetchCount === 100 && isLoading) {
       fetchSaved();
     }
     if (fetchCount < 100) {
       dispatch(setLoadingStatus({ status: false }));
     }
     console.log('second effect');
-  }, [after, fetchCount, user, dispatch]);
+  }, [after, fetchCount, user, dispatch, isLoading]);
 
   const signOut = () => {
     localStorage.clear();
