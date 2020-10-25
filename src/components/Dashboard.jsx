@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import URLParse from 'url-parse';
 import { UserContext } from '../context/UserContext';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addLinks, hasFinished } from '../redux/actions';
+import { batch, useDispatch, useSelector } from 'react-redux';
+import { addBatch, addLinks, setFetchCount, setLoadingStatus } from '../redux/actions';
 
 //TODO Keep track of token expires
 const Dashboard = () => {
@@ -12,6 +12,9 @@ const Dashboard = () => {
   const [count, setCount] = useState(100);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
+  // const { fetching, hasErrored, isLoading, total, after, fetchCount } = useSelector(state => state.saved);
+  // console.log(state);
 
   useEffect(() => {
     const url = new URLParse(window.location, true);
@@ -43,7 +46,7 @@ const Dashboard = () => {
         })
         .catch(err => console.log(err));
     };
-    
+
     if (url && url.query.state === seed) {
       fetchUserToken(url.query.code);
     }
@@ -61,11 +64,18 @@ const Dashboard = () => {
         })
           .then(res => res.json())
           .then(({ after, dist, links }) => {
-            console.log(links);
-            setLoading(true);
-            dispatch(addLinks({ links: links }));
-            setAfter(after);
-            setCount(dist);
+            console.log('this is fine');
+            setLoading(true); // remove if works
+            setAfter(after); // remove if works
+            setCount(dist); // remove if works
+            dispatch(addBatch({ links: links, count: dist, after: after }));
+            // batch(() => {
+              
+            //   // dispatch(setLoadingStatus({ status: true }));
+            //   // dispatch(setAfter({ after: after }));
+            //   // dispatch(setFetchCount({ count: dist }));
+            // });
+            console.log('this is fine 2');
           })
           .catch(err => console.log(err));
       };
@@ -85,9 +95,16 @@ const Dashboard = () => {
       })
         .then(res => res.json())
         .then(({ after, dist, links }) => {
-          dispatch(addLinks({ links: links }));
-          setAfter(after);
-          setCount(dist);
+          console.log('still fine');
+          dispatch(addBatch({ links: links, count: dist, after: after }));
+          // batch(() => {
+          //   dispatch(addLinks({ links: links }));
+          //   // dispatch(setAfter({ after: after }));
+          //   // dispatch(setFetchCount({ count: dist }));
+          // });
+          setAfter(after); // remove if works
+          setCount(dist); // remove if works
+          console.log('still fine 2');
         })
         .catch(err => console.log(err));
     };
@@ -96,7 +113,7 @@ const Dashboard = () => {
     }
     if (count < 100) {
       setLoading(false);
-      dispatch(hasFinished({ status: true }));
+      dispatch(setLoadingStatus({ status: false }));
     }
     console.log('second effect');
   }, [after, count, user, dispatch]);
