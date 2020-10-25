@@ -5,7 +5,7 @@ const initialState = {
   isLoading: true,
   hasErrored: false,
   after: '',
-  fetchCount: 0,
+  fetchCount: 100,
   total: 0,
 };
 

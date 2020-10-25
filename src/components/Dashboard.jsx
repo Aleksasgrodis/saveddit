@@ -8,13 +8,9 @@ import { addBatch, addLinks, setFetchCount, setLoadingStatus } from '../redux/ac
 //TODO Keep track of token expires
 const Dashboard = () => {
   const { setUser, user } = useContext(UserContext);
-  const [after, setAfter] = useState(null);
-  const [count, setCount] = useState(100);
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  // const { fetching, hasErrored, isLoading, total, after, fetchCount } = useSelector(state => state.saved);
-  // console.log(state);
+  const { fetching, hasErrored, isLoading, total, after, fetchCount } = useSelector(state => state.saved);
 
   useEffect(() => {
     const url = new URLParse(window.location, true);
@@ -65,16 +61,7 @@ const Dashboard = () => {
           .then(res => res.json())
           .then(({ after, dist, links }) => {
             console.log('this is fine');
-            setLoading(true); // remove if works
-            setAfter(after); // remove if works
-            setCount(dist); // remove if works
             dispatch(addBatch({ links: links, count: dist, after: after }));
-            // batch(() => {
-              
-            //   // dispatch(setLoadingStatus({ status: true }));
-            //   // dispatch(setAfter({ after: after }));
-            //   // dispatch(setFetchCount({ count: dist }));
-            // });
             console.log('this is fine 2');
           })
           .catch(err => console.log(err));
@@ -97,26 +84,18 @@ const Dashboard = () => {
         .then(({ after, dist, links }) => {
           console.log('still fine');
           dispatch(addBatch({ links: links, count: dist, after: after }));
-          // batch(() => {
-          //   dispatch(addLinks({ links: links }));
-          //   // dispatch(setAfter({ after: after }));
-          //   // dispatch(setFetchCount({ count: dist }));
-          // });
-          setAfter(after); // remove if works
-          setCount(dist); // remove if works
           console.log('still fine 2');
         })
         .catch(err => console.log(err));
     };
-    if (after && count === 100) {
+    if (after && fetchCount === 100) {
       fetchSaved();
     }
-    if (count < 100) {
-      setLoading(false);
+    if (fetchCount < 100) {
       dispatch(setLoadingStatus({ status: false }));
     }
     console.log('second effect');
-  }, [after, count, user, dispatch]);
+  }, [after, fetchCount, user, dispatch]);
 
   const signOut = () => {
     localStorage.clear();
@@ -125,7 +104,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <h2>Welcome, {user.name ? user.name : 'person!'}</h2>
-      <p>{loading ? 'Loading' : 'Finished'}</p>
+      <p>{isLoading ? 'Loading' : 'Finished'}</p>
       <button onClick={() => signOut()}>Log out</button>
     </div>
   );
