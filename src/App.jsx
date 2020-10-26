@@ -4,6 +4,7 @@ import './App.css';
 import { UserContext } from './context/UserContext';
 import Welcome from './components/Welcome';
 import Dashboard from './components/Dashboard';
+// import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const [user, setUser] = useState(
@@ -23,6 +24,7 @@ function App() {
           <Route path="/dashboard">
             <Dashboard />
           </Route>
+          {/* <ProtectedRoute path="/dashboard" component={Dashboard} /> */}
         </Switch>
       </Router>
     </UserContext.Provider>
