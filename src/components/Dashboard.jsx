@@ -4,11 +4,11 @@ import SideBar from './SideBar'
 
 function Dashboard() {
   return (
-    <div className="container flex w-screen h-screen">
-      <div className="w-48 flex-none">
+    <div className="flex w-screen h-screen max-w-full">
+      <div className="w-1/12 flex-none">
         <SideBar />
       </div>
-      <div className="w-full flex-none">
+      <div className="w-11/12 flex-none">
         <Content />
       </div>
     </div>
