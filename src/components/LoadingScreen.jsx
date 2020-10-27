@@ -43,8 +43,9 @@ const LoadingScreen = () => {
       })
         .then(res => res.json())
         .then(data => {
+          console.log(data);
           setUser(prevstate => {
-            return { ...prevstate, name: data.name };
+            return { ...prevstate, name: data.name, avatar: data.icon_img, account_created: data.created_utc, karma: data.total_karma, verified: data.verified, coins: data.coins };
           });
         })
         .catch(err => console.log(err));
@@ -102,9 +103,6 @@ const LoadingScreen = () => {
     }
   }, [after, fetchCount, user, dispatch, isLoading]);
 
-  const signOut = () => {
-    localStorage.clear();
-  };
 
   if (!isLoading) {
     return <Redirect to="/dashboard" />;
