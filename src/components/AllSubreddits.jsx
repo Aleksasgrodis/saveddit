@@ -15,14 +15,66 @@ function AllSubreddits() {
   const subreddits = [...new Set(duplicateSubreddits)].sort((a, b) =>
     a.localeCompare(b),
   );
+  const alphabet = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
+  ];
+  const sortedByLetter = alphabet.map(letter => [
+    letter,
+    [...subreddits.filter(link => link.toUpperCase().charAt(0) === letter)],
+  ]);
+  console.log(sortedByLetter);
   return (
     <div className="flex flex-col">
-      <div>
+      <div className="fixed">
         <Search />
       </div>
-      <div className="flex flex-wrap w-full">
-        {subreddits
+      {/* {subreddits
           ? subreddits.map(sub => <SubredditListItem key={sub} title={sub} />)
+          : null} */}
+      <div className="mt-16">
+        {sortedByLetter
+          ? sortedByLetter.map(letter => {
+              if (letter[1].length) {
+                return (
+                  <div
+                    className="w-full flex flex-col flex-wrap"
+                    key={letter[0]}
+                  >
+                    <h2 className="font-bold text-4xl">{letter[0]}</h2>
+                    <div className="flex flex-wrap">
+                      {letter[1].map(sub => (
+                        <SubredditListItem key={sub} title={sub} />
+                      ))}
+                    </div>
+                  </div>
+                );
+              } else return null;
+            })
           : null}
       </div>
     </div>
