@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import { UserContext } from './context/UserContext';
 import Welcome from './components/Welcome';
+import LoadingScreen from './components/LoadingScreen';
+import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
-// import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const [user, setUser] = useState(
@@ -21,10 +22,10 @@ function App() {
           <Route exact path="/">
             <Welcome />
           </Route>
-          <Route path="/dashboard">
-            <Dashboard />
+          <Route path="/loading">
+            <LoadingScreen />
           </Route>
-          {/* <ProtectedRoute path="/dashboard" component={Dashboard} /> */}
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
     </UserContext.Provider>

@@ -6,7 +6,7 @@ module.exports = (req, res) => {
   var data = qs.stringify({
     grant_type: 'authorization_code',
     code: code,
-    redirect_uri: 'http://localhost:3000/dashboard',
+    redirect_uri: 'http://localhost:3000/loading',
   });
   var config = {
     method: 'post',
