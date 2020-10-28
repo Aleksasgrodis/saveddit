@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { loadNumberedPage } from '../redux/actions';
+import SavedLinkListItem from './SavedLinkListItem';
 
 const pageSelector = state => state.saved.pageResults;
 
@@ -18,7 +19,10 @@ function AllLinks() {
       {currentPage > 1 ? (<button type="button" className="button" onClick={() => dispatch(loadNumberedPage({page: currentPage -1}))}>Previous</button>): null}
       current page: {currentPage}
       <button type="button" className="button" onClick={() => dispatch(loadNumberedPage({page: currentPage +1}))}>Next</button>
-      {pageResults.map(link => (<p>{link.title}</p>))}
+      <div className="w-full flex flex-wrap">
+
+      {pageResults.map(link => <SavedLinkListItem {...link} />)}
+      </div>
     </div>
   )
 }
