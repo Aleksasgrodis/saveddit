@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import AllLinks from './AllLinks'
 import AllSubreddits from './AllSubreddits'
 
 function Content() {
@@ -7,7 +8,7 @@ function Content() {
     <div className="pl-12">
       <Switch>
         <Route path="/dashboard/all">
-          all
+          <AllLinks />
         </Route>
         <Route path="/dashboard/categories">
           cata

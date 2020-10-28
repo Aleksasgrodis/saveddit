@@ -18,6 +18,7 @@ const minifyReponse = array => {
       subreddit,
       title,
       url,
+      thumbnail,
     }) => ({
       author,
       archived,
@@ -33,6 +34,7 @@ const minifyReponse = array => {
       subreddit,
       title,
       url,
+      thumbnail,
     }),
   );
 };
@@ -57,7 +59,7 @@ module.exports = (req, res) => {
     })
     .then(({ data }) => {
       const { dist, after, children, before } = data;
-
+      console.log(children)
       return res.json({
         dist,
         after,

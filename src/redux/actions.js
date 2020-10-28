@@ -17,10 +17,6 @@ export const setLoadingStatus = ({ status }) => ({
   status,
 });
 
-// export const setLoadingStatus = ({ status }) => ({
-
-// })
-
 export const setAfter = ({ after }) => ({
   type: 'SET_AFTER',
   after,
@@ -30,3 +26,15 @@ export const setFetchCount = ({ count }) => ({
   type: 'SET_FETCH_COUNT',
   count,
 });
+
+
+// load_numbered_page - for initial load (1) and any (n) page thereafter.
+export const loadNumberedPage = ({page}) => ({
+  type: 'LOAD_NUMBERED_PAGE',
+  page
+})
+// load_next_page
+// load_prev_page
+
+// set_filter_values
+

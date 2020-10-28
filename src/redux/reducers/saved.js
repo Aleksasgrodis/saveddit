@@ -7,6 +7,7 @@ const initialState = {
   after: '',
   fetchCount: 100,
   total: 0,
+  pages: 0,
 };
 
 export default function (state = initialState, action) {
@@ -23,8 +24,14 @@ export default function (state = initialState, action) {
         ...state,
         links: [...state.links, ...action.links],
         total: state.links.length + action.links.length,
+        pages: Math.ceil(state.links.length / 20),
         after: action.after,
         fetchCount: action.count,
+        currentPage: 1,
+        filterValues: [],
+        pageResults: [],
+        filterResults: [],
+        sortResults: [],
       }
     case 'SET_LOADING_STATUS':
       return {
@@ -41,6 +48,15 @@ export default function (state = initialState, action) {
         ...state,
         fetchCount: action.count,
       };
+    case 'LOAD_NUMBERED_PAGE': 
+      let lowerCount = (action.page -1) * 20;
+      let upperCount = lowerCount + 20;
+      let pageResults = state.links.slice(lowerCount, upperCount)
+      return {
+        ...state, 
+        pageResults: pageResults,
+        currentPage: action.page
+      }
     default:
       return state;
   }
