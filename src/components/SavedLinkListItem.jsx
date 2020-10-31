@@ -1,5 +1,13 @@
 import { faReddit, faRedditSquare } from '@fortawesome/free-brands-svg-icons';
+import {
+  faArrowUp,
+  faCalendarAlt,
+  faEye,
+  faLink,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { over } from 'lodash';
 import React from 'react';
 
 function SavedLinkListItem({
@@ -43,14 +51,45 @@ function SavedLinkListItem({
           </p>
           <div className="text-gray-900 font-bold text-xl">{title}</div>
         </div>
-        <div className="flex items-center justify-between">
-          <div className="text-sm">
-            <p className="text-gray-900 leading-none">u/{author}</p>
-            <p className="text-gray-600">Date</p>
+        <div className="flex flex-col">
+          <div className="flex justify-between">
+            <div className="text-sm flex-col flex items-center w-2/6">
+              <span>
+                <FontAwesomeIcon icon={faLink} />
+              </span>
+              <p className="text-gray-900 leading-none">u/{author}</p>
+            </div>
+            <div className="text-sm flex-col flex items-center w-2/6">
+              <span>
+                <FontAwesomeIcon icon={faCalendarAlt} />
+              </span>
+              <p className="text-gray-900 leading-none">{created_utc}</p>
+            </div>
+            {over_18 ? (<div className="text-sm flex-col flex items-center w-2/6">
+              <span>
+                {/* <FontAwesomeIcon icon={faLink} /> */}
+              </span>
+              <p className="text-gray-900 leading-none">NSFW</p>
+            </div>) : null}
           </div>
-          <div className="text-sm">
-            <p className="text-gray-900 leading-none">u/{author}</p>
-            <p className="text-gray-600">Date</p>
+          <div className="flex justify-between">
+            <div className="text-sm flex-col flex items-center w-2/6">
+              <span>
+                <FontAwesomeIcon icon={faArrowUp} />
+              </span>
+              <p className="text-gray-900 leading-none">{score}</p>
+            </div>
+            <div className="text-sm flex-col flex items-center w-2/6">
+              <span>
+                <FontAwesomeIcon icon={faUser} />
+              </span>
+              <p className="text-gray-900 leading-none">{author}</p>
+            </div>
+            {clicked ? (<div className="text-sm flex-col flex items-center w-2/6">
+              <span>
+                <FontAwesomeIcon icon={faEye} />
+              </span>
+            </div>) : null}
           </div>
         </div>
       </div>
