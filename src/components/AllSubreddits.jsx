@@ -1,6 +1,7 @@
 import { create } from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { NavHashLink } from 'react-router-hash-link';
 import { createSelector } from 'reselect';
 import Search from './Search';
 import SubredditListItem from './SubredditListItem';
@@ -56,26 +57,44 @@ function AllSubreddits() {
       {/* {subreddits
           ? subreddits.map(sub => <SubredditListItem key={sub} title={sub} />)
           : null} */}
-      <div className="mt-16">
-        {sortedByLetter
-          ? sortedByLetter.map(letter => {
-              if (letter[1].length) {
-                return (
-                  <div
-                    className="w-full flex flex-col flex-wrap"
-                    key={letter[0]}
-                  >
-                    <h2 className="font-bold text-4xl">{letter[0]}</h2>
-                    <div className="flex flex-wrap">
-                      {letter[1].map(sub => (
-                        <SubredditListItem key={sub} title={sub} />
-                      ))}
-                    </div>
-                  </div>
-                );
-              } else return null;
-            })
-          : null}
+      <div className="flex">
+        <div className="mt-16">
+          {sortedByLetter
+            ? sortedByLetter.map(letter => {
+                if (letter[1].length) {
+                  return (
+                    <section
+                      id={`section-${letter[0].toLowerCase()}`}
+                      className="w-full flex flex-col flex-wrap"
+                      key={letter[0]}
+                    >
+                      <h2 className="font-bold text-4xl">{letter[0]}</h2>
+                      <div className="flex flex-wrap">
+                        {letter[1].map(sub => (
+                          <SubredditListItem key={sub} title={sub} />
+                        ))}
+                      </div>
+                    </section>
+                  );
+                } else return null;
+              })
+            : null}
+        </div>
+        <div className="fixed right-0 inset-y-0 mr-6">
+          <div className="flex flex-col justify-around h-full">
+            {sortedByLetter.map(letter => {
+              return letter[1].length ? (
+                <NavHashLink
+                className="font-bold"
+                  to={`/dashboard/subreddits#section-${letter[0].toLowerCase()}`}
+                  smooth
+                >
+                  {letter[0]}
+                </NavHashLink>
+              ) : null;
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
