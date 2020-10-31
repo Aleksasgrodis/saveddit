@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { loadNumberedPage } from '../redux/actions';
@@ -10,21 +10,36 @@ function AllLinks() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadNumberedPage({page: 2}));
-  }, [dispatch])
+    dispatch(loadNumberedPage({ page: 2 }));
+  }, [dispatch]);
 
-  const {pageResults, currentPage} = useSelector(state => state.saved);
+  const { pageResults, currentPage } = useSelector(state => state.saved);
   return (
     <div>
-      {currentPage > 1 ? (<button type="button" className="button" onClick={() => dispatch(loadNumberedPage({page: currentPage -1}))}>Previous</button>): null}
+      {currentPage > 1 ? (
+        <button
+          type="button"
+          className="button"
+          onClick={() => dispatch(loadNumberedPage({ page: currentPage - 1 }))}
+        >
+          Previous
+        </button>
+      ) : null}
       current page: {currentPage}
-      <button type="button" className="button" onClick={() => dispatch(loadNumberedPage({page: currentPage +1}))}>Next</button>
+      <button
+        type="button"
+        className="button"
+        onClick={() => dispatch(loadNumberedPage({ page: currentPage + 1 }))}
+      >
+        Next
+      </button>
       <div className="w-full flex flex-wrap">
-
-      {pageResults.map(link => <SavedLinkListItem {...link} />)}
+        {pageResults.map(link => (
+          <SavedLinkListItem {...link} />
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default AllLinks
+export default AllLinks;
