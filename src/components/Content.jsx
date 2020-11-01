@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import AllLinks from './AllLinks'
 import AllSubreddits from './AllSubreddits'
+import FilterByNSFW from './FilterByNSFW'
 import FilterBySubreddit from './FilterBySubreddit'
 
 function Content() {
@@ -19,6 +20,9 @@ function Content() {
         </Route>
         <Route path="/dashboard/subreddits/:subreddit">
           <FilterBySubreddit />
+        </Route>
+        <Route path="/dashboard/nsfw">
+          <FilterByNSFW />
         </Route>
       </Switch>
     </div>
