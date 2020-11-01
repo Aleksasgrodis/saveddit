@@ -7,7 +7,6 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { over } from 'lodash';
 import React from 'react';
 
 function SavedLinkListItem({
@@ -57,7 +56,7 @@ function SavedLinkListItem({
               <span>
                 <FontAwesomeIcon icon={faLink} />
               </span>
-              <p className="text-gray-900 leading-none">u/{author}</p>
+              <p className="text-gray-900 leading-none">{domain}</p>
             </div>
             <div className="text-sm flex-col flex items-center w-2/6">
               <span>
@@ -65,12 +64,12 @@ function SavedLinkListItem({
               </span>
               <p className="text-gray-900 leading-none">{created_utc}</p>
             </div>
-            {over_18 ? (<div className="text-sm flex-col flex items-center w-2/6">
-              <span>
-                {/* <FontAwesomeIcon icon={faLink} /> */}
-              </span>
-              <p className="text-gray-900 leading-none">NSFW</p>
-            </div>) : null}
+            {over_18 ? (
+              <div className="text-sm flex-col flex items-center w-2/6">
+                <span>{/* <FontAwesomeIcon icon={faLink} /> */}</span>
+                <p className="text-gray-900 leading-none">NSFW</p>
+              </div>
+            ) : null}
           </div>
           <div className="flex justify-between">
             <div className="text-sm flex-col flex items-center w-2/6">
@@ -85,13 +84,16 @@ function SavedLinkListItem({
               </span>
               <p className="text-gray-900 leading-none">{author}</p>
             </div>
-            {clicked ? (<div className="text-sm flex-col flex items-center w-2/6">
-              <span>
-                <FontAwesomeIcon icon={faEye} />
-              </span>
-            </div>) : null}
+            {clicked ? (
+              <div className="text-sm flex-col flex items-center w-2/6">
+                <span>
+                  <FontAwesomeIcon icon={faEye} />
+                </span>
+              </div>
+            ) : null}
           </div>
         </div>
+        {/* Buttons to view url or post */}
       </div>
     </div>
   );

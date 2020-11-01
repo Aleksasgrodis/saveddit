@@ -11,6 +11,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
+    "date-fns": "^2.16.1",
     "dexie": "^3.0.2",
     "dotenv": "^8.2.0",
     "lodash": "^4.17.20",
