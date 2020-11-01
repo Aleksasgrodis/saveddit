@@ -5,7 +5,7 @@ import AllSubreddits from './AllSubreddits'
 
 function Content() {
   return (
-    <div className="pl-12">
+    <div className="">
       <Switch>
         <Route path="/dashboard/all">
           <AllLinks />

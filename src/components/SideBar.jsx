@@ -11,7 +11,7 @@ function SideBar() {
   };
 
   return (
-    <div className="flex flex-col justify-around h-screen">
+    <div className="flex flex-col justify-around h-screen w-full">
       <div><UserInfo /></div>
       <div className="flex flex-col justify-center">
         <NavLink to="/dashboard/all">All</NavLink>

@@ -26,7 +26,7 @@ function SavedLinkListItem({
   thumbnail,
 }) {
   return (
-    <div className="rounded xl:w-3/6 w-2/6 min-w-2/6 lg:flex ">
+    <div className="rounded xl:w-4/12 w-4/12 min-w-2/6 lg:flex mr-1 mb-1">
       {/* {thumbnail ? (
         <div
           className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
@@ -41,7 +41,7 @@ function SavedLinkListItem({
         ></div>
       )} */}
 
-      <div className="border border-gray-400 w-full m-2 justify-between lg:border-gray-400 bg-white rounded p-4 flex flex-col leading-normal">
+      <div className="border border-gray-400 w-full justify-between lg:border-gray-400 bg-white rounded p-4 flex flex-col leading-normal">
         <div className="mb-8">
           <div className="flex justify-between align-center">
             <p className="text-sm text-gray-600 flex items-center mb-1">
@@ -49,7 +49,14 @@ function SavedLinkListItem({
                 icon={faRedditSquare}
                 className="text-xl mr-2 text-orange-600"
               />
-              {subreddit_name_prefixed}
+              <a
+                className="hover:text-gray-900"
+                rel="noopener noreferrer"
+                target="_blank"
+                href={`https://www.reddit.com/${subreddit_name_prefixed}`}
+              >
+                {subreddit_name_prefixed}
+              </a>
             </p>
             <span className={`text-${clicked ? 'blue' : 'gray'}-600`}>
               {over_18 ? (
@@ -65,7 +72,15 @@ function SavedLinkListItem({
               </span>
             </span>
           </div>
-          <div className="text-gray-900 font-bold text-xl">{title}</div>
+          <div className="text-gray-900 font-bold text-xl">
+            <a
+              href={`https://www.reddit.com${permalink}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {title}
+            </a>
+          </div>
         </div>
         <div className="flex flex-col">
           <div className="flex justify-between  mb-4">
