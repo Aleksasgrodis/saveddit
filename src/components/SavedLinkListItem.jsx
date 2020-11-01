@@ -26,7 +26,7 @@ function SavedLinkListItem({
   thumbnail,
 }) {
   return (
-    <div className="rounded xl:w-4/12 w-4/12 min-w-2/6 lg:flex mr-1 mb-1">
+    <div className="rounded w-3/12 lg:flex mb-2 mr-2"> 
       {/* {thumbnail ? (
         <div
           className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"

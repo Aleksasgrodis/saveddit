@@ -14,9 +14,9 @@ function SideBar() {
     <div className="flex flex-col justify-around h-screen w-full">
       <div><UserInfo /></div>
       <div className="flex flex-col justify-center">
-        <NavLink className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center" activeClassName="font-bold text-blue-600" to="/dashboard/all">All</NavLink>
-        <NavLink className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center" activeClassName="font-bold text-blue-600" to="/dashboard/subreddits">Subreddits</NavLink>
-        <NavLink className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center" activeClassName="font-bold text-blue-600" to="/dashboard/nsfw">NSFW</NavLink>
+        <NavLink className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center" activeClassName="font-bold text-blue-600 border-b-4" to="/dashboard/all">All</NavLink>
+        <NavLink className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center" activeClassName="font-bold text-blue-600 border-b-4" to="/dashboard/subreddits">Subreddits</NavLink>
+        <NavLink className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center" activeClassName="font-bold text-blue-600 border-b-4" to="/dashboard/nsfw">NSFW</NavLink>
       </div>
       <div className="flex flex-col">
         <button

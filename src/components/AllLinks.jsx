@@ -17,7 +17,7 @@ function AllLinks() {
   return (
     <div>
       
-      <div className="w-11/12 flex flex-wrap justify-center">
+      <div className="w-full flex flex-wrap justify-center">
         {pageResults.map(link => (
           <SavedLinkListItem key={link.permalink} {...link} />
         ))}
