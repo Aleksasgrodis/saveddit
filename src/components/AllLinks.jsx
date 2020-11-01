@@ -35,7 +35,7 @@ function AllLinks() {
       </button>
       <div className="w-full flex flex-wrap">
         {pageResults.map(link => (
-          <SavedLinkListItem key={link.title} {...link} />
+          <SavedLinkListItem key={link.permalink} {...link} />
         ))}
       </div>
     </div>
