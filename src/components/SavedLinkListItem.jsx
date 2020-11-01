@@ -41,7 +41,7 @@ function SavedLinkListItem({
         ></div>
       )} */}
 
-      <div className="border-2 border-gray-400 w-full m-2 justify-between lg:border-gray-400 bg-white rounded p-4 flex flex-col leading-normal">
+      <div className="border border-gray-400 w-full m-2 justify-between lg:border-gray-400 bg-white rounded p-4 flex flex-col leading-normal">
         <div className="mb-8">
           <div className="flex justify-between align-center">
             <p className="text-sm text-gray-600 flex items-center mb-1">
@@ -53,9 +53,16 @@ function SavedLinkListItem({
             </p>
             <span className={`text-${clicked ? 'blue' : 'gray'}-600`}>
               {over_18 ? (
-                <span className="text-red-600 mr-2 font-bold">NSFW</span>
+                <span
+                  title="NOT SAFE FOR WORK"
+                  className="text-red-600 mr-2 font-bold"
+                >
+                  NSFW
+                </span>
               ) : null}{' '}
-              <FontAwesomeIcon icon={clicked ? faEye : faEyeSlash} />
+              <span title={clicked ? 'Viewed' : 'Not Viewed'}>
+                <FontAwesomeIcon icon={clicked ? faEye : faEyeSlash} />
+              </span>
             </span>
           </div>
           <div className="text-gray-900 font-bold text-xl">{title}</div>
