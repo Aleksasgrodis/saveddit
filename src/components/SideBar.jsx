@@ -5,27 +5,57 @@ import { UserContext } from '../context/UserContext';
 import UserInfo from './UserInfo';
 
 function SideBar() {
-  const { user : {refresh_token} } = useContext(UserContext);
+  const {
+    user: { refresh_token },
+    setUser,
+    user,
+  } = useContext(UserContext);
   let history = useHistory();
   const signOut = () => {
     localStorage.clear();
-    history.push('/')
+    history.push('/');
   };
-  console.log(refresh_token);
+  console.log(user);
   const requestRefreshToken = () => {
-  fetch(`/api/refresh?token=${refresh_token}`)
+    fetch(`/api/refresh?token=${refresh_token}`)
       .then(res => res.json())
-      .then(data => console.log(data))
-      .catch( err => console.log(err))
-  }
+      .then(data => {
+        if (data.access_token) {
+          setUser({ ...user, token: data.access_token });
+          localStorage.removeItem('saved');
+          history.push('/loading');
+        }
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
     <div className="flex flex-col justify-around h-screen w-full">
-      <div><UserInfo /></div>
+      <div>
+        <UserInfo />
+      </div>
       <div className="flex flex-col justify-center">
-        <NavLink className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center" activeClassName="font-bold text-blue-600 border-b-4" to="/dashboard/all">All</NavLink>
-        <NavLink className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center" activeClassName="font-bold text-blue-600 border-b-4" to="/dashboard/subreddits">Subreddits</NavLink>
-        <NavLink className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center" activeClassName="font-bold text-blue-600 border-b-4" to="/dashboard/nsfw">NSFW</NavLink>
+        <NavLink
+          className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center"
+          activeClassName="font-bold text-blue-600 border-b-4"
+          to="/dashboard/all"
+        >
+          All
+        </NavLink>
+        <NavLink
+          className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center"
+          activeClassName="font-bold text-blue-600 border-b-4"
+          to="/dashboard/subreddits"
+        >
+          Subreddits
+        </NavLink>
+        <NavLink
+          className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center"
+          activeClassName="font-bold text-blue-600 border-b-4"
+          to="/dashboard/nsfw"
+        >
+          NSFW
+        </NavLink>
       </div>
       <div className="flex flex-col">
         <button
