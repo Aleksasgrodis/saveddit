@@ -95,7 +95,7 @@ function SavedLinkListItem({
                 <FontAwesomeIcon icon={faCalendarAlt} />
               </span>
               <p className="text-gray-900 leading-none">
-                {format(fromUnixTime(created_utc), 'MM/dd/yyyy')}
+                {format(fromUnixTime(created_utc), 'd MMM yyy')}
               </p>
             </div>
           </div>
