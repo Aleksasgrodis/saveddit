@@ -100,7 +100,6 @@ function AllSubreddits() {
       );
     }
   }, [searchValue, copy]);
-  console.log(searchResults);
   return (
     <div className="flex flex-col">
       <div className="fixed">

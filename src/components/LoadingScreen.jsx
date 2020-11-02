@@ -27,7 +27,8 @@ const LoadingScreen = () => {
         fetch(`/api/token?code=${code}`)
           .then(res => res.json())
           .then(data => {
-            setUser({ ...user, token: data.access_token });
+            console.log(data);
+            setUser({ ...user, token: data.access_token, refresh_token: data.refresh_token });
             fetchUserName(data.access_token);
           })
           .catch(err => console.log(err));

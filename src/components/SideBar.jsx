@@ -1,14 +1,23 @@
 import React from 'react';
+import { useContext } from 'react';
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 import UserInfo from './UserInfo';
 
 function SideBar() {
-
+  const { user : {refresh_token} } = useContext(UserContext);
   let history = useHistory();
   const signOut = () => {
     localStorage.clear();
     history.push('/')
   };
+  console.log(refresh_token);
+  const requestRefreshToken = () => {
+  fetch(`/api/refresh?token=${refresh_token}`)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch( err => console.log(err))
+  }
 
   return (
     <div className="flex flex-col justify-around h-screen w-full">
@@ -22,6 +31,7 @@ function SideBar() {
         <button
           type="button"
           className="mb-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          onClick={() => requestRefreshToken()}
         >
           Refresh
         </button>
