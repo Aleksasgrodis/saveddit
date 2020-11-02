@@ -4,15 +4,12 @@ const { default: fetch } = require('node-fetch');
 module.exports = (req, res) => {
   const { body } = req;
   const { token } = JSON.parse(body);
-  console.log(token)
   var config = {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
     }
-
   };
-
   fetch(`https://oauth.reddit.com/api/v1/me`, config)
     .then(response => {
       return response.json()})

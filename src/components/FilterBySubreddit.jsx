@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useMemo } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -17,7 +18,8 @@ const subredditLinksSelector = subreddit =>
 
 function FilterBySubreddit() {
   const { subreddit } = useParams();
-  const [sortedPosts, setSortedPosts] = useState(null);
+  const [sortedPosts, setSortedPosts] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
   const filteredPosts = useSelector(subredditLinksSelector(subreddit));
   const filteredPostsCopy = useMemo(() => [...filteredPosts], [filteredPosts]);
 
@@ -48,14 +50,29 @@ function FilterBySubreddit() {
         );
         break;
       case 'popularity':
-        setSortedPosts(filteredPostsCopy.sort((a, b) => a.score > b.score ? -1 : 1));
+        setSortedPosts(
+          filteredPostsCopy.sort((a, b) => (a.score > b.score ? -1 : 1)),
+        );
+        break;
+      case 'lastSaved':
+        setSortedPosts([]);
         break;
       default:
         break;
     }
   };
 
-  const search = { sortBy, withSort: true };
+  // useEffect(() => {
+  //   if (filteredPostsCopy) {
+  //     setSortedPosts(
+  //       filteredPostsCopy.filter(post =>
+  //         post.title.toLowerCase().includes(searchValue.toLowerCase()),
+  //       ),
+  //     );
+  //   }
+  // }, [searchValue, filteredPostsCopy]);
+
+  const search = { sortBy, withSort: true, searchValue, setSearchValue };
 
   return (
     <div>
@@ -63,7 +80,7 @@ function FilterBySubreddit() {
         <Search {...search} />
       </div>
       <div className="flex flex-wrap justify-center">
-        {filteredPostsCopy && !sortedPosts
+        {filteredPostsCopy && !sortedPosts.length
           ? filteredPostsCopy.map(link => (
               <SavedLinkListItem key={link.permalink} {...link} />
             ))
