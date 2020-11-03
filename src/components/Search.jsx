@@ -8,12 +8,6 @@ function Search({ searchValue, setSearchValue, withSort, sortBy, ...props }) {
   const history = useHistory();
   return (
     <div className="mt-5 opacity-25 hover:opacity-100 focus:opacity-100 flex items-center">
-      <button
-        onClick={() => history.go(-1)}
-        className="bg-gray-500 shadow-inner hover:bg-gray-700 text-white text-2xl font-bold py-1 px-4 rounded-lg mr-5 focus:outline-none focus:shadow-outline"
-      >
-        ←
-      </button>
       <input
         type="text"
         value={searchValue}

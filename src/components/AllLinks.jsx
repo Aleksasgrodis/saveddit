@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { loadNumberedPage } from '../redux/actions';
+import ContentHeader from './ContentHeader';
 import SavedLinkListItem from './SavedLinkListItem';
 
 const pageSelector = state => state.saved.pageResults;
@@ -15,9 +16,9 @@ function AllLinks() {
 
   const { pageResults, currentPage } = useSelector(state => state.saved);
   return (
-    <div>
-      
-      <div className="w-full flex flex-wrap justify-center">
+    <div className="w-full">
+      <ContentHeader withSort={true} />
+      <div className="flex flex-wrap justify-center pt-32">
         {pageResults.map(link => (
           <SavedLinkListItem key={link.permalink} {...link} />
         ))}

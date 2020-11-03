@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavHashLink } from 'react-router-hash-link';
 import { createSelector } from 'reselect';
+import ContentHeader from './ContentHeader';
 import Search from './Search';
 import SubredditListItem from './SubredditListItem';
 
@@ -102,13 +103,8 @@ function AllSubreddits() {
   }, [searchValue, copy]);
   return (
     <div className="flex flex-col">
-      <div className="fixed">
-        <Search {...search} />
-      </div>
-      {/* {subreddits
-          ? subreddits.map(sub => <SubredditListItem key={sub} title={sub} />)
-          : null} */}
-      <div className="flex">
+      <ContentHeader {...search} title="All Subreddits" />
+      <div className="flex pt-4">
         <div className="mt-16">
           {sortedByLetter && !searchValue.length
             ? sortedByLetter.map(letter => {

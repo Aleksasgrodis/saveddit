@@ -7,7 +7,7 @@ import FilterBySubreddit from './FilterBySubreddit'
 
 function Content() {
   return (
-    <div className="w-full">
+    <div className="">
       <Switch>
         <Route path="/dashboard/all">
           <AllLinks />

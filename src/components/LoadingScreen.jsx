@@ -106,7 +106,7 @@ const LoadingScreen = () => {
 
 
   if (!isLoading) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/dashboard/all" />;
   }
 
   return (
