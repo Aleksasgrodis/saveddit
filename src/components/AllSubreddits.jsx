@@ -101,11 +101,21 @@ function AllSubreddits() {
       );
     }
   }, [searchValue, copy]);
+  
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace("#", "");
+      const element = document.getElementById(id);
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+  }, [])
+
   return (
     <div className="flex flex-col">
       <ContentHeader {...search} title="All Subreddits" />
-      <div className="flex pt-4">
-        <div className="mt-16">
+      <div className="flex mt-20">
+        <div className="">
           {sortedByLetter && !searchValue.length
             ? sortedByLetter.map(letter => {
                 if (letter[1].length) {
