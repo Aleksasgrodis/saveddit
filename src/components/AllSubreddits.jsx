@@ -162,7 +162,7 @@ function AllSubreddits() {
                   key={letter[0]}
                   className="font-bold text-gray-400 hover:text-gray-900"
                   to={`/dashboard/subreddits#section-${letter[0].toLowerCase()}`}
-                  smooth
+                  scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'center' })}
                   activeClassName="text-orange-600 text-xl font-bolder"
                 >
                   {letter[0]}
