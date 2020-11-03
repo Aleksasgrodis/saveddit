@@ -33,6 +33,10 @@ export const loadNumberedPage = ({page}) => ({
   type: 'LOAD_NUMBERED_PAGE',
   page
 })
+
+export const refreshSaved = () => ({
+  type: 'REFRESH'
+})
 // load_next_page
 // load_prev_page
 

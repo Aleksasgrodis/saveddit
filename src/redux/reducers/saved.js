@@ -19,12 +19,12 @@ export default function (state = initialState, action) {
         links: [...state.links, ...action.links],
         total: state.links.length + action.links.length,
       };
-    case 'ADD_BATCH': 
+    case 'ADD_BATCH':
       return {
         ...state,
         links: [...state.links, ...action.links],
         total: state.links.length + action.links.length,
-        pages: Math.ceil(state.links.length / 20),
+        pages: Math.ceil((state.links.length + action.links.length) / 20),
         after: action.after,
         fetchCount: action.count,
         currentPage: 1,
@@ -32,7 +32,7 @@ export default function (state = initialState, action) {
         pageResults: [],
         filterResults: [],
         sortResults: [],
-      }
+      };
     case 'SET_LOADING_STATUS':
       return {
         ...state,
@@ -48,15 +48,17 @@ export default function (state = initialState, action) {
         ...state,
         fetchCount: action.count,
       };
-    case 'LOAD_NUMBERED_PAGE': 
-      let lowerCount = (action.page -1) * 20;
+    case 'LOAD_NUMBERED_PAGE':
+      let lowerCount = (action.page - 1) * 20;
       let upperCount = lowerCount + 20;
-      let pageResults = state.links.slice(lowerCount, upperCount)
+      let pageResults = state.links.slice(lowerCount, upperCount);
       return {
-        ...state, 
+        ...state,
         pageResults: pageResults,
-        currentPage: action.page
-      }
+        currentPage: action.page,
+      };
+    case 'REFRESH':
+      return { ...initialState };
     default:
       return state;
   }

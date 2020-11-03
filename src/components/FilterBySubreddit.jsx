@@ -21,7 +21,11 @@ function FilterBySubreddit() {
   const [sortedPosts, setSortedPosts] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const filteredPosts = useSelector(subredditLinksSelector(subreddit));
-  const filteredPostsCopy = useMemo(() => [...filteredPosts], [filteredPosts]);
+  const filteredPostsCopy = useMemo(() => {
+    return filteredPosts;
+  }, [filteredPosts]);
+  // const [searchResults, setSearchResults] = useState(null);
+  // const [posts, setPosts] = useState(filteredPostsCopy);
 
   const sortBy = value => {
     switch (value) {
@@ -62,8 +66,10 @@ function FilterBySubreddit() {
     }
   };
 
+  // This hook seems to cause many re-renders, haven't figured out exactly why yet.
   // useEffect(() => {
-  //   if (filteredPostsCopy) {
+  //   console.log('searchval: ', searchValue, ' posts: ', filteredPostsCopy);
+  //   if (filteredPostsCopy && searchValue !== '') {
   //     setSortedPosts(
   //       filteredPostsCopy.filter(post =>
   //         post.title.toLowerCase().includes(searchValue.toLowerCase()),
@@ -71,6 +77,22 @@ function FilterBySubreddit() {
   //     );
   //   }
   // }, [searchValue, filteredPostsCopy]);
+
+  // useEffect(() => {
+  //   console.log('render:');
+  // if (filteredPostsCopy) setPosts(filteredPostsCopy);
+  //   return () => {};
+  // }, [filteredPostsCopy, posts]);
+
+  // useEffect(() => {
+  //   console.log('posts change: ', posts);
+  //   return () => {};
+  // }, [posts]);
+
+  // useEffect(() => {
+  //   console.log('copy change: ', filteredPostsCopy);
+  //   return () => {};
+  // }, [filteredPostsCopy]);
 
   const search = { sortBy, withSort: true, searchValue, setSearchValue };
 

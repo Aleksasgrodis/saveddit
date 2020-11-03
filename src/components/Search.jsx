@@ -4,6 +4,7 @@ import SortingDropdown from './SortingDropdown';
 
 function Search({ searchValue, setSearchValue, withSort, sortBy, ...props }) {
   // takes in props or array to search in and bounces results to page
+  console.log('search render');
   const history = useHistory();
   return (
     <div className="mt-5 opacity-25 hover:opacity-100 focus:opacity-100 flex items-center">
