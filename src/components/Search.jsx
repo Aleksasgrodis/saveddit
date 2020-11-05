@@ -3,18 +3,27 @@ import { useDispatch } from 'react-redux';
 import { setSearchResults } from '../redux/actions';
 import SortingDropdown from './SortingDropdown';
 
-function Search({ withSort, ...props }) {
-  const [searchValue, setSearchValue] = useState('')
-  const dispatch = useDispatch()
+function Search({
+  withSort,
+  subredditSearchValue,
+  setSubredditSearchValue,
+  ...props
+}) {
+  const [searchValue, setSearchValue] = useState('');
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setSearchResults({value: searchValue}))
-  }, [searchValue, dispatch])
+    dispatch(setSearchResults({ value: searchValue }));
+  }, [searchValue, dispatch]);
   return (
     <div className="mt-5 opacity-25 hover:opacity-100 focus:opacity-100 flex items-center">
       <input
         type="text"
-        value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        value={subredditSearchValue ? subredditSearchValue : searchValue}
+        onChange={e =>
+          setSubredditSearchValue
+            ? setSubredditSearchValue(e.target.value)
+            : setSearchValue(e.target.value)
+        }
         className="focus:opacity-100 mr-5 py-1 shadow-inner px-4 bg-gray-500 text-white text-2xl rounded-lg placeholder-white focus:outline-none focus:shadow-outline"
         placeholder="Search"
       />

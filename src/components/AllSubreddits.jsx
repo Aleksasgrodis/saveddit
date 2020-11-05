@@ -11,9 +11,9 @@ const subredditSelector = createSelector(linksSelector, links =>
 );
 
 function AllSubreddits() {
-  const [searchValue, setSearchValue] = useState('');
+  const [subredditSearchValue, setSubredditSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState(null);
-  const search = { searchValue, setSearchValue };
+  const search = { subredditSearchValue, setSubredditSearchValue };
   const duplicateSubreddits = useSelector(subredditSelector);
   const subreddits = [...new Set(duplicateSubreddits)].sort((a, b) =>
     a.localeCompare(b),
@@ -91,14 +91,14 @@ function AllSubreddits() {
           [
             ...sortedSubreddits
               .filter(sub =>
-                sub.toLowerCase().includes(searchValue.toLowerCase()),
+                sub.toLowerCase().includes(subredditSearchValue.toLowerCase()),
               )
               .filter(link => link.toUpperCase().charAt(0) === letter),
           ],
         ]),
       );
     }
-  }, [searchValue, copy]);
+  }, [subredditSearchValue, copy]);
   
   useEffect(() => {
     if (window.location.hash) {
@@ -114,7 +114,7 @@ function AllSubreddits() {
       <ContentHeader {...search} title="All Subreddits" />
       <div className="flex mt-20">
         <div className="">
-          {sortedByLetter && !searchValue.length
+          {sortedByLetter && !subredditSearchValue.length
             ? sortedByLetter.map(letter => {
                 if (letter[1].length) {
                   return (
