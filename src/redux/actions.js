@@ -27,23 +27,26 @@ export const setFetchCount = ({ count }) => ({
   count,
 });
 
-
 // load_numbered_page - for initial load (1) and any (n) page thereafter.
-export const loadNumberedPage = ({page}) => ({
+export const loadNumberedPage = ({ page }) => ({
   type: 'LOAD_NUMBERED_PAGE',
-  page
-})
+  page,
+});
 
 export const refreshSaved = () => ({
-  type: 'REFRESH'
-})
+  type: 'REFRESH',
+});
 
 export const setSearchResults = ({ value }) => ({
   type: 'SET_SEARCH_RESULTS',
-  value
-})
+  value,
+});
+
+export const setSubredditSearchResults = ({ subreddit }) => ({
+  type: 'SET_SUBREDDIT_SEARCH_RESULTS',
+  subreddit,
+});
 // load_next_page
 // load_prev_page
 
 // set_filter_values
-

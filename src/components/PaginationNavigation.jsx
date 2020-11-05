@@ -41,7 +41,7 @@ function PaginationNavigation({ action, total, currentPage }) {
           <button
             disabled={currentPage === total ? true : false}
             className={` -ml-px relative inline-flex items-center px-4 py-4 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 ${
-              currentPage === 1 ? 'cursor-not-allowed' : ''
+              currentPage === total ? 'cursor-not-allowed' : ''
             }`}
             aria-label="Next"
             onClick={() => dispatch(action({ page: currentPage + 1 }))}

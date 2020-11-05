@@ -2,9 +2,11 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useMemo } from 'react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createSelector } from 'reselect';
+import { loadNumberedPage, setSubredditSearchResults } from '../redux/actions';
+import PaginationNavigation from './PaginationNavigation';
 import SavedLinkListItem from './SavedLinkListItem';
 import Search from './Search';
 
@@ -18,14 +20,22 @@ const subredditLinksSelector = subreddit =>
 
 function FilterBySubreddit() {
   const { subreddit } = useParams();
+  const dispatch = useDispatch();
   const [sortedPosts, setSortedPosts] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const filteredPosts = useSelector(subredditLinksSelector(subreddit));
   const filteredPostsCopy = useMemo(() => {
     return filteredPosts;
   }, [filteredPosts]);
-  // const [searchResults, setSearchResults] = useState(null);
-  // const [posts, setPosts] = useState(filteredPostsCopy);
+
+  const { pageResults, currentPage, searchPages, searchResults } = useSelector(state => state.saved);
+  console.log(searchResults);
+  useEffect(() => {
+    dispatch(setSubredditSearchResults({ subreddit: subreddit }));
+    return () => {
+      dispatch(setSubredditSearchResults({ subreddit: '' }));
+    };
+  }, [dispatch, subreddit]);
 
   const sortBy = value => {
     switch (value) {
@@ -102,14 +112,13 @@ function FilterBySubreddit() {
         <Search {...search} />
       </div>
       <div className="flex flex-wrap justify-center">
-        {filteredPostsCopy && !sortedPosts.length
-          ? filteredPostsCopy.map(link => (
-              <SavedLinkListItem key={link.permalink} {...link} />
-            ))
-          : sortedPosts.map(link => (
-              <SavedLinkListItem key={link.permalink} {...link} />
-            ))}
+        {pageResults.map(link => (
+          <SavedLinkListItem key={link.permalink} {...link} />
+        ))}
       </div>
+      <PaginationNavigation total={searchPages}
+        action={loadNumberedPage}
+        currentPage={currentPage} />
     </div>
   );
 }

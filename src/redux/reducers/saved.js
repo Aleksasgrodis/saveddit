@@ -71,6 +71,14 @@ export default function (state = initialState, action) {
         searchResults,
         pageResults: searchResults.slice(0, 20),
         searchPages: Math.ceil((searchResults.length) / 20)
+      };
+    case 'SET_SUBREDDIT_SEARCH_RESULTS': 
+      let results = [...state.links].filter(link => link.subreddit.toLowerCase() === action.subreddit.toLowerCase())
+      return {
+        ...state,
+        searchResults: results,
+        pageResults: results.slice(0, 20),
+        searchPages: Math.ceil((results.length) / 20)
       }
     default:
       return state;

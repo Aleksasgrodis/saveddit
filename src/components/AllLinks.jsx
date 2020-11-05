@@ -11,7 +11,6 @@ const pageSelector = state => state.saved.pageResults;
 function AllLinks() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
-  const searchResults = useSelector(state => state.saved.searchResults);
   const search = { searchValue, setSearchValue };
   useEffect(() => {
     dispatch(loadNumberedPage({ page: 1 }));
