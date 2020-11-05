@@ -7,8 +7,9 @@ const initialState = {
   after: '',
   fetchCount: 100,
   total: 0,
-  pages: 0,
+  totalPages: 0,
   searchResults: [],
+  searchPages: 0,
 };
 
 export default function (state = initialState, action) {
@@ -25,7 +26,7 @@ export default function (state = initialState, action) {
         ...state,
         links: [...state.links, ...action.links],
         total: state.links.length + action.links.length,
-        pages: Math.ceil((state.links.length + action.links.length) / 20),
+        totalPages: Math.ceil((state.links.length + action.links.length) / 20),
         after: action.after,
         fetchCount: action.count,
         currentPage: 1,
@@ -34,6 +35,7 @@ export default function (state = initialState, action) {
         filterResults: [],
         sortResults: [],
         searchResults: [...state.links, ...action.links],
+        searchPages: Math.ceil((state.links.length + action.links.length) / 20),
       };
     case 'SET_LOADING_STATUS':
       return {
@@ -53,7 +55,7 @@ export default function (state = initialState, action) {
     case 'LOAD_NUMBERED_PAGE':
       let lowerCount = (action.page - 1) * 20;
       let upperCount = lowerCount + 20;
-      let pageResults = state.links.slice(lowerCount, upperCount);
+      let pageResults = state.searchResults.slice(lowerCount, upperCount);
       return {
         ...state,
         pageResults: pageResults,
@@ -61,12 +63,14 @@ export default function (state = initialState, action) {
       };
     case 'REFRESH':
       return { ...initialState };
-    case 'SET_POST_SEARCH_VALUE': 
+    case 'SET_SEARCH_RESULTS': 
       let copy = [...state.links];
-      let searchResult = copy.filter(link => link.title.toLowerCase().includes(action.value.toLowerCase()))
+      let searchResults = copy.filter(link => link.title.toLowerCase().includes(action.value.toLowerCase()))
       return {
         ...state,
-        searchResult
+        searchResults,
+        pageResults: searchResults.slice(0, 20),
+        searchPages: Math.ceil((searchResults.length) / 20)
       }
     default:
       return state;

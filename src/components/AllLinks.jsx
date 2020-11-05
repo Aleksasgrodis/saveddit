@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { loadNumberedPage, setPostSearchValue } from '../redux/actions';
+import { loadNumberedPage, setSearchResults } from '../redux/actions';
 import ContentHeader from './ContentHeader';
 import PaginationNavigation from './PaginationNavigation';
 import SavedLinkListItem from './SavedLinkListItem';
@@ -11,18 +11,17 @@ const pageSelector = state => state.saved.pageResults;
 function AllLinks() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
-  const searchResults = useSelector(state => state.saved.searchResult);
-  console.log(searchResults);
+  const searchResults = useSelector(state => state.saved.searchResults);
   const search = { searchValue, setSearchValue };
   useEffect(() => {
     dispatch(loadNumberedPage({ page: 1 }));
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(setPostSearchValue({value: searchValue}))
+    dispatch(setSearchResults({value: searchValue}))
   }, [searchValue, dispatch])
 
-  const { pageResults, currentPage, pages } = useSelector(state => state.saved);
+  const { pageResults, currentPage, searchPages } = useSelector(state => state.saved);
   return (
     <div className="w-full">
       <ContentHeader withSort={true} {...search} />
@@ -32,7 +31,7 @@ function AllLinks() {
         ))}
       </div>
       <PaginationNavigation
-        total={pages}
+        total={searchPages}
         action={loadNumberedPage}
         currentPage={currentPage}
       />
