@@ -8,6 +8,7 @@ const initialState = {
   fetchCount: 100,
   total: 0,
   pages: 0,
+  searchResult: [],
 };
 
 export default function (state = initialState, action) {
@@ -59,6 +60,13 @@ export default function (state = initialState, action) {
       };
     case 'REFRESH':
       return { ...initialState };
+    case 'SET_POST_SEARCH_VALUE': 
+      let copy = [...state.links];
+      let searchResult = copy.filter(link => link.title.toLowerCase().includes(action.value.toLowerCase()))
+      return {
+        ...state,
+        searchResult
+      }
     default:
       return state;
   }

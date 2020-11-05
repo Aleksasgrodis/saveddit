@@ -37,6 +37,11 @@ export const loadNumberedPage = ({page}) => ({
 export const refreshSaved = () => ({
   type: 'REFRESH'
 })
+
+export const setPostSearchValue = ({ value }) => ({
+  type: 'SET_POST_SEARCH_VALUE',
+  value
+})
 // load_next_page
 // load_prev_page
 

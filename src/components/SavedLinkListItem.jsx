@@ -1,19 +1,15 @@
 import {
-  faReddit,
   faRedditAlien,
   faRedditSquare,
 } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowUp,
   faCalendarAlt,
-  faComment,
   faCommentAlt,
   faEye,
   faEyeSlash,
   faLink,
-  faTrash,
   faTrashAlt,
-  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { format, fromUnixTime } from 'date-fns';
@@ -46,7 +42,7 @@ function SavedLinkListItem({
         </div>
       </div>
       <div className="flex flex-col justify-between"></div>
-      <div className="w-10/12 p-2 flex flex-col justify-between">
+      <div className="w-10/12 p-2 flex flex-col justify-between border-t border-b">
         <div>
           <div className="flex justify-between align-center">
             <p className="text-sm text-gray-600 flex items-center mb-1">
@@ -95,13 +91,12 @@ function SavedLinkListItem({
               icon={faCalendarAlt}
             />
             <span className="text-gray-600 text-sm">
-              Posted on {format(fromUnixTime(created_utc), 'd MMM yyy')} by {author}
+              Posted on {format(fromUnixTime(created_utc), 'd MMM yyy')} by{' '}
+              {author}
             </span>
           </div>
           <div className="flex items-center">
-            <span className="text-gray-600 text-sm">
-              {domain}
-            </span>
+            <span className="text-gray-600 text-sm">{domain}</span>
           </div>
         </div>
       </div>
