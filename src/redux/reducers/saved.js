@@ -8,7 +8,7 @@ const initialState = {
   fetchCount: 100,
   total: 0,
   pages: 0,
-  searchResult: [],
+  searchResults: [],
 };
 
 export default function (state = initialState, action) {
@@ -33,6 +33,7 @@ export default function (state = initialState, action) {
         pageResults: [],
         filterResults: [],
         sortResults: [],
+        searchResults: [...state.links, ...action.links],
       };
     case 'SET_LOADING_STATUS':
       return {
