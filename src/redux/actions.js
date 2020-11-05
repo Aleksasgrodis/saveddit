@@ -47,6 +47,11 @@ export const setSubredditFilter = ({ subreddit }) => ({
   subreddit
 })
 
+export const setSortingMethod = ({method}) => ({
+  type: 'SET_SORTING_METHOD',
+  method
+})
+
 // export const setSubredditResults = ({ subreddit }) => ({
 //   type: 'SET_SUBREDDIT_RESULTS',
 //   subreddit,

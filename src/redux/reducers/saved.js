@@ -63,23 +63,95 @@ export default function (state = initialState, action) {
       };
     case 'REFRESH':
       return { ...initialState };
-    case 'SET_SUBREDDIT_FILTER': 
+    case 'SET_SUBREDDIT_FILTER':
       return {
-        ...state, 
-        subredditFilter: action.subreddit
+        ...state,
+        subredditFilter: action.subreddit,
+      };
+    case 'SET_SORTING_METHOD':
+      switch (action.method) {
+        case 'a-z': {
+          let sorted = state.searchResults.sort((a, b) =>
+            a.title.localeCompare(b.title),
+          );
+          return {
+            ...state,
+            searchResults: sorted,
+            pageResults: sorted.slice(0, 20),
+          };
+        }
+        case 'z-a': {
+          let sorted = state.searchResults.sort((a, b) =>
+            b.title.localeCompare(a.title),
+          );
+          return {
+            ...state,
+            searchResults: sorted,
+            pageResults: sorted.slice(0, 20),
+          };
+        }
+        case 'dateNew': {
+          let sorted = state.searchResults.sort((a, b) =>
+            a.created_utc > b.created_utc ? -1 : 1,
+          );
+          return {
+            ...state,
+            searchResults: sorted,
+            pageResults: sorted.slice(0, 20),
+          };
+        }
+        case 'dateOld': {
+          let sorted = state.searchResults.sort((a, b) =>
+            a.created_utc > b.created_utc ? 1 : -1,
+          );
+          return {
+            ...state,
+            searchResults: sorted,
+            pageResults: sorted.slice(0, 20),
+          };
+        }
+        case 'popularity': {
+          let sorted = state.searchResults.sort((a, b) =>
+            a.score > b.score ? -1 : 1,
+          );
+          return {
+            ...state,
+            searchResults: sorted,
+            pageResults: sorted.slice(0, 20),
+          };
+        }
+        case 'lastSaved': {
+          let searchResults = [...state.links];
+          if (state.subredditFilter) {
+            searchResults = searchResults.filter(
+              post => post.subreddit === state.subredditFilter,
+            );
+          }
+          return {
+            ...state,
+            searchResults,
+            pageResults: searchResults.slice(0, 20),
+            searchPages: Math.ceil(searchResults.length / 20),
+          };
+        }
+        default:
+          break;
       }
-    case 'SET_SEARCH_RESULTS': 
+      break;
+    case 'SET_SEARCH_RESULTS':
       let copy = [...state.links];
-      if (state.subredditFilter){
-        copy = copy.filter(post => post.subreddit === state.subredditFilter)
+      if (state.subredditFilter) {
+        copy = copy.filter(post => post.subreddit === state.subredditFilter);
       }
-      let searchResults = copy.filter(link => link.title.toLowerCase().includes(action.value.toLowerCase()))
+      let searchResults = copy.filter(link =>
+        link.title.toLowerCase().includes(action.value.toLowerCase()),
+      );
       return {
         ...state,
         searchResults,
         pageResults: searchResults.slice(0, 20),
-        searchPages: Math.ceil((searchResults.length) / 20)
-      }
+        searchPages: Math.ceil(searchResults.length / 20),
+      };
     default:
       return state;
   }
