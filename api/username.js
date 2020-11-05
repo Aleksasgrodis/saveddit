@@ -8,11 +8,12 @@ module.exports = (req, res) => {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
   };
   fetch(`https://oauth.reddit.com/api/v1/me`, config)
     .then(response => {
-      return response.json()})
+      return response.json();
+    })
     .then(data => res.json(data))
     .catch(error => console.log(error));
 };

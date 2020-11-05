@@ -9,7 +9,6 @@ const subredditLinksSelector = createSelector(linksSelector, links =>
 );
 
 function FilterByNSFW() {
-  console.log('nsfw');
   const filteredPosts = useSelector(subredditLinksSelector);
   return (
     <div className="flex flex-wrap justify-center">

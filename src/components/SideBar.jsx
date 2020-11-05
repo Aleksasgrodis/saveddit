@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink, Redirect, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { refreshSaved } from '../redux/actions';
 import UserInfo from './UserInfo';
@@ -17,15 +17,15 @@ function SideBar() {
     localStorage.clear();
     history.push('/');
   };
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const requestRefreshToken = () => {
-    fetch(`/api/refresh?token=${refresh_token}`)
+    return fetch(`/api/refresh?token=${refresh_token}`)
       .then(res => res.json())
       .then(data => {
         if (data.access_token) {
+          setUser({ ...user, token: data.access_token });
           dispatch(refreshSaved());
           localStorage.removeItem('saved');
-          setUser({ ...user, token: data.access_token });
           history.push('/loading');
         }
       })

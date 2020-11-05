@@ -1,9 +1,9 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import AllLinks from './AllLinks'
-import AllSubreddits from './AllSubreddits'
-import FilterByNSFW from './FilterByNSFW'
-import FilterBySubreddit from './FilterBySubreddit'
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import AllLinks from './AllLinks';
+import AllSubreddits from './AllSubreddits';
+import FilterByNSFW from './FilterByNSFW';
+import FilterBySubreddit from './FilterBySubreddit';
 
 function Content() {
   return (
@@ -12,9 +12,7 @@ function Content() {
         <Route path="/dashboard/all">
           <AllLinks />
         </Route>
-        <Route path="/dashboard/categories">
-          cata
-        </Route>
+        <Route path="/dashboard/categories">cata</Route>
         <Route exact path="/dashboard/subreddits">
           <AllSubreddits />
         </Route>
@@ -26,7 +24,7 @@ function Content() {
         </Route>
       </Switch>
     </div>
-  )
+  );
 }
 
-export default Content
+export default Content;

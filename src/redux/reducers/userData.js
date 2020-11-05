@@ -3,10 +3,10 @@ const userDataReducer = (state = [], action) => {
   // remove etc etc
   switch (action.type) {
     case 'ADD_SAVED':
-      return [...state, ...action.data]
+      return [...state, ...action.data];
     case 'GET_SAVED':
       return state;
-    default: 
+    default:
       return state;
   }
 };

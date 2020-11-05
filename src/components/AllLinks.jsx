@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { loadNumberedPage, setSearchResults } from '../redux/actions';
 import ContentHeader from './ContentHeader';
 import PaginationNavigation from './PaginationNavigation';
 import SavedLinkListItem from './SavedLinkListItem';
-
-const pageSelector = state => state.saved.pageResults;
 
 function AllLinks() {
   const dispatch = useDispatch();
@@ -17,10 +14,12 @@ function AllLinks() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(setSearchResults({value: searchValue}))
-  }, [searchValue, dispatch])
+    dispatch(setSearchResults({ value: searchValue }));
+  }, [searchValue, dispatch]);
 
-  const { pageResults, currentPage, searchPages } = useSelector(state => state.saved);
+  const { pageResults, currentPage, searchPages } = useSelector(
+    state => state.saved,
+  );
   return (
     <div className="w-full">
       <ContentHeader withSort={true} {...search} />

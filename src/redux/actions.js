@@ -44,13 +44,13 @@ export const setSearchResults = ({ value }) => ({
 
 export const setSubredditFilter = ({ subreddit }) => ({
   type: 'SET_SUBREDDIT_FILTER',
-  subreddit
-})
+  subreddit,
+});
 
-export const setSortingMethod = ({method}) => ({
+export const setSortingMethod = ({ method }) => ({
   type: 'SET_SORTING_METHOD',
-  method
-})
+  method,
+});
 
 // export const setSubredditResults = ({ subreddit }) => ({
 //   type: 'SET_SUBREDDIT_RESULTS',

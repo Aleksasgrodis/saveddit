@@ -99,15 +99,14 @@ function AllSubreddits() {
       );
     }
   }, [subredditSearchValue, copy]);
-  
+
   useEffect(() => {
     if (window.location.hash) {
-      const id = window.location.hash.replace("#", "");
+      const id = window.location.hash.replace('#', '');
       const element = document.getElementById(id);
       element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    
-  }, [])
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -134,23 +133,23 @@ function AllSubreddits() {
                 } else return null;
               })
             : searchResults.map(letter => {
-              if (letter[1].length) {
-                return (
-                  <section
-                    id={`section-${letter[0].toLowerCase()}`}
-                    className="w-11/12 flex flex-col flex-wrap"
-                    key={letter[0]}
-                  >
-                    <h2 className="font-bold text-4xl">{letter[0]}</h2>
-                    <div className="flex flex-wrap">
-                      {letter[1].map(sub => (
-                        <SubredditListItem key={sub} title={sub} />
-                      ))}
-                    </div>
-                  </section>
-                );
-              } else return null;
-            })}
+                if (letter[1].length) {
+                  return (
+                    <section
+                      id={`section-${letter[0].toLowerCase()}`}
+                      className="w-11/12 flex flex-col flex-wrap"
+                      key={letter[0]}
+                    >
+                      <h2 className="font-bold text-4xl">{letter[0]}</h2>
+                      <div className="flex flex-wrap">
+                        {letter[1].map(sub => (
+                          <SubredditListItem key={sub} title={sub} />
+                        ))}
+                      </div>
+                    </section>
+                  );
+                } else return null;
+              })}
         </div>
         <div className="fixed right-0 inset-y-0 mr-16">
           <div className="flex flex-col h-full justify-center items-center">
@@ -160,7 +159,9 @@ function AllSubreddits() {
                   key={letter[0]}
                   className="font-bold text-gray-400 hover:text-gray-900"
                   to={`/dashboard/subreddits#section-${letter[0].toLowerCase()}`}
-                  scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+                  scroll={el =>
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                  }
                   activeClassName="text-orange-600 text-xl font-bolder"
                 >
                   {letter[0]}

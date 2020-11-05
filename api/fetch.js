@@ -59,7 +59,7 @@ module.exports = (req, res) => {
     })
     .then(({ data }) => {
       const { dist, after, children, before } = data;
-      console.log(children)
+      console.log(children);
       return res.json({
         dist,
         after,

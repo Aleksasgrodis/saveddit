@@ -18,7 +18,8 @@ module.exports = (req, res) => {
   fetch('https://www.reddit.com/api/v1/access_token', config)
     .then(response => response.json(response))
     .then(data => {
-      console.log(data)
-      return res.json(data)})
+      console.log(data);
+      return res.json(data);
+    })
     .catch(error => console.log(error));
 };

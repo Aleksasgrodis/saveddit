@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,7 +16,6 @@ const Login = () => {
   };
   return (
     <div className="flex justify-center">
-
       <button
         onClick={() => handleAuthorize()}
         type="button"
@@ -28,4 +27,4 @@ const Login = () => {
   );
 };
 
-export default Login
+export default Login;
