@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createSelector } from 'reselect';
-import { loadNumberedPage, setSubredditSearchResults } from '../redux/actions';
+import { loadNumberedPage, setSearchResults, setSubredditFilter, setSubredditSearchResults } from '../redux/actions';
 import PaginationNavigation from './PaginationNavigation';
 import SavedLinkListItem from './SavedLinkListItem';
 import Search from './Search';
@@ -31,11 +31,15 @@ function FilterBySubreddit() {
   const { pageResults, currentPage, searchPages, searchResults } = useSelector(state => state.saved);
   console.log(searchResults);
   useEffect(() => {
-    dispatch(setSubredditSearchResults({ subreddit: subreddit }));
+    dispatch(setSubredditFilter({ subreddit: subreddit }));
     return () => {
-      dispatch(setSubredditSearchResults({ subreddit: '' }));
+      dispatch(setSubredditFilter({ subreddit: null }));
     };
   }, [dispatch, subreddit]);
+
+  useEffect(() => {
+    dispatch(setSearchResults({value: searchValue}))
+  }, [searchValue, dispatch])
 
   const sortBy = value => {
     switch (value) {

@@ -42,10 +42,20 @@ export const setSearchResults = ({ value }) => ({
   value,
 });
 
-export const setSubredditSearchResults = ({ subreddit }) => ({
-  type: 'SET_SUBREDDIT_SEARCH_RESULTS',
-  subreddit,
-});
+export const setSubredditFilter = ({ subreddit }) => ({
+  type: 'SET_SUBREDDIT_FILTER',
+  subreddit
+})
+
+// export const setSubredditResults = ({ subreddit }) => ({
+//   type: 'SET_SUBREDDIT_RESULTS',
+//   subreddit,
+// });
+
+// export const setSubredditSearchResults = ({ value }) => ({
+//   type: 'SET_SUBREDDIT_SEARCH_RESULTS',
+//   value,
+// });
 // load_next_page
 // load_prev_page
 

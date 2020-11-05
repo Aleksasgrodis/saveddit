@@ -7,6 +7,7 @@ const initialState = {
   after: '',
   fetchCount: 100,
   total: 0,
+  subredditFilter: null,
   totalPages: 0,
   searchResults: [],
   searchPages: 0,
@@ -32,7 +33,6 @@ export default function (state = initialState, action) {
         currentPage: 1,
         filterValues: [],
         pageResults: [],
-        filterResults: [],
         sortResults: [],
         searchResults: [...state.links, ...action.links],
         searchPages: Math.ceil((state.links.length + action.links.length) / 20),
@@ -63,22 +63,22 @@ export default function (state = initialState, action) {
       };
     case 'REFRESH':
       return { ...initialState };
+    case 'SET_SUBREDDIT_FILTER': 
+      return {
+        ...state, 
+        subredditFilter: action.subreddit
+      }
     case 'SET_SEARCH_RESULTS': 
       let copy = [...state.links];
+      if (state.subredditFilter){
+        copy = copy.filter(post => post.subreddit === state.subredditFilter)
+      }
       let searchResults = copy.filter(link => link.title.toLowerCase().includes(action.value.toLowerCase()))
       return {
         ...state,
         searchResults,
         pageResults: searchResults.slice(0, 20),
         searchPages: Math.ceil((searchResults.length) / 20)
-      };
-    case 'SET_SUBREDDIT_SEARCH_RESULTS': 
-      let results = [...state.links].filter(link => link.subreddit.toLowerCase() === action.subreddit.toLowerCase())
-      return {
-        ...state,
-        searchResults: results,
-        pageResults: results.slice(0, 20),
-        searchPages: Math.ceil((results.length) / 20)
       }
     default:
       return state;
