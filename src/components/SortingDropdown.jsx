@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { setSortingMethod } from '../redux/actions'
 
-function SortingDropdown({sortBy}) {
+function SortingDropdown() {
   const dispatch = useDispatch()
   return (
       <select onChange={e => {

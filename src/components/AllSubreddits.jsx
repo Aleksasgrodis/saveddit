@@ -1,10 +1,8 @@
-import { create } from 'lodash';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavHashLink } from 'react-router-hash-link';
 import { createSelector } from 'reselect';
 import ContentHeader from './ContentHeader';
-import Search from './Search';
 import SubredditListItem from './SubredditListItem';
 
 const linksSelector = state => state.saved.links;
