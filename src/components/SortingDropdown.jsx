@@ -1,10 +1,12 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { setSortingMethod } from '../redux/actions'
 
-function SortingDropdown({sortBy}) {
+function SortingDropdown() {
+  const dispatch = useDispatch()
   return (
       <select onChange={e => {
-        console.log('onchange ran')
-        sortBy(e.target.value)}} className="focus:opacity-100 h-10 pt-1 pb-1 pl-3 shadow-inner bg-gray-500 text-white text-2xl rounded-lg placeholder-white focus:outline-none focus:shadow-outline" name="" id="">
+        dispatch(setSortingMethod({method: e.target.value}))}} className="focus:opacity-100 h-10 pt-1 pb-1 pl-3 shadow-inner bg-gray-500 text-white text-2xl rounded-lg placeholder-white focus:outline-none focus:shadow-outline" name="" id="">
         <option value="lastSaved">Last Saved</option>
         <option value="a-z">Title: A - Z</option>
         <option value="z-a">Title: Z - A</option>

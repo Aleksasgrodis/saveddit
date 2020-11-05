@@ -27,23 +27,41 @@ export const setFetchCount = ({ count }) => ({
   count,
 });
 
-
 // load_numbered_page - for initial load (1) and any (n) page thereafter.
-export const loadNumberedPage = ({page}) => ({
+export const loadNumberedPage = ({ page }) => ({
   type: 'LOAD_NUMBERED_PAGE',
-  page
-})
+  page,
+});
 
 export const refreshSaved = () => ({
-  type: 'REFRESH'
+  type: 'REFRESH',
+});
+
+export const setSearchResults = ({ value }) => ({
+  type: 'SET_SEARCH_RESULTS',
+  value,
+});
+
+export const setSubredditFilter = ({ subreddit }) => ({
+  type: 'SET_SUBREDDIT_FILTER',
+  subreddit
 })
 
-export const setPostSearchValue = ({ value }) => ({
-  type: 'SET_POST_SEARCH_VALUE',
-  value
+export const setSortingMethod = ({method}) => ({
+  type: 'SET_SORTING_METHOD',
+  method
 })
+
+// export const setSubredditResults = ({ subreddit }) => ({
+//   type: 'SET_SUBREDDIT_RESULTS',
+//   subreddit,
+// });
+
+// export const setSubredditSearchResults = ({ value }) => ({
+//   type: 'SET_SUBREDDIT_SEARCH_RESULTS',
+//   value,
+// });
 // load_next_page
 // load_prev_page
 
 // set_filter_values
-
