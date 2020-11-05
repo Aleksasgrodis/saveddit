@@ -38,8 +38,8 @@ export const refreshSaved = () => ({
   type: 'REFRESH'
 })
 
-export const setSearchValue = ({ value }) => ({
-  type: 'SET_SEARCH_VALUE',
+export const setPostSearchValue = ({ value }) => ({
+  type: 'SET_POST_SEARCH_VALUE',
   value
 })
 // load_next_page

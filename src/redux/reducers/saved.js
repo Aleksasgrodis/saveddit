@@ -60,7 +60,7 @@ export default function (state = initialState, action) {
       };
     case 'REFRESH':
       return { ...initialState };
-    case 'SET_SEARCH_VALUE': 
+    case 'SET_POST_SEARCH_VALUE': 
       let copy = [...state.links];
       let searchResult = copy.filter(link => link.title.toLowerCase().includes(action.value.toLowerCase()))
       return {
