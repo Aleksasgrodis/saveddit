@@ -20,7 +20,6 @@ function SavedLinkListItem({
   score,
   num_comments,
   author,
-  clicked,
   created_utc,
   domain,
   over_18,
@@ -28,8 +27,8 @@ function SavedLinkListItem({
   thumbnail,
 }) {
   return (
-    <div className="rounded-md xl:w-5/12 lg:w-10/12 md:w-full sm:w-full w-full flex shadow-md mb-4 mr-4 md:h-40 sm:h-56 h-56 overflow-hidden">
-      <div className="xl:w-1/12 lg:w-1/12 md:w-1/12 sm:w-12 w-12 flex flex-col justify-around bg-gray-900 text-white border-r">
+    <div className="rounded-md xl:w-5/12 lg:w-10/12 md:w-full sm:w-full w-full flex border shadow-md mb-4 mr-4 md:h-40 sm:h-56 h-56 overflow-hidden">
+      <div className="xl:w-1/12 lg:w-1/12 md:w-1/12 sm:w-12 w-12 flex flex-col justify-around bg-gray-900 text-white ">
         <div className="flex flex-col items-center justify-center h-16">
           <FontAwesomeIcon icon={faArrowUp} />
           <span className="sm:text-xs md:text-sm">
@@ -42,7 +41,7 @@ function SavedLinkListItem({
         </div>
       </div>
       <div className="flex flex-col justify-between"></div>
-      <div className="w-10/12 p-2 flex flex-col justify-between border-t border-b">
+      <div className="w-10/12 p-4 flex flex-col justify-between">
         <div>
           <div className="flex justify-between align-center">
             <p className="text-sm text-gray-600 flex items-center mb-1">
@@ -105,9 +104,9 @@ function SavedLinkListItem({
           href={url}
           rel="noopener noreferrer"
           target="_blank"
-          className="w-full h-full outline-none"
+          className="w-full h-full outline-none bg-transparent" 
         >
-          <button className="bg-blue-500 w-full h-full text-white text-2xl">
+          <button className=" w-full h-full rounded bg-transparent text-blue-500 text-2xl">
             <FontAwesomeIcon icon={faLink} />
           </button>
         </a>
@@ -117,11 +116,11 @@ function SavedLinkListItem({
           target="_blank"
           className="w-full h-full outline-none"
         >
-          <button className="bg-orange-500 w-full h-full text-white text-2xl">
+          <button className="w-full h-full text-orange-500 text-2xl">
             <FontAwesomeIcon icon={faRedditAlien} />
           </button>
         </a>
-        <button className="w-full h-full outline-none bg-red-500 w-full h-full text-white text-2xl">
+        <button className="w-full h-full outline-none text-red-500 bg-transparent text-2xl">
           <FontAwesomeIcon icon={faTrashAlt} />
         </button>
       </div>
