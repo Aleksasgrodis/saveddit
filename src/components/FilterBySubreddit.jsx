@@ -34,7 +34,7 @@ function FilterBySubreddit() {
 
   return (
     <div>
-      <ContentHeader title={`r/${subreddit}`} />
+      <ContentHeader title={`r/${subreddit}`} withSort={true} />
       <div className="flex flex-wrap justify-center pt-32">
         {pageResults.map(link => (
           <SavedLinkListItem key={link.permalink} {...link} />
