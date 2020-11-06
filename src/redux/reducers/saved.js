@@ -16,7 +16,6 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case Types.ADD_LINKS:
-      console.log(action);
       return {
         ...state,
         links: [...state.links, ...action.links],
@@ -152,6 +151,13 @@ export default function (state = initialState, action) {
         pageResults: searchResults.slice(0, 20),
         searchPages: Math.ceil(searchResults.length / 20),
       };
+    case 'UNSAVE_POST': 
+      return {
+        ...state,
+        links: state.links.filter(link => link.id !== action.id),
+        searchResults: state.searchResults.filter(link => link.id !== action.id),
+        pageResults: state.pageResults.filter(link => link.id !== action.id)
+      }
     default:
       return state;
   }

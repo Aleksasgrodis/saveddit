@@ -52,6 +52,11 @@ export const setSortingMethod = ({ method }) => ({
   method,
 });
 
+export const unsavePost = ({id}) => ({
+  type: 'UNSAVE_POST',
+  id
+})
+
 // export const setSubredditResults = ({ subreddit }) => ({
 //   type: 'SET_SUBREDDIT_RESULTS',
 //   subreddit,
