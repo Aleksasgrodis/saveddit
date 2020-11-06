@@ -6,7 +6,6 @@ const minifyReponse = array => {
     ({
       author,
       archived,
-      clicked,
       created_utc,
       domain,
       id,
@@ -18,11 +17,9 @@ const minifyReponse = array => {
       subreddit,
       title,
       url,
-      thumbnail,
     }) => ({
       author,
       archived,
-      clicked,
       created_utc,
       domain,
       id,
@@ -34,7 +31,6 @@ const minifyReponse = array => {
       subreddit,
       title,
       url,
-      thumbnail,
     }),
   );
 };
