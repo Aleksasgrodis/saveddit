@@ -347,6 +347,7 @@ module.exports = {
       '5xl': '64rem',
       '6xl': '72rem',
       full: '100%',
+      'full-sidebar': 'calc(100% - 200px)',
       ...breakpoints(theme('screens')),
     }),
     minHeight: {
