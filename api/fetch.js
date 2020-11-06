@@ -54,9 +54,7 @@ module.exports = (req, res) => {
     }`,
     config,
   )
-    .then(response => {
-      return response.json(response);
-    })
+    .then(response => response.json(response))
     .then(({ data }) => {
       const { dist, after, children, before } = data;
       return res.json({

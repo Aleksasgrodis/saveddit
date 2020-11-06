@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-  loadNumberedPage,
-  setSearchResults,
-  setSubredditFilter,
-} from '../redux/actions';
+import { loadNumberedPage, setSubredditFilter } from '../redux/actions';
 import ContentHeader from './ContentHeader';
 import PaginationNavigation from './PaginationNavigation';
 import SavedLinkListItem from './SavedLinkListItem';
-import Search from './Search';
 
 function FilterBySubreddit() {
   const { subreddit } = useParams();
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = useState('');
   const { pageResults, currentPage, searchPages } = useSelector(
     state => state.saved,
   );
@@ -25,12 +19,6 @@ function FilterBySubreddit() {
       dispatch(setSubredditFilter({ subreddit: null }));
     };
   }, [dispatch, subreddit]);
-
-  useEffect(() => {
-    dispatch(setSearchResults({ value: searchValue }));
-  }, [searchValue, dispatch]);
-
-  const search = { withSort: true, searchValue, setSearchValue };
 
   return (
     <div>
