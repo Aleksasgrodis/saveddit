@@ -6,15 +6,13 @@ import {
   faArrowUp,
   faCalendarAlt,
   faCommentAlt,
-  faEye,
-  faEyeSlash,
   faLink,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { format, fromUnixTime } from 'date-fns';
 import React from 'react';
-
+import TextTruncate from 'react-text-truncate';
 function SavedLinkListItem({
   title,
   url,
@@ -30,15 +28,17 @@ function SavedLinkListItem({
   thumbnail,
 }) {
   return (
-    <div className="rounded-md lg:w-5/12 md:w-8/12 flex shadow-md mb-4 mr-4 h-32 overflow-hidden">
-      <div className="w-1/12 flex flex-col justify-around bg-gray-900 text-white border-r">
-        <div className="flex flex-col items-center justify-center h-12">
+    <div className="rounded-md xl:w-5/12 lg:w-10/12 md:w-full sm:w-full w-full flex shadow-md mb-4 mr-4 md:h-40 sm:h-56 h-56 overflow-hidden">
+      <div className="xl:w-1/12 lg:w-1/12 md:w-1/12 sm:w-12 w-12 flex flex-col justify-around bg-gray-900 text-white border-r">
+        <div className="flex flex-col items-center justify-center h-16">
           <FontAwesomeIcon icon={faArrowUp} />
-          <span className="text-sm">{score}</span>
+          <span className="sm:text-xs md:text-sm">
+            {score > 100000 ? '100K+' : score}
+            </span>
         </div>
-        <div className="flex flex-col items-center justify-center h-12">
+        <div className="flex flex-col items-center justify-center h-16">
           <FontAwesomeIcon icon={faCommentAlt} />
-          <span className="text-sm">{num_comments}</span>
+          <span className="sm:text-xs md:text-sm">{num_comments}</span>
         </div>
       </div>
       <div className="flex flex-col justify-between"></div>
@@ -59,28 +59,28 @@ function SavedLinkListItem({
                 {subreddit_name_prefixed}
               </a>
             </p>
-            <span className={`text-${clicked ? 'blue' : 'gray'}-600`}>
-              {over_18 ? (
-                <span
-                  title="NOT SAFE FOR WORK"
-                  className="text-red-600 mr-2 font-bold"
-                >
-                  NSFW
-                </span>
-              ) : null}{' '}
-              <span title={clicked ? 'Viewed' : 'Not Viewed'}>
-                <FontAwesomeIcon icon={clicked ? faEye : faEyeSlash} />
+            {over_18 ? (
+              <span
+                title="NOT SAFE FOR WORK"
+                className="text-white bg-red-600 py-px px-1 rounded font-bold text-sm"
+              >
+                NSFW
               </span>
-            </span>
+            ) : null}{' '}
           </div>
-          <div className="text-gray-900 font-bold text-xl">
+          <div className="text-gray-900 font-bold text-md">
             <a
               href={`https://www.reddit.com${permalink}`}
               rel="noopener noreferrer"
               target="_blank"
               className="hover:text-orange-600"
             >
-              {title}
+              <TextTruncate
+                line={3}
+                element="span"
+                truncateText="..."
+                text={title}
+              />
             </a>
           </div>
         </div>
@@ -96,11 +96,11 @@ function SavedLinkListItem({
             </span>
           </div>
           <div className="flex items-center">
-            <span className="text-gray-600 text-sm">{domain}</span>
+            <span className="text-gray-600 text-sm truncate">{domain}</span>
           </div>
         </div>
       </div>
-      <div className="w-1/12 flex flex-col justify-around items-center">
+      <div className="xl:w-1/12 lg:w-1/12 md:w-1/12 sm:w-12 flex flex-col justify-around items-center">
         <a
           href={url}
           rel="noopener noreferrer"

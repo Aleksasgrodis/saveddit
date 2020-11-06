@@ -8,7 +8,7 @@ function Dashboard() {
       <div className="flex-none min-w-200 p-3">
         <SideBar />
       </div>
-      <div className="w-11/12 flex-none overflow-y-scroll">
+      <div className="w-full max-w-full-sidebar flex-none overflow-y-scroll">
         <Content />
       </div>
     </div>
