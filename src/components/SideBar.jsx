@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { UserContext } from '../context/UserContext';
 import { refreshSaved } from '../redux/actions';
 import UserInfo from './UserInfo';
@@ -24,6 +25,8 @@ function SideBar() {
       .then(data => {
         if (data.access_token) {
           setUser({ ...user, token: data.access_token });
+          // <Redirect to={'/dashboard'} />
+          history.push('/dashboard');
           dispatch(refreshSaved());
           localStorage.removeItem('saved');
           history.push('/loading');
