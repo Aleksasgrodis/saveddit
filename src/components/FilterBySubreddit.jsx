@@ -6,6 +6,7 @@ import {
   setSearchResults,
   setSubredditFilter,
 } from '../redux/actions';
+import ContentHeader from './ContentHeader';
 import PaginationNavigation from './PaginationNavigation';
 import SavedLinkListItem from './SavedLinkListItem';
 import Search from './Search';
@@ -33,10 +34,8 @@ function FilterBySubreddit() {
 
   return (
     <div>
-      <div className="fixed">
-        <Search {...search} />
-      </div>
-      <div className="flex flex-wrap justify-center">
+      <ContentHeader title={`r/${subreddit}`} />
+      <div className="flex flex-wrap justify-center pt-32">
         {pageResults.map(link => (
           <SavedLinkListItem key={link.permalink} {...link} />
         ))}
