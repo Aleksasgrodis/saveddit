@@ -3,10 +3,14 @@ const { default: fetch } = require('node-fetch');
 
 module.exports = (req, res) => {
   const code = req.query.code;
+  const redirect_uri =
+    process.env.NODE_ENV === 'production'
+      ? 'https://saveddit.vercel.app/loading'
+      : 'http://localhost:3000/loading';
   var data = qs.stringify({
     grant_type: 'authorization_code',
     code: code,
-    redirect_uri: 'http://localhost:3000/loading',
+    redirect_uri: redirect_uri,
   });
   var config = {
     method: 'post',
