@@ -152,7 +152,7 @@ function AllSubreddits() {
               })}
         </div>
         <div className="fixed right-0 inset-y-0 mr-12">
-          <div className="flex flex-col h-full justify-center items-center">
+          <nav className="flex flex-col h-full justify-center items-center">
             {sortedByLetter.map(letter => {
               return letter[1].length ? (
                 <NavHashLink
@@ -168,7 +168,7 @@ function AllSubreddits() {
                 </NavHashLink>
               ) : null;
             })}
-          </div>
+          </nav>
         </div>
       </div>
     </div>

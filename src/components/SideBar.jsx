@@ -38,7 +38,7 @@ function SideBar() {
       <div>
         <UserInfo />
       </div>
-      <div className="flex flex-col justify-center">
+      <nav className="flex flex-col justify-center">
         <NavLink
           className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow border rounded p-2 mb-2 text-center"
           activeClassName="font-bold text-blue-600 border-b-4"
@@ -60,7 +60,7 @@ function SideBar() {
         >
           NSFW
         </NavLink>
-      </div>
+      </nav>
       <div className="flex flex-col">
         <button
           type="button"

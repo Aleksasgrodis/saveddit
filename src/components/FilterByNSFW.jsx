@@ -12,7 +12,7 @@ const subredditLinksSelector = createSelector(linksSelector, links =>
 function FilterByNSFW() {
   const filteredPosts = useSelector(subredditLinksSelector);
   return (
-    <div className="w-full">
+    <section className="w-full">
       <ContentHeader title="NSFW" />
       <div className="flex flex-wrap justify-center pt-32">
         {filteredPosts
@@ -21,7 +21,7 @@ function FilterByNSFW() {
             ))
           : null}
       </div>
-    </div>
+    </section>
   );
 }
 

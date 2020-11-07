@@ -21,7 +21,7 @@ function AllLinks() {
     state => state.saved,
   );
   return (
-    <div className="w-full">
+    <section className="w-full">
       <ContentHeader withSort={true} {...search} />
       <div className="flex flex-wrap justify-center pt-32">
         {pageResults.map(link => (
@@ -33,7 +33,7 @@ function AllLinks() {
         action={loadNumberedPage}
         currentPage={currentPage}
       />
-    </div>
+    </section>
   );
 }
 
