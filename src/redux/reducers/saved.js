@@ -21,7 +21,7 @@ export default function (state = initialState, action) {
         links: [...state.links, ...action.links],
         total: state.links.length + action.links.length,
       };
-    case 'ADD_BATCH':
+    case Types.ADD_BATCH:
       return {
         ...state,
         links: [...state.links, ...action.links],
@@ -36,22 +36,22 @@ export default function (state = initialState, action) {
         searchResults: [...state.links, ...action.links],
         searchPages: Math.ceil((state.links.length + action.links.length) / 20),
       };
-    case 'SET_LOADING_STATUS':
+    case Types.SET_LOADING_STATUS:
       return {
         ...state,
         isLoading: action.status,
       };
-    case 'SET_AFTER':
+    case Types.SET_AFTER:
       return {
         ...state,
         after: action.after,
       };
-    case 'SET_FETCH_COUNT':
+    case Types.SET_FETCH_COUNT:
       return {
         ...state,
         fetchCount: action.count,
       };
-    case 'LOAD_NUMBERED_PAGE':
+    case Types.LOAD_NUMBERED_PAGE:
       let lowerCount = (action.page - 1) * 20;
       let upperCount = lowerCount + 20;
       let pageResults = state.searchResults.slice(lowerCount, upperCount);
@@ -60,14 +60,14 @@ export default function (state = initialState, action) {
         pageResults: pageResults,
         currentPage: action.page,
       };
-    case 'REFRESH':
+    case Types.REFRESH:
       return { ...initialState };
-    case 'SET_SUBREDDIT_FILTER':
+    case Types.SET_SUBREDDIT_FILTER:
       return {
         ...state,
         subredditFilter: action.subreddit,
       };
-    case 'SET_SORTING_METHOD':
+    case Types.SET_SORTING_METHOD:
       switch (action.method) {
         case 'a-z': {
           let sorted = state.searchResults.sort((a, b) =>
@@ -137,7 +137,7 @@ export default function (state = initialState, action) {
           break;
       }
       break;
-    case 'SET_SEARCH_RESULTS':
+    case Types.SET_SEARCH_RESULTS:
       let copy = [...state.links];
       if (state.subredditFilter) {
         copy = copy.filter(post => post.subreddit === state.subredditFilter);
@@ -151,13 +151,15 @@ export default function (state = initialState, action) {
         pageResults: searchResults.slice(0, 20),
         searchPages: Math.ceil(searchResults.length / 20),
       };
-    case 'UNSAVE_POST': 
+    case Types.UNSAVE_POST:
       return {
         ...state,
         links: state.links.filter(link => link.id !== action.id),
-        searchResults: state.searchResults.filter(link => link.id !== action.id),
-        pageResults: state.pageResults.filter(link => link.id !== action.id)
-      }
+        searchResults: state.searchResults.filter(
+          link => link.id !== action.id,
+        ),
+        pageResults: state.pageResults.filter(link => link.id !== action.id),
+      };
     default:
       return state;
   }
