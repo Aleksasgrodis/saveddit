@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, batch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { loadNumberedPage, setSubredditFilter } from '../redux/actions';
+import {
+  loadNumberedPage,
+  setSearchResults,
+  setSubredditFilter,
+} from '../redux/actions';
 import ContentHeader from './ContentHeader';
 import PaginationNavigation from './PaginationNavigation';
 import SavedLinkListItem from './SavedLinkListItem';
@@ -14,7 +18,10 @@ function FilterBySubreddit() {
   );
 
   useEffect(() => {
-    dispatch(setSubredditFilter({ subreddit: subreddit }));
+    batch(() => {
+      dispatch(setSubredditFilter({ subreddit: subreddit }));
+      dispatch(setSearchResults({ value: '' }));
+    });
     return () => {
       dispatch(setSubredditFilter({ subreddit: null }));
     };

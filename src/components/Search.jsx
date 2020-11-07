@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSearchResults } from '../redux/actions';
-import SortingDropdown from './SortingDropdown';
 
-function Search({
-  withSort,
-  subredditSearchValue,
-  setSubredditSearchValue,
-  ...props
-}) {
+function Search({ subredditSearchValue, setSubredditSearchValue, ...props }) {
   const [searchValue, setSearchValue] = useState('');
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setSearchResults({ value: searchValue }));
   }, [searchValue, dispatch]);
   return (
-    <div className="mt-5 opacity-25 hover:opacity-100 focus:opacity-100 flex items-center">
+    <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-4/12 xl:w-2/6 px-3">
+      <label
+        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        htmlFor="search-input"
+      >
+        Search
+      </label>
       <input
-        type="text"
         value={subredditSearchValue ? subredditSearchValue : searchValue}
         onChange={e =>
           setSubredditSearchValue
             ? setSubredditSearchValue(e.target.value)
             : setSearchValue(e.target.value)
         }
-        className="focus:opacity-100 mr-5 py-1 shadow-inner px-4 bg-gray-500 text-white text-2xl rounded-lg placeholder-white focus:outline-none focus:shadow-outline"
-        placeholder="Search"
+        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        id="search-input"
+        type="text"
+        placeholder={
+          setSubredditSearchValue ? 'BearsDoingHumanThings...' : 'Title of post..'
+        }
       />
-      {withSort ? <SortingDropdown /> : null}
     </div>
   );
 }

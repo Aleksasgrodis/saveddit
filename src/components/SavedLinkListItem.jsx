@@ -121,7 +121,7 @@ function SavedLinkListItem({
           </div>
         </div>
       </div>
-      <div className="xl:w-1/12 lg:w-1/12 md:w-1/12 sm:w-12 flex flex-col justify-around items-center">
+      <div className="xl:w-1/12 lg:w-1/12 md:w-1/12 sm:w-12 w-12 flex flex-col justify-around items-center">
         <a
           href={url}
           rel="noopener noreferrer"

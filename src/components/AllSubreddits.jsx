@@ -111,7 +111,7 @@ function AllSubreddits() {
   return (
     <div className="flex flex-col">
       <ContentHeader {...search} title="All Subreddits" />
-      <div className="flex mt-20">
+      <div className="flex pt-32">
         <div className="">
           {sortedByLetter && !subredditSearchValue.length
             ? sortedByLetter.map(letter => {
@@ -151,7 +151,7 @@ function AllSubreddits() {
                 } else return null;
               })}
         </div>
-        <div className="fixed right-0 inset-y-0 mr-16">
+        <div className="fixed right-0 inset-y-0 mr-12">
           <div className="flex flex-col h-full justify-center items-center">
             {sortedByLetter.map(letter => {
               return letter[1].length ? (
@@ -162,7 +162,7 @@ function AllSubreddits() {
                   scroll={el =>
                     el.scrollIntoView({ behavior: 'smooth', block: 'center' })
                   }
-                  activeClassName="text-orange-600 text-xl font-bolder"
+                  activeClassName="text-orange-600 text-3xl font-bolder"
                 >
                   {letter[0]}
                 </NavHashLink>
