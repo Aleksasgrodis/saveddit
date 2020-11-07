@@ -75,6 +75,7 @@ function SavedLinkListItem({
                 className="hover:text-gray-900"
                 rel="noopener noreferrer"
                 target="_blank"
+                title={`Open ${subreddit_name_prefixed} in a new tab.`}
                 href={`https://www.reddit.com/${subreddit_name_prefixed}`}
               >
                 {subreddit_name_prefixed}
@@ -87,7 +88,7 @@ function SavedLinkListItem({
               >
                 NSFW
               </span>
-            ) : null}{' '}
+            ) : null}
           </div>
           <div className="text-gray-900 font-bold text-md">
             <a
@@ -95,6 +96,7 @@ function SavedLinkListItem({
               rel="noopener noreferrer"
               target="_blank"
               className="hover:text-orange-600"
+              title={`Open Reddit post in new tab.`}
             >
               <TextTruncate
                 line={3}
@@ -126,9 +128,10 @@ function SavedLinkListItem({
           href={url}
           rel="noopener noreferrer"
           target="_blank"
+          title={`Open linked resource in new tab (${domain}).`}
           className="w-full h-full outline-none bg-transparent"
         >
-          <button className=" w-full h-full rounded bg-transparent text-blue-500 text-xl">
+          <button className=" w-full h-full rounded bg-transparent text-blue-500 hover:text-white hover:bg-blue-500 text-xl">
             <FontAwesomeIcon icon={faLink} />
           </button>
         </a>
@@ -136,15 +139,17 @@ function SavedLinkListItem({
           href={`https://www.reddit.com${permalink}`}
           rel="noopener noreferrer"
           target="_blank"
+          title={`Open Reddit post in new tab.`}
           className="w-full h-full outline-none"
         >
-          <button className="w-full h-full text-orange-500 text-xl">
+          <button className="w-full h-full rounded hover:text-white hover:bg-orange-600 text-orange-500 text-xl">
             <FontAwesomeIcon icon={faRedditAlien} />
           </button>
         </a>
         <button
+          title="Remove post from saved posts."
           onClick={() => unsave(id)}
-          className="w-full h-full outline-none text-red-500 bg-transparent text-xl"
+          className="w-full h-full outline-none rounded text-red-500 hover:text-white hover:bg-red-500 bg-transparent text-xl"
         >
           <FontAwesomeIcon icon={faTrashAlt} />
         </button>
