@@ -1,8 +1,9 @@
 import { faChevronDown, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import exportFromJSON from 'export-from-json';
 import React from 'react';
 import { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { refreshSaved } from '../redux/actions';
@@ -35,6 +36,41 @@ function SideBar() {
       })
       .catch(err => console.log(err));
   };
+  const {
+    links,
+    subredditFilter,
+    searchResults,
+    pageResults,
+    currentPage,
+    searchPages,
+    total,
+  } = useSelector(state => state.saved);
+
+  const exportAsXLS = event => {
+    const exportType = 'xls';
+    let fileName = 'spreadsheet';
+    let data = [];
+    switch (event.target.value) {
+      case 'page':
+        fileName = `Page${currentPage}of${searchPages}`;
+        data = pageResults;
+        exportFromJSON({ data, fileName, exportType });
+        break;
+      case 'subreddit':
+        fileName = `ResultsFrom-r/${subredditFilter}`;
+        data = searchResults;
+        exportFromJSON({ data, fileName, exportType });
+        break;
+      case 'everything':
+        fileName = `AllSavedPosts(${total})`;
+        data = links;
+        exportFromJSON({ data, fileName, exportType });
+        break;
+      default:
+        break;
+    }
+    event.target.value = "";
+  };
 
   return (
     <div className="flex flex-col justify-around h-screen w-full">
@@ -45,7 +81,9 @@ function SideBar() {
       <div className="flex flex-col">
         <div className="relative">
           <select
-            onChange={e => {}}
+            onChange={e => {
+              exportAsXLS(e);
+            }}
             className="mb-2 font-bold text-white block appearance-none w-full bg-blue-500 py-3 px-4 pr-8 rounded border-b-4 border-blue-700 leading-tight focus:outline-none"
           >
             <option value="" disabled selected>
