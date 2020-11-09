@@ -160,6 +160,11 @@ export default function (state = initialState, action) {
         ),
         pageResults: state.pageResults.filter(link => link.id !== action.id),
       };
+    case Types.RESET_PAGE_NUMBER:
+      return {
+        ...state,
+        currentPage: 1,
+      };
     default:
       return state;
   }

@@ -56,3 +56,7 @@ export const unsavePost = ({ id }) => ({
   type: Types.UNSAVE_POST,
   id,
 });
+
+export const resetPageNumber = () => ({
+  type: Types.RESET_PAGE_NUMBER,
+});

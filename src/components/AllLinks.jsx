@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadNumberedPage, setSearchResults } from '../redux/actions';
+import { loadNumberedPage, resetPageNumber, setSearchResults } from '../redux/actions';
 import ContentHeader from './ContentHeader';
 import PaginationNavigation from './PaginationNavigation';
 import SavedLinkListItem from './SavedLinkListItem';
@@ -13,6 +13,9 @@ function AllLinks() {
   const search = { searchValue, setSearchValue };
   useEffect(() => {
     dispatch(loadNumberedPage({ page: 1 }));
+    return () => {
+      dispatch(resetPageNumber({}));
+    };
   }, [dispatch]);
 
   useEffect(() => {
