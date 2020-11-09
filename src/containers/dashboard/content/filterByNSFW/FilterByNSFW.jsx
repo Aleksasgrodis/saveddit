@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import ContentHeader from './ContentHeader';
-import SavedLinkListItem from './SavedLinkListItem';
+import ContentHeader from '../../../../components/ContentHeader';
+import SavedLinkListItem from '../../../../components/SavedLinkListItem';
 
 const linksSelector = state => state.saved.links;
 const subredditLinksSelector = createSelector(linksSelector, links =>

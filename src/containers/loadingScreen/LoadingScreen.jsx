@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import URLParse from 'url-parse';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBatch, setLoadingStatus } from '../redux/actions';
+import { addBatch, setLoadingStatus } from '../../redux/actions';
 import { Redirect } from 'react-router-dom';
 
 //TODO Keep track of token expires

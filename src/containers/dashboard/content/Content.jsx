@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AllLinks from './AllLinks';
-import AllSubreddits from './AllSubreddits';
-import FilterByNSFW from './FilterByNSFW';
-import FilterBySubreddit from './FilterBySubreddit';
+import AllLinks from './allPosts/AllLinks';
+import AllSubreddits from './allSubreddits/AllSubreddits';
+import FilterByNSFW from './filterByNSFW/FilterByNSFW';
+import FilterBySubreddit from './filterBySubreddit/FilterBySubreddit';
 
 function Content() {
   return (

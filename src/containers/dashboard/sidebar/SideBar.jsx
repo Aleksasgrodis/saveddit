@@ -1,14 +1,14 @@
-import { faChevronDown, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import exportFromJSON from 'export-from-json';
 import React from 'react';
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
-import { refreshSaved } from '../redux/actions';
-import SideBarNavigation from './SideBarNavigation';
-import UserInfo from './UserInfo';
+import { UserContext } from '../../../context/UserContext';
+import { refreshSaved } from '../../../redux/actions';
+import SideBarNavigation from './components/SideBarNavigation';
+import UserInfo from './components/UserInfo';
 
 function SideBar() {
   const {

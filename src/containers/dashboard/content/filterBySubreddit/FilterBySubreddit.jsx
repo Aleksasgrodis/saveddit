@@ -5,10 +5,10 @@ import {
   loadNumberedPage,
   setSearchResults,
   setSubredditFilter,
-} from '../redux/actions';
-import ContentHeader from './ContentHeader';
-import PaginationNavigation from './PaginationNavigation';
-import SavedLinkListItem from './SavedLinkListItem';
+} from '../../../../redux/actions';
+import ContentHeader from '../../../../components/ContentHeader';
+import PaginationNavigation from '../../../../components/PaginationNavigation';
+import SavedLinkListItem from '../../../../components/SavedLinkListItem';
 
 function FilterBySubreddit() {
   const { subreddit } = useParams();

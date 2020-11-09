@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { UserContext } from './context/UserContext';
-import Welcome from './components/Welcome';
-import LoadingScreen from './components/LoadingScreen';
+import Dashboard from './containers/dashboard/Dashboard';
+import Welcome from './containers/homepage/Welcome';
+import LoadingScreen from './containers/loadingScreen/LoadingScreen';
 import ProtectedRoute from './components/ProtectedRoute';
-import Dashboard from './components/Dashboard';
+import { UserContext } from './context/UserContext';
 
 function App() {
   const [user, setUser] = useState(

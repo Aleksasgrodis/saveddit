@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from './Login';
-import { ReactComponent as Logo } from '../saveddit.svg';
+import Login from './components/Login';
+import { ReactComponent as Logo } from '../../assets/images/saveddit.svg';
 
 function Welcome() {
   return (

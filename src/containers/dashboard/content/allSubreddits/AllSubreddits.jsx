@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import AnchorNavigation from './AnchorNavigation';
-import ContentHeader from './ContentHeader';
-import SubredditListItem from './SubredditListItem';
+import AnchorNavigation from './components/AnchorNavigation';
+import ContentHeader from '../../../../components/ContentHeader';
+import SubredditListItem from './components/SubredditListItem';
 
 const linksSelector = state => state.saved.links;
 const subredditSelector = createSelector(linksSelector, links =>

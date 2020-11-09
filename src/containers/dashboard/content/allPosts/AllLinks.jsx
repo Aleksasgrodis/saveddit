@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadNumberedPage, resetPageNumber, setSearchResults } from '../redux/actions';
-import ContentHeader from './ContentHeader';
-import PaginationNavigation from './PaginationNavigation';
-import SavedLinkListItem from './SavedLinkListItem';
+import { loadNumberedPage, resetPageNumber, setSearchResults } from '../../../../redux/actions';
+import ContentHeader from '../../../../components/ContentHeader';
+import PaginationNavigation from '../../../../components/PaginationNavigation';
+import SavedLinkListItem from '../../../../components/SavedLinkListItem';
 
 import exportFromJSON from 'export-from-json';
 
