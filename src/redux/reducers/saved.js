@@ -167,6 +167,8 @@ export default function (state = initialState, action) {
         ...state,
         currentPage: 1,
       };
+    case Types.CLEAR_STATE:
+      return {};
     default:
       return state;
   }
