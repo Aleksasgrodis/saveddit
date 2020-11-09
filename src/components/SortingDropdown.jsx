@@ -7,7 +7,7 @@ import { setSortingMethod } from '../redux/actions';
 function SortingDropdown() {
   const dispatch = useDispatch();
   return (
-    <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-2/12 xl:w-1/6 px-3">
+    <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-2/12 xl:w-1/6 px-3 mr-4">
       <label
         className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         htmlFor="sort-select"
