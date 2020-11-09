@@ -13,7 +13,7 @@ import SavedLinkListItem from './SavedLinkListItem';
 function FilterBySubreddit() {
   const { subreddit } = useParams();
   const dispatch = useDispatch();
-  const { pageResults, currentPage, searchPages } = useSelector(
+  const { pageResults, currentPage, searchPages, searchTotal } = useSelector(
     state => state.saved,
   );
 
@@ -29,7 +29,11 @@ function FilterBySubreddit() {
 
   return (
     <div>
-      <ContentHeader title={`r/${subreddit}`} withSort={true} />
+      <ContentHeader
+        title={`r/${subreddit}`}
+        count={searchTotal}
+        withSort={true}
+      />
       <div className="flex flex-wrap justify-center pt-32">
         {pageResults.map(link => (
           <SavedLinkListItem key={link.permalink} {...link} />

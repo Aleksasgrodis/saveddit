@@ -11,6 +11,7 @@ const initialState = {
   totalPages: 0,
   searchResults: [],
   searchPages: 0,
+  searchTotal: 0,
 };
 
 export default function (state = initialState, action) {
@@ -150,6 +151,7 @@ export default function (state = initialState, action) {
         searchResults,
         pageResults: searchResults.slice(0, 20),
         searchPages: Math.ceil(searchResults.length / 20),
+        searchTotal: searchResults.length,
       };
     case Types.UNSAVE_POST:
       return {

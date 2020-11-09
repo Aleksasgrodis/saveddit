@@ -22,12 +22,12 @@ function AllLinks() {
     dispatch(setSearchResults({ value: searchValue }));
   }, [searchValue, dispatch]);
 
-  const { pageResults, currentPage, searchPages } = useSelector(
+  const { pageResults, currentPage, searchPages, total } = useSelector(
     state => state.saved,
   );
   return (
     <section className="w-full">
-      <ContentHeader withSort={true} {...search} />
+      <ContentHeader withSort={true} count={total} {...search} />
       <div className="flex flex-wrap justify-center pt-32">
         {pageResults.map(link => (
           <SavedLinkListItem key={link.permalink} {...link} />
