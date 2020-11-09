@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavHashLink } from 'react-router-hash-link';
 import { createSelector } from 'reselect';
+import AnchorNavigation from './AnchorNavigation';
 import ContentHeader from './ContentHeader';
 import SubredditListItem from './SubredditListItem';
 
@@ -151,25 +152,7 @@ function AllSubreddits() {
                 } else return null;
               })}
         </div>
-        <div className="fixed right-0 inset-y-0 mr-12">
-          <nav className="flex flex-col h-full justify-center items-center">
-            {sortedByLetter.map(letter => {
-              return letter[1].length ? (
-                <NavHashLink
-                  key={letter[0]}
-                  className="font-bold text-gray-400 hover:text-gray-900"
-                  to={`/dashboard/subreddits#section-${letter[0].toLowerCase()}`}
-                  scroll={el =>
-                    el.scrollIntoView({ behavior: 'smooth', block: 'center' })
-                  }
-                  activeClassName="text-orange-600 text-3xl font-bolder"
-                >
-                  {letter[0]}
-                </NavHashLink>
-              ) : null;
-            })}
-          </nav>
-        </div>
+        <AnchorNavigation sortedArray={sortedByLetter} />
       </div>
     </div>
   );
