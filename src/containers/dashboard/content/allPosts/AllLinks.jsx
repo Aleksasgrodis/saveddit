@@ -5,8 +5,6 @@ import ContentHeader from '../../../../components/ContentHeader';
 import PaginationNavigation from '../../../../components/PaginationNavigation';
 import SavedLinkListItem from '../../../../components/SavedLinkListItem';
 
-import exportFromJSON from 'export-from-json';
-
 function AllLinks() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');

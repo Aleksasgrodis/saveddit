@@ -6,6 +6,7 @@ const Login = () => {
   const handleAuthorize = () => {
     const seed = uuidv4();
     localStorage.setItem('seed', seed);
+    localStorage.removeItem('saved');
     Axios.post('/api/authorize', {
       seed,
     })

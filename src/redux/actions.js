@@ -60,3 +60,7 @@ export const unsavePost = ({ id }) => ({
 export const resetPageNumber = () => ({
   type: Types.RESET_PAGE_NUMBER,
 });
+
+export const clearState = () => ({
+  type: Types.CLEAR_STATE,
+});

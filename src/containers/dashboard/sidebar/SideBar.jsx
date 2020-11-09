@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../../context/UserContext';
-import { refreshSaved } from '../../../redux/actions';
+import { clearState, refreshSaved } from '../../../redux/actions';
 import SideBarNavigation from './components/SideBarNavigation';
 import UserInfo from './components/UserInfo';
 
@@ -17,11 +17,12 @@ function SideBar() {
     user,
   } = useContext(UserContext);
   let history = useHistory();
+  const dispatch = useDispatch();
   const signOut = () => {
+    dispatch(clearState());
     localStorage.clear();
     history.push('/');
   };
-  const dispatch = useDispatch();
   const requestRefreshToken = () => {
     return fetch(`/api/refresh?token=${refresh_token}`)
       .then(res => res.json())
@@ -69,7 +70,7 @@ function SideBar() {
       default:
         break;
     }
-    event.target.value = "";
+    event.target.value = '';
   };
 
   return (
@@ -90,7 +91,9 @@ function SideBar() {
               Export Excel Sheet
             </option>
             <option value="page">Current Page</option>
-            { subredditFilter && <option value="subreddit">Selected Subreddit</option>}
+            {subredditFilter && (
+              <option value="subreddit">Selected Subreddit</option>
+            )}
             <option value="everything">Everything</option>
           </select>
           <div className="pointer-events-none mb-3 mr-1 absolute inset-y-0 right-0 flex items-center px-1 text-white">

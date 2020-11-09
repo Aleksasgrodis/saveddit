@@ -1,13 +1,13 @@
 const { qs } = require('url-parse');
 const { default: fetch } = require('node-fetch');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   const token = req.query.token;
-  var data = qs.stringify({
+  const data = qs.stringify({
     grant_type: 'refresh_token',
     refresh_token: token,
   });
-  var config = {
+  const config = {
     method: 'post',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -15,8 +15,14 @@ module.exports = (req, res) => {
     },
     body: data,
   };
-  fetch('https://www.reddit.com/api/v1/access_token', config)
-    .then(response => response.json(response))
-    .then(data => res.json(data))
-    .catch(error => console.log(error));
+  try {
+    const response = await fetch(
+      'https://www.reddit.com/api/v1/access_token',
+      config,
+    );
+    const data = await response.json();
+    return res.json(data);
+  } catch (error) {
+    return res.json(error);
+  }
 };
