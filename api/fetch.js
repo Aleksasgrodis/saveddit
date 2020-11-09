@@ -37,7 +37,7 @@ const minifyReponse = array => {
 
 module.exports = (req, res) => {
   const { token, username, after } = JSON.parse(req.body);
-  var config = {
+  const config = {
     method: 'GET',
     headers: {
       Authorization: `Bearer ` + token,

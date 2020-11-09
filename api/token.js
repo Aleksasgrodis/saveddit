@@ -7,12 +7,12 @@ module.exports = (req, res) => {
     process.env.NODE_ENV === 'production'
       ? 'https://saveddit.vercel.app/loading'
       : 'http://localhost:3000/loading';
-  var data = qs.stringify({
+  const data = qs.stringify({
     grant_type: 'authorization_code',
     code: code,
     redirect_uri: redirect_uri,
   });
-  var config = {
+  const config = {
     method: 'post',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',

@@ -3,11 +3,11 @@ const { default: fetch } = require('node-fetch');
 
 module.exports = (req, res) => {
   const token = req.query.token;
-  var data = qs.stringify({
+  const data = qs.stringify({
     grant_type: 'refresh_token',
     refresh_token: token,
   });
-  var config = {
+  const config = {
     method: 'post',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',

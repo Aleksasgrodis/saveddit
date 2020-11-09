@@ -4,7 +4,7 @@ const { default: fetch } = require('node-fetch');
 module.exports = (req, res) => {
   const { body } = req;
   const { id, token } = JSON.parse(body);
-  var config = {
+  const config = {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
