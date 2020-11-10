@@ -15,11 +15,10 @@ function FilterByNSFW() {
     <section className="w-full">
       <ContentHeader title="NSFW" />
       <div className="flex flex-wrap justify-center pt-32">
-        {filteredPosts
-          ? filteredPosts.map(link => (
-              <SavedLinkListItem key={link.permalink} {...link} />
-            ))
-          : null}
+        {filteredPosts &&
+          filteredPosts.map(link => (
+            <SavedLinkListItem key={link.permalink} {...link} />
+          ))}
       </div>
     </section>
   );

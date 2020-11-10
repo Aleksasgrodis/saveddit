@@ -82,14 +82,14 @@ function SavedLinkListItem({
                 {subreddit_name_prefixed}
               </a>
             </p>
-            {over_18 ? (
+            {over_18 && (
               <span
                 title="NOT SAFE FOR WORK"
                 className="text-white bg-red-600 py-px px-1 rounded font-bold text-sm"
               >
                 NSFW
               </span>
-            ) : null}
+            )}
           </div>
           <div className="text-gray-900 font-bold text-md">
             <a
