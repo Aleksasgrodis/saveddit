@@ -5,10 +5,10 @@ export const addLinks = ({ links }) => ({
   links,
 });
 
-export const addBatch = ({ links, after, count }) => ({
+export const addBatch = ({ links, afterListing, count }) => ({
   type: Types.ADD_BATCH,
   links,
-  after,
+  afterListing,
   count,
 });
 
@@ -17,9 +17,9 @@ export const setLoadingStatus = ({ status }) => ({
   status,
 });
 
-export const setAfter = ({ after }) => ({
+export const setAfter = ({ afterListing }) => ({
   type: Types.SET_AFTER,
-  after,
+  afterListing,
 });
 
 export const setFetchCount = ({ count }) => ({

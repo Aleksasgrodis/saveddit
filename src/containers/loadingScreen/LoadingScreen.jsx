@@ -10,7 +10,7 @@ const LoadingScreen = () => {
   const { setUser, user } = useContext(UserContext);
   const dispatch = useDispatch();
 
-  const { isLoading, total, after, fetchCount } = useSelector(
+  const { isLoading, total, afterListing, fetchCount } = useSelector(
     state => state.saved,
   );
 
@@ -77,7 +77,7 @@ const LoadingScreen = () => {
           .then(res => res.json())
           .then(({ after, dist, links }) => {
             dispatch(setLoadingStatus({ status: true }));
-            dispatch(addBatch({ links: links, count: dist, after: after }));
+            dispatch(addBatch({ links: links, count: dist, afterListing: after }));
           })
           .catch(err => console.log(err));
       };
@@ -92,22 +92,22 @@ const LoadingScreen = () => {
         body: JSON.stringify({
           token: user.token,
           username: user.name,
-          after,
+          afterListing,
         }),
       })
         .then(res => res.json())
         .then(({ after, dist, links }) => {
-          dispatch(addBatch({ links: links, count: dist, after: after }));
+          dispatch(addBatch({ links: links, count: dist, afterListing: after }));
         })
         .catch(err => console.log(err));
     };
-    if (after && fetchCount === 100 && isLoading) {
+    if (afterListing && fetchCount === 100 && isLoading) {
       fetchSaved();
     }
     if (fetchCount < 100) {
       dispatch(setLoadingStatus({ status: false }));
     }
-  }, [after, fetchCount, user, dispatch, isLoading]);
+  }, [afterListing, fetchCount, user, dispatch, isLoading]);
 
   if (!isLoading) {
     return <Redirect to="/dashboard/all" />;
