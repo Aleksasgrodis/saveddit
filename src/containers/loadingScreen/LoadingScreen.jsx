@@ -22,7 +22,6 @@ const LoadingScreen = () => {
         fetch(`/api/token?code=${code}`)
           .then(res => res.json())
           .then(data => {
-            console.log(data);
             setUser({
               ...user,
               token: data.access_token,
@@ -43,7 +42,6 @@ const LoadingScreen = () => {
       })
         .then(res => res.json())
         .then(data => {
-          console.log(data);
           setUser(prevstate => {
             return {
               ...prevstate,
@@ -86,7 +84,7 @@ const LoadingScreen = () => {
   }, [user, dispatch]);
 
   useEffect(() => {
-    const fetchSaved = () => {
+    const fetchSaved = async () => {
       fetch(`/api/fetch`, {
         method: 'POST',
         body: JSON.stringify({
@@ -117,7 +115,7 @@ const LoadingScreen = () => {
     <div className="container mx-auto h-screen flex flex-col justify-center">
       <div className="self-center font-mono">
         <h2 className="font-bold text-4xl">
-          Welcome, {user.name ? user.name : 'person.'}.
+          Welcome, {user.name ? user.name : 'redditor.'}.
         </h2>
         <p>
           Please wait while we fetch your saved threads and links, this may take

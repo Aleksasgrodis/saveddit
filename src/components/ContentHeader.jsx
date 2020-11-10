@@ -2,6 +2,7 @@ import React from 'react';
 import BackButton from './BackButton';
 import Search from './Search';
 import SortingDropdown from './SortingDropdown';
+import PropTypes from 'prop-types';
 
 function ContentHeader({
   title = 'All Posts',
@@ -22,6 +23,13 @@ function ContentHeader({
       </div>
     </header>
   );
+}
+
+ContentHeader.propTypes = {
+  title: PropTypes.string,
+  count: PropTypes.number,
+  withHistory: PropTypes.bool,
+  withSort: PropTypes.bool,
 }
 
 export default ContentHeader;

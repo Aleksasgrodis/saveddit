@@ -82,12 +82,13 @@ function SideBar() {
       <div className="flex flex-col">
         <div className="relative">
           <select
+            defaultValue=""
             onChange={e => {
               exportAsXLS(e);
             }}
             className="mb-2 font-bold text-white block appearance-none w-full bg-blue-500 py-3 px-4 pr-8 rounded border-b-4 border-blue-700 leading-tight focus:outline-none"
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Export Excel Sheet
             </option>
             <option value="page">Current Page</option>
@@ -97,7 +98,7 @@ function SideBar() {
             <option value="everything">Everything</option>
           </select>
           <div className="pointer-events-none mb-3 mr-1 absolute inset-y-0 right-0 flex items-center px-1 text-white">
-            <FontAwesomeIcon icon={faDownload} size="md" />
+            <FontAwesomeIcon icon={faDownload} size="1x" />
           </div>
         </div>
         <button
