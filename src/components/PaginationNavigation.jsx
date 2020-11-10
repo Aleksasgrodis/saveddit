@@ -5,6 +5,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 function PaginationNavigation({ action, total, currentPage }) {
   const dispatch = useDispatch();
@@ -120,5 +121,11 @@ function PaginationNavigation({ action, total, currentPage }) {
     );
   }
 }
+
+PaginationNavigation.propTypes = {
+  action: PropTypes.func,
+  total: PropTypes.number,
+  currentPage: PropTypes.number,
+};
 
 export default PaginationNavigation;

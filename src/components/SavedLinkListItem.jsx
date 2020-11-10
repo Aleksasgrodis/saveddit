@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import TextTruncate from 'react-text-truncate';
 import { UserContext } from '../context/UserContext';
 import { unsavePost } from '../redux/actions';
+import PropTypes from 'prop-types';
 
 function SavedLinkListItem({
   title,
@@ -157,5 +158,19 @@ function SavedLinkListItem({
     </article>
   );
 }
+
+SavedLinkListItem.propTypes = {
+  title: PropTypes.string,
+  url: PropTypes.string,
+  permalink: PropTypes.string,
+  score: PropTypes.number,
+  num_comments: PropTypes.number,
+  author: PropTypes.string,
+  created_utc: PropTypes.number,
+  domain: PropTypes.string,
+  over_18: PropTypes.bool,
+  subreddit_name_prefixed: PropTypes.string,
+  id: PropTypes.string,
+};
 
 export default SavedLinkListItem;

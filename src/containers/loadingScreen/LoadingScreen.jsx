@@ -75,7 +75,9 @@ const LoadingScreen = () => {
           .then(res => res.json())
           .then(({ after, dist, links }) => {
             dispatch(setLoadingStatus({ status: true }));
-            dispatch(addBatch({ links: links, count: dist, afterListing: after }));
+            dispatch(
+              addBatch({ links: links, count: dist, afterListing: after }),
+            );
           })
           .catch(err => console.log(err));
       };
@@ -95,7 +97,9 @@ const LoadingScreen = () => {
       })
         .then(res => res.json())
         .then(({ after, dist, links }) => {
-          dispatch(addBatch({ links: links, count: dist, afterListing: after }));
+          dispatch(
+            addBatch({ links: links, count: dist, afterListing: after }),
+          );
         })
         .catch(err => console.log(err));
     };

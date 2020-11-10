@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSearchResults } from '../redux/actions';
+import PropTypes from 'prop-types';
 
-function Search({ subredditSearchValue, setSubredditSearchValue, ...props }) {
+function Search({ subredditSearchValue, setSubredditSearchValue }) {
   const [searchValue, setSearchValue] = useState('');
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,6 +33,11 @@ function Search({ subredditSearchValue, setSubredditSearchValue, ...props }) {
       />
     </div>
   );
+}
+
+Search.propTypes = {
+  subredditSearchValue: PropTypes.string,
+  setSubredditSearchValue: PropTypes.func,
 }
 
 export default Search;
