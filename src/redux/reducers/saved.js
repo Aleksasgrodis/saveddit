@@ -4,7 +4,7 @@ const initialState = {
   links: [],
   isLoading: true,
   hasErrored: false,
-  after: '',
+  afterListing: '',
   fetchCount: 100,
   total: 0,
   subredditFilter: null,
@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
         links: [...state.links, ...action.links],
         total: state.links.length + action.links.length,
         totalPages: Math.ceil((state.links.length + action.links.length) / 20),
-        after: action.after,
+        afterListing: action.afterListing,
         fetchCount: action.count,
         currentPage: 1,
         filterValues: [],
@@ -45,7 +45,7 @@ export default function (state = initialState, action) {
     case Types.SET_AFTER:
       return {
         ...state,
-        after: action.after,
+        afterListing: action.afterListing,
       };
     case Types.SET_FETCH_COUNT:
       return {

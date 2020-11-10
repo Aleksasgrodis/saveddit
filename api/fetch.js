@@ -35,8 +35,8 @@ const minifyReponse = array => {
   );
 };
 
-module.exports = (req, res) => {
-  const { token, username, after } = JSON.parse(req.body);
+module.exports = async (req, res) => {
+  const { token, username, afterListing } = JSON.parse(req.body);
   const config = {
     method: 'GET',
     headers: {
@@ -44,21 +44,23 @@ module.exports = (req, res) => {
     },
   };
 
-  fetch(
-    `https://oauth.reddit.com/user/${username.toLowerCase()}/saved/?limit=100${
-      after ? `&after=${after}` : ''
-    }`,
-    config,
-  )
-    .then(response => response.json(response))
-    .then(({ data }) => {
-      const { dist, after, children, before } = data;
-      return res.json({
-        dist,
-        after,
-        before,
-        links: minifyReponse(children.map(a => a.data)),
-      });
-    })
-    .catch(error => console.log(error));
+  try {
+    const response = await fetch(
+      `https://oauth.reddit.com/user/${username.toLowerCase()}/saved/?limit=100${
+        afterListing ? `&after=${afterListing}` : ''
+      }`,
+      config,
+    );
+    const {
+      data: { dist, after, children, before },
+    } = await response.json();
+    return res.json({
+      dist,
+      after,
+      before,
+      links: await minifyReponse(children.map(a => a.data)),
+    });
+  } catch (error) {
+    return res.json(error);
+  }
 };
