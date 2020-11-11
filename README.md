@@ -11,7 +11,7 @@ Saveddit is a web application built on top of react and makes use of serverless 
 
 ReactJS | Redux | TailwindCSS | Vercel
 
-### `Q&A`
+### `FAQ`
 *Coming Soon*
 
 
