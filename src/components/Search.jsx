@@ -11,12 +11,12 @@ function Search({ subredditSearchValue, setSubredditSearchValue }) {
   }, [searchValue, dispatch]);
   return (
     <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-4/12 xl:w-2/6 px-3">
-      <label
+      {/* <label
         className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         htmlFor="search-input"
       >
         Search
-      </label>
+      </label> */}
       <input
         value={subredditSearchValue ? subredditSearchValue : searchValue}
         onChange={e =>
@@ -28,7 +28,7 @@ function Search({ subredditSearchValue, setSubredditSearchValue }) {
         id="search-input"
         type="text"
         placeholder={
-          setSubredditSearchValue ? 'BearsDoingHumanThings...' : 'Title of post..'
+          setSubredditSearchValue ? 'Search for subreddit title..' : 'Search for title..'
         }
       />
     </div>
