@@ -64,3 +64,11 @@ export const resetPageNumber = () => ({
 export const clearState = () => ({
   type: Types.CLEAR_STATE,
 });
+
+export const setNsfwFilter = () => ({
+  type: Types.SET_NSFW_FILTER,
+});
+
+export const resetNsfwFilter = () => ({
+  type: Types.RESET_NSFW_FILTER,
+});

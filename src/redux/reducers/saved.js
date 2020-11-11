@@ -8,6 +8,7 @@ const initialState = {
   fetchCount: 100,
   total: 0,
   subredditFilter: null,
+  nsfwFilter: false,
   totalPages: 0,
   searchResults: [],
   searchPages: 0,
@@ -67,6 +68,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         subredditFilter: action.subreddit,
+      };
+    case Types.SET_NSFW_FILTER:
+      return {
+        ...state,
+        nsfwFilter: true,
+      };
+    case Types.RESET_NSFW_FILTER:
+      return {
+        ...state,
+        nsfwFilter: false,
       };
     case Types.SET_SORTING_METHOD:
       switch (action.method) {
@@ -142,6 +153,8 @@ export default function (state = initialState, action) {
       let copy = [...state.links];
       if (state.subredditFilter) {
         copy = copy.filter(post => post.subreddit === state.subredditFilter);
+      } else if (state.nsfwFilter === true) {
+        copy = copy.filter(post => post.over_18 === true);
       }
       let searchResults = copy.filter(link =>
         link.title.toLowerCase().includes(action.value.toLowerCase()),
