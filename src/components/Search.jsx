@@ -24,7 +24,7 @@ function Search({ subredditSearchValue, setSubredditSearchValue }) {
             ? setSubredditSearchValue(e.target.value)
             : setSearchValue(e.target.value)
         }
-        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        className="appearance-none block w-full bg-white text-gray-700 border border-gray-200 shadow-md rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         id="search-input"
         type="text"
         placeholder={

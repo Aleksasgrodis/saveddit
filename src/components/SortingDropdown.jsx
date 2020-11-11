@@ -8,18 +8,12 @@ function SortingDropdown() {
   const dispatch = useDispatch();
   return (
     <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-2/12 xl:w-1/6 px-3 mr-4">
-      {/* <label
-        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-        htmlFor="sort-select"
-      >
-        Sort By
-      </label> */}
       <div className="relative">
         <select
           onChange={e => {
             dispatch(setSortingMethod({ method: e.target.value }));
           }}
-          className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          className="block appearance-none w-full bg-white border border-gray-200 shadow-md text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           id="sort-select"
           defaultValue=""
         >

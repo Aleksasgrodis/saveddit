@@ -10,10 +10,13 @@ import PropTypes from 'prop-types';
 function PaginationNavigation({ action, total, currentPage }) {
   const dispatch = useDispatch();
   const pageNumbers = new Array(total).fill(0);
+  if (total <= 1 ) {
+    return null;
+  }
   if (total <= 10) {
     return (
       <div className="flex justify-center">
-        <nav className="relative z-0 inline-flex shadow-sm pb-4">
+        <nav className="relative z-0 inline-flex pb-4">
           <button
             disabled={currentPage === 1 ? true : false}
             className={`relative inline-flex items-center px-4 py-4 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 ${
@@ -56,7 +59,7 @@ function PaginationNavigation({ action, total, currentPage }) {
   if (total > 10) {
     return (
       <div className="flex justify-center">
-        <nav className="relative z-0 inline-flex shadow-sm">
+        <nav className="relative z-0 inline-flex">
           <button
             disabled={currentPage === 1 ? true : false}
             className={`relative inline-flex items-center px-4 py-4 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 ${

@@ -15,7 +15,7 @@ function ContentHeader({
     <header className="pb-4 w-full max-w-full-sidebar fixed  h-20 bg-gray-100 rounded">
       <div className="flex justify-between items-end h-full">
         {withHistory && <BackButton />}
-        <h2 className="font-bold text-lg sm:text-xl md:text-3xl text-gray-900">
+        <h2 className="font-bold text-lg sm:text-xl md:text-3xl text-gray-900 pl-2">
           {title} {count && `(${count})`}
         </h2>
         <Search {...props} />
