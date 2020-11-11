@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import ContentHeader from '../../../../components/ContentHeader';
+import PaginationNavigation from '../../../../components/PaginationNavigation';
 import SavedLinkListItem from '../../../../components/SavedLinkListItem';
 import {
   resetNsfwFilter,
@@ -9,15 +9,15 @@ import {
   setSearchResults,
 } from '../../../../redux/actions';
 
-const linksSelector = state => state.saved.links;
-const subredditLinksSelector = createSelector(linksSelector, links =>
-  links.filter(link => link.over_18),
-);
-
 function FilterByNSFW() {
-  const filteredPosts = useSelector(subredditLinksSelector);
   const dispatch = useDispatch();
-  const { pageResults } = useSelector(state => state.saved);
+  const {
+    pageResults,
+    loadNumberedPage,
+    currentPage,
+    searchPages,
+  } = useSelector(state => state.saved);
+
   useEffect(() => {
     dispatch(setNsfwFilter());
     dispatch(setSearchResults({ value: '' }));
@@ -35,6 +35,11 @@ function FilterByNSFW() {
             <SavedLinkListItem key={link.permalink} {...link} />
           ))}
       </div>
+      <PaginationNavigation
+        total={searchPages}
+        action={loadNumberedPage}
+        currentPage={currentPage}
+      />
     </section>
   );
 }
