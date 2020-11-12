@@ -5,8 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 const Login = () => {
   const handleAuthorize = () => {
     const seed = uuidv4();
+    localStorage.clear();
     localStorage.setItem('seed', seed);
-    localStorage.removeItem('saved');
     Axios.post('/api/authorize', {
       seed,
     })

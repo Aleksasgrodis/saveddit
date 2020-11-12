@@ -9,11 +9,9 @@ function AllLinks() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
   const search = { searchValue, setSearchValue };
+  console.log('All links load');
   useEffect(() => {
     dispatch(loadNumberedPage({ page: 1 }));
-    return () => {
-      dispatch(resetPageNumber({}));
-    };
   }, [dispatch]);
 
   useEffect(() => {

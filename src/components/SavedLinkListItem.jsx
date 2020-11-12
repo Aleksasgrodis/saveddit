@@ -11,10 +11,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { format, fromUnixTime } from 'date-fns';
-import React, { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import TextTruncate from 'react-text-truncate';
-import { UserContext } from '../context/UserContext';
 import { unsavePost } from '../redux/actions';
 import PropTypes from 'prop-types';
 
@@ -31,9 +30,7 @@ function SavedLinkListItem({
   subreddit_name_prefixed,
   id,
 }) {
-  const {
-    user: { token },
-  } = useContext(UserContext);
+  const { token } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const unsave = id => {
     fetch('/api/unsave', {

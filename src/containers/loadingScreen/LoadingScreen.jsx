@@ -1,15 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import URLParse from 'url-parse';
-import { UserContext } from '../../context/UserContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBatch, setLoadingStatus } from '../../redux/actions';
+import {
+  addBatch,
+  setLoadingStatus,
+  setTokens,
+  setUserDetails,
+} from '../../redux/actions';
 import { Redirect } from 'react-router-dom';
 
 //TODO Keep track of token expires
 const LoadingScreen = () => {
-  const { setUser, user } = useContext(UserContext);
   const dispatch = useDispatch();
-
+  const user = useSelector(state => state.user);
   const { isLoading, total, afterListing, fetchCount } = useSelector(
     state => state.saved,
   );
@@ -22,11 +25,12 @@ const LoadingScreen = () => {
         fetch(`/api/token?code=${code}`)
           .then(res => res.json())
           .then(data => {
-            setUser({
-              ...user,
-              token: data.access_token,
-              refresh_token: data.refresh_token,
-            });
+            dispatch(
+              setTokens({
+                token: data.access_token,
+                refresh_token: data.refresh_token,
+              }),
+            );
             fetchUserName(data.access_token);
           })
           .catch(err => console.log(err));
@@ -42,17 +46,16 @@ const LoadingScreen = () => {
       })
         .then(res => res.json())
         .then(data => {
-          setUser(prevstate => {
-            return {
-              ...prevstate,
+          dispatch(
+            setUserDetails({
               name: data.name,
               avatar: data.icon_img,
               account_created: data.created_utc,
               karma: data.total_karma,
               verified: data.verified,
               coins: data.coins,
-            };
-          });
+            }),
+          );
         })
         .catch(err => console.log(err));
     };
@@ -60,10 +63,12 @@ const LoadingScreen = () => {
     if (url && url.query.state === seed) {
       fetchUserToken(url.query.code);
     }
-  }, [setUser, user]);
+  }, [user, dispatch]);
 
   useEffect(() => {
-    if (user.token && user.name && !localStorage.getItem('saved')) {
+    if (user.token && user.name) {
+      console.log('got token and name');
+      console.log(user.token, user.name);
       const fetchSaved = () => {
         fetch(`/api/fetch`, {
           method: 'POST',
@@ -74,7 +79,7 @@ const LoadingScreen = () => {
         })
           .then(res => res.json())
           .then(({ after, dist, links }) => {
-            dispatch(setLoadingStatus({ status: true }));
+            console.log(after, dist, links);
             dispatch(
               addBatch({ links: links, count: dist, afterListing: after }),
             );
@@ -111,9 +116,11 @@ const LoadingScreen = () => {
     }
   }, [afterListing, fetchCount, user, dispatch, isLoading]);
 
-  if (!isLoading) {
+  if (isLoading === false) {
+    console.log('loading finished redirecting to all');
     return <Redirect to="/dashboard/all" />;
   }
+  console.log('loadingscreen loaded');
 
   return (
     <div className="container mx-auto h-screen flex flex-col justify-center">

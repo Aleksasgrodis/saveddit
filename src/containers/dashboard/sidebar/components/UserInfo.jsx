@@ -1,11 +1,8 @@
 import React from 'react';
-import { useContext } from 'react';
-import { UserContext } from '../../../../context/UserContext';
+import { useSelector } from 'react-redux';
 
 function UserInfo() {
-  const {
-    user: { avatar, karma, name },
-  } = useContext(UserContext);
+  const { avatar, karma, name } = useSelector(state => state.user);
   return (
     <div className="container flex mx-auto w-full justify-center rounded-md">
       <img className="h-12 w-12 rounded mr-2" src={avatar} alt="user avatar" />
