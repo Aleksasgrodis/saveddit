@@ -13,11 +13,13 @@ function SortingDropdown() {
           onChange={e => {
             dispatch(setSortingMethod({ method: e.target.value }));
           }}
-          className="block appearance-none w-full bg-white border border-gray-200 shadow-md text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          className="block appearance-none w-full bg-white border border-gray-200 shadow-md text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
           id="sort-select"
           defaultValue=""
         >
-          <option value="" disabled>Sort by</option>
+          <option value="" disabled>
+            Sort by
+          </option>
           <option value="lastSaved">Last Saved</option>
           <option value="a-z">Title: A - Z</option>
           <option value="z-a">Title: Z - A</option>
