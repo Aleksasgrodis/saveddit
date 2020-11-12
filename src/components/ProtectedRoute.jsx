@@ -1,18 +1,14 @@
 import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const { user } = useContext(UserContext);
+  const { name, token } = useSelector(state => state.user);
   return (
     <Route
       {...rest}
       render={props =>
-        user.name && user.token ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={'/'} />
-        )
+        name && token ? <Component {...props} /> : <Redirect to={'/'} />
       }
     />
   );

@@ -13,3 +13,10 @@ export const RESET_PAGE_NUMBER = 'RESET_PAGENUMBER';
 export const CLEAR_STATE = 'CLEAR_STATE';
 export const SET_NSFW_FILTER = 'SET_NSFW_FILTER';
 export const RESET_NSFW_FILTER = 'RESET_NSFW_FILTER';
+
+
+
+// User Action Types
+export const SET_TOKENS = 'SET_TOKENS';
+export const SET_USER_DETAILS = 'SET_USER_DETAILS';
+

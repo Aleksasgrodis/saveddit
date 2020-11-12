@@ -72,3 +72,26 @@ export const setNsfwFilter = () => ({
 export const resetNsfwFilter = () => ({
   type: Types.RESET_NSFW_FILTER,
 });
+
+export const setTokens = ({ token, refresh_token }) => ({
+  type: Types.SET_TOKENS,
+  token,
+  refresh_token,
+});
+
+export const setUserDetails = ({
+  name,
+  avatar,
+  account_created,
+  karma,
+  verified,
+  coins,
+}) => ({
+  type: Types.SET_USER_DETAILS,
+  name,
+  avatar,
+  account_created,
+  karma,
+  verified,
+  coins,
+});
