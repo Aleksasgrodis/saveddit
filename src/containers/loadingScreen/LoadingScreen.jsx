@@ -67,6 +67,8 @@ const LoadingScreen = () => {
 
   useEffect(() => {
     if (user.token && user.name) {
+      console.log('got token and name');
+      console.log(user.token, user.name);
       const fetchSaved = () => {
         fetch(`/api/fetch`, {
           method: 'POST',
@@ -77,6 +79,7 @@ const LoadingScreen = () => {
         })
           .then(res => res.json())
           .then(({ after, dist, links }) => {
+            console.log(after, dist, links);
             dispatch(
               addBatch({ links: links, count: dist, afterListing: after }),
             );
@@ -113,7 +116,8 @@ const LoadingScreen = () => {
     }
   }, [afterListing, fetchCount, user, dispatch, isLoading]);
 
-  if (!isLoading) {
+  if (isLoading === false) {
+    console.log('loading finished redirecting to all');
     return <Redirect to="/dashboard/all" />;
   }
   console.log('loadingscreen loaded');

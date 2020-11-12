@@ -4,6 +4,7 @@ import { Redirect, Route } from 'react-router-dom';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const { name, token } = useSelector(state => state.user);
+  console.log('Protected route load');
   return (
     <Route
       {...rest}
