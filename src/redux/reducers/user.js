@@ -30,11 +30,14 @@ export default function (state = initialState, action) {
         coins: action.coins,
       };
 
-    case Types.UPDATE_TOKEN: 
+    case Types.UPDATE_TOKEN:
       return {
-        ...state, 
-        token: action.token
-      }
+        ...state,
+        token: action.token,
+      };
+
+    case Types.CLEAR_STATE:
+      return {};
     default:
       return state;
   }
