@@ -165,6 +165,7 @@ export default function (state = initialState, action) {
         pageResults: searchResults.slice(0, 20),
         searchPages: Math.ceil(searchResults.length / 20),
         searchTotal: searchResults.length,
+        currentPage: 1,
       };
     case Types.UNSAVE_POST:
       return {

@@ -11,9 +11,6 @@ function AllLinks() {
   const search = { searchValue, setSearchValue };
   useEffect(() => {
     dispatch(loadNumberedPage({ page: 1 }));
-    return () => {
-      dispatch(resetPageNumber({}));
-    };
   }, [dispatch]);
 
   useEffect(() => {
