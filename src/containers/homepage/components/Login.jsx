@@ -20,7 +20,7 @@ const Login = () => {
       <button
         onClick={() => handleAuthorize()}
         type="button"
-        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded mr-3"
+        className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded text-xl mr-3"
       >
         Authorize
       </button>

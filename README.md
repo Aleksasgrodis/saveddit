@@ -28,6 +28,7 @@ ReactJS | Redux | TailwindCSS | Vercel
 - [ ] Mobile UI & Customizability
 - [ ] Sharing Options
 - [ ] More Filtering Options
+- [ ] Various Export Formats
 - [ ] Preview Post Comments & Contents
 - [ ] Easter Egg
 - [ ] Ability to give feedback, report issues & request features.

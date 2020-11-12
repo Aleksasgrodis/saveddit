@@ -2,14 +2,19 @@ import React from 'react';
 import Login from './components/Login';
 import { ReactComponent as Logo } from '../../assets/images/saveddit.svg';
 import Reset from './components/Reset';
-
+import PreviewImage from '../../assets/images/preview.png'
 function Welcome() {
   return (
-    <div className="lg:container lg:mx-auto flex">
+    <div className="w-9/12 lg:mx-auto flex">
       <div className="container flex h-screen flex-col justify-center">
-        <div className="container flex h-64 flex-col justify-between">
-          <div className="container logo font-bold">
-            Saveddit
+        <div className="container flex flex-col justify-between reddit-font welcome-details text-gray-800">
+          <div className="relative font-bold h-40">
+            <div className="text-6xl">Saveddit</div>
+            <div className="relative subtitle text-2xl">Reddit Manager</div>
+          </div>
+          <div className="font-medium text-lg h-32">
+            <p>Search, filter, sort, export, unsave.</p>
+            <p>Blazingly fast.</p>
           </div>
           <div className="container flex">
             <Login />
@@ -19,7 +24,7 @@ function Welcome() {
       </div>
       <div className="container h-screen flex flex-col justify-center">
         <img
-          src="https://static.dribbble.com/users/2007356/screenshots/6625574/file_manager_2x.png"
+          src={PreviewImage}
           alt="dashboard of product"
         />
       </div>

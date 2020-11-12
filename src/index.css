@@ -13,5 +13,19 @@ code {
 }
 
 .logo {
+  font-size: 6rem;
+  margin:0;
+  padding:0;
+}
+
+.subtitle { 
+  top:-20px;
+}
+
+.welcome-details {
+  height: 30vh;
+}
+
+.reddit-font {
   font-family: 'Quicksand', sans-serif;
 }
