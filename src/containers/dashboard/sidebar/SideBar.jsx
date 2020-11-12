@@ -1,19 +1,13 @@
 import React from 'react';
-import { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../../../context/UserContext';
-import { clearState, refreshSaved } from '../../../redux/actions';
+import { clearState, refreshSaved, updateToken } from '../../../redux/actions';
 import ExportAsXlsSelect from './components/ExportAsXlsSelect';
 import SideBarNavigation from './components/SideBarNavigation';
 import UserInfo from './components/UserInfo';
 
 function SideBar() {
-  const {
-    user: { refresh_token },
-    setUser,
-    user,
-  } = useContext(UserContext);
+  const { refresh_token } = useSelector(state => state.user);
   let history = useHistory();
   const dispatch = useDispatch();
   const signOut = () => {
@@ -26,7 +20,7 @@ function SideBar() {
       .then(res => res.json())
       .then(data => {
         if (data.access_token) {
-          setUser({ ...user, token: data.access_token });
+          dispatch(updateToken({token: data.access_token}))
           history.push('/dashboard');
           dispatch(refreshSaved());
           localStorage.removeItem('saved');

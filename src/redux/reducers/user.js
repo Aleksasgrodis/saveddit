@@ -29,6 +29,12 @@ export default function (state = initialState, action) {
         verified: action.verified,
         coins: action.coins,
       };
+
+    case Types.UPDATE_TOKEN: 
+      return {
+        ...state, 
+        token: action.token
+      }
     default:
       return state;
   }

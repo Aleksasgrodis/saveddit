@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import URLParse from 'url-parse';
-import { UserContext } from '../../context/UserContext';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addBatch,
@@ -12,7 +11,6 @@ import { Redirect } from 'react-router-dom';
 
 //TODO Keep track of token expires
 const LoadingScreen = () => {
-  // const { setUser, user } = useContext(UserContext);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const { isLoading, total, afterListing, fetchCount } = useSelector(
@@ -27,11 +25,6 @@ const LoadingScreen = () => {
         fetch(`/api/token?code=${code}`)
           .then(res => res.json())
           .then(data => {
-            // setUser({
-            //   ...user,
-            //   token: data.access_token,
-            //   refresh_token: data.refresh_token,
-            // });
             dispatch(
               setTokens({
                 token: data.access_token,
@@ -53,17 +46,6 @@ const LoadingScreen = () => {
       })
         .then(res => res.json())
         .then(data => {
-          // setUser(prevstate => {
-          //   return {
-          //     ...prevstate,
-          //     name: data.name,
-          //     avatar: data.icon_img,
-          //     account_created: data.created_utc,
-          //     karma: data.total_karma,
-          //     verified: data.verified,
-          //     coins: data.coins,
-          //   };
-          // });
           dispatch(
             setUserDetails({
               name: data.name,

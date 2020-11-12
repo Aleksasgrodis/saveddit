@@ -95,3 +95,8 @@ export const setUserDetails = ({
   verified,
   coins,
 });
+
+export const updateToken = ({ token }) => ({
+  type: Types.UPDATE_TOKEN,
+  token,
+});
