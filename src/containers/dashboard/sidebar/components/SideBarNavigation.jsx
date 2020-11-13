@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import React from 'react'
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 
 function SideBarNavigation() {
   return (
@@ -26,7 +26,7 @@ function SideBarNavigation() {
         NSFW
       </NavLink>
     </nav>
-  );
+  )
 }
 
-export default SideBarNavigation;
+export default SideBarNavigation

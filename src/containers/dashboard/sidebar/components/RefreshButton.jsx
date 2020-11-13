@@ -1,27 +1,27 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { refreshSaved, updateToken } from '../../../../redux/actions';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { refreshSaved, updateToken } from '../../../../redux/actions'
 
 function RefreshButton() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const { refresh_token } = useSelector(state => state.user);
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const { refresh_token } = useSelector((state) => state.user)
 
   const requestRefreshToken = () => {
     return fetch(`/api/refresh?token=${refresh_token}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.access_token) {
-          dispatch(updateToken({ token: data.access_token }));
-          history.push('/dashboard');
-          dispatch(refreshSaved());
-          localStorage.removeItem('saved');
-          history.push('/loading');
+          dispatch(updateToken({ token: data.access_token }))
+          history.push('/dashboard')
+          dispatch(refreshSaved())
+          localStorage.removeItem('saved')
+          history.push('/loading')
         }
       })
-      .catch(err => console.log(err));
-  };
+      .catch((err) => console.log(err))
+  }
   return (
     <button
       type="button"
@@ -30,7 +30,7 @@ function RefreshButton() {
     >
       Refresh
     </button>
-  );
+  )
 }
 
-export default RefreshButton;
+export default RefreshButton

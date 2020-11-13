@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 function SubredditListItem({ title, hits }) {
   return (
@@ -11,7 +11,7 @@ function SubredditListItem({ title, hits }) {
         {title}
       </div>
     </NavLink>
-  );
+  )
 }
 
-export default SubredditListItem;
+export default SubredditListItem

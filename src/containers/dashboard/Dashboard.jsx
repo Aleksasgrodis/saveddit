@@ -1,6 +1,6 @@
-import React from 'react';
-import Content from './content/Content';
-import SideBar from './sidebar/SideBar';
+import React from 'react'
+import Content from './content/Content'
+import SideBar from './sidebar/SideBar'
 
 function Dashboard() {
   return (
@@ -12,7 +12,7 @@ function Dashboard() {
         <Content />
       </div>
     </div>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard

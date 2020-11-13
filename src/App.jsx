@@ -1,9 +1,9 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Dashboard from './containers/dashboard/Dashboard';
-import Welcome from './containers/homepage/Welcome';
-import LoadingScreen from './containers/loadingScreen/LoadingScreen';
-import ProtectedRoute from './components/ProtectedRoute';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Dashboard from './containers/dashboard/Dashboard'
+import Welcome from './containers/homepage/Welcome'
+import LoadingScreen from './containers/loadingScreen/LoadingScreen'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <ProtectedRoute path="/dashboard" component={Dashboard} />
       </Switch>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,28 +1,28 @@
-import React from 'react';
-import { NavHashLink } from 'react-router-hash-link';
+import React from 'react'
+import { NavHashLink } from 'react-router-hash-link'
 
 function AnchorNavigation({ sortedArray }) {
   return (
     <div className="fixed right-0 inset-y-0 mr-12">
       <nav className="flex flex-col h-full justify-center items-center">
-        {sortedArray.map(letter => {
+        {sortedArray.map((letter) => {
           return letter[1].length ? (
             <NavHashLink
               key={letter[0]}
               className="font-bold text-gray-400 hover:text-gray-900"
               to={`/dashboard/subreddits#section-${letter[0].toLowerCase()}`}
-              scroll={el =>
+              scroll={(el) =>
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' })
               }
               activeClassName="text-orange-600 text-3xl font-bolder"
             >
               {letter[0]}
             </NavHashLink>
-          ) : null;
+          ) : null
         })}
       </nav>
     </div>
-  );
+  )
 }
 
-export default AnchorNavigation;
+export default AnchorNavigation

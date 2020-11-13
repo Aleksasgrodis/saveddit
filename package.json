@@ -45,7 +45,7 @@
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write \"{,!(node_modules)/**/}*.js\""
+    "format": "prettier --write \"{,!(node_modules)/**/}*.jsx*\""
   },
   "eslintConfig": {
     "extends": "@imaginary-cloud/react"

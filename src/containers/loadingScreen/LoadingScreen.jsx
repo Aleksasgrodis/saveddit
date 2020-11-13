@@ -1,51 +1,51 @@
-import React, { useEffect } from 'react';
-import URLParse from 'url-parse';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import URLParse from 'url-parse'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   addBatch,
   setLoadingStatus,
   setTokens,
   setUserDetails,
-} from '../../redux/actions';
-import { Redirect } from 'react-router-dom';
+} from '../../redux/actions'
+import { Redirect } from 'react-router-dom'
 
 //TODO Keep track of token expires
 const LoadingScreen = () => {
-  const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user)
   const { isLoading, total, afterListing, fetchCount } = useSelector(
-    state => state.saved,
-  );
+    (state) => state.saved,
+  )
 
   useEffect(() => {
-    const url = new URLParse(window.location, true);
-    const seed = localStorage.getItem('seed');
-    const fetchUserToken = code => {
+    const url = new URLParse(window.location, true)
+    const seed = localStorage.getItem('seed')
+    const fetchUserToken = (code) => {
       if (!user.token) {
         fetch(`/api/token?code=${code}`)
-          .then(res => res.json())
-          .then(data => {
+          .then((res) => res.json())
+          .then((data) => {
             dispatch(
               setTokens({
                 token: data.access_token,
                 refresh_token: data.refresh_token,
               }),
-            );
-            fetchUserName(data.access_token);
+            )
+            fetchUserName(data.access_token)
           })
-          .catch(err => console.log(err));
+          .catch((err) => console.log(err))
       }
-    };
+    }
 
-    const fetchUserName = token => {
+    const fetchUserName = (token) => {
       fetch(`/api/username`, {
         method: 'POST',
         body: JSON.stringify({
           token: token,
         }),
       })
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           dispatch(
             setUserDetails({
               name: data.name,
@@ -55,15 +55,15 @@ const LoadingScreen = () => {
               verified: data.verified,
               coins: data.coins,
             }),
-          );
+          )
         })
-        .catch(err => console.log(err));
-    };
+        .catch((err) => console.log(err))
+    }
 
     if (url && url.query.state === seed) {
-      fetchUserToken(url.query.code);
+      fetchUserToken(url.query.code)
     }
-  }, [user, dispatch]);
+  }, [user, dispatch])
 
   useEffect(() => {
     if (user.token && user.name) {
@@ -75,17 +75,17 @@ const LoadingScreen = () => {
             username: user.name,
           }),
         })
-          .then(res => res.json())
+          .then((res) => res.json())
           .then(({ after, dist, links }) => {
             dispatch(
               addBatch({ links: links, count: dist, afterListing: after }),
-            );
+            )
           })
-          .catch(err => console.log(err));
-      };
-      fetchSaved();
+          .catch((err) => console.log(err))
+      }
+      fetchSaved()
     }
-  }, [user, dispatch]);
+  }, [user, dispatch])
 
   useEffect(() => {
     const fetchSaved = async () => {
@@ -97,24 +97,22 @@ const LoadingScreen = () => {
           afterListing,
         }),
       })
-        .then(res => res.json())
+        .then((res) => res.json())
         .then(({ after, dist, links }) => {
-          dispatch(
-            addBatch({ links: links, count: dist, afterListing: after }),
-          );
+          dispatch(addBatch({ links: links, count: dist, afterListing: after }))
         })
-        .catch(err => console.log(err));
-    };
+        .catch((err) => console.log(err))
+    }
     if (afterListing && fetchCount === 100 && isLoading) {
-      fetchSaved();
+      fetchSaved()
     }
     if (fetchCount < 100) {
-      dispatch(setLoadingStatus({ status: false }));
+      dispatch(setLoadingStatus({ status: false }))
     }
-  }, [afterListing, fetchCount, user, dispatch, isLoading]);
+  }, [afterListing, fetchCount, user, dispatch, isLoading])
 
   if (isLoading === false) {
-    return <Redirect to="/dashboard/all" />;
+    return <Redirect to="/dashboard/all" />
   }
 
   return (
@@ -130,7 +128,7 @@ const LoadingScreen = () => {
         <p>{isLoading ? `Count: ${total}` : 'Done!'}</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoadingScreen;
+export default LoadingScreen

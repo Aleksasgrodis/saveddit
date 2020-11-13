@@ -1,17 +1,17 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { clearState } from '../../../../redux/actions';
-import { useHistory } from 'react-router-dom';
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { clearState } from '../../../../redux/actions'
+import { useHistory } from 'react-router-dom'
 
 function SignOutButton() {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   const signOut = () => {
-    dispatch(clearState());
-    localStorage.clear();
-    history.push('/');
-  };
+    dispatch(clearState())
+    localStorage.clear()
+    history.push('/')
+  }
 
   return (
     <button
@@ -21,7 +21,7 @@ function SignOutButton() {
     >
       Sign Out
     </button>
-  );
+  )
 }
 
-export default SignOutButton;
+export default SignOutButton

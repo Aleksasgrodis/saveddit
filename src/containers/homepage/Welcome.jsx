@@ -1,7 +1,7 @@
-import React from 'react';
-import Login from './components/Login';
-import Reset from './components/Reset';
-import PreviewImage from '../../assets/images/preview.png';
+import React from 'react'
+import Login from './components/Login'
+import Reset from './components/Reset'
+import PreviewImage from '../../assets/images/preview.png'
 
 function Welcome() {
   return (
@@ -26,7 +26,7 @@ function Welcome() {
         <img src={PreviewImage} alt="dashboard of product" />
       </div>
     </div>
-  );
+  )
 }
 
-export default Welcome;
+export default Welcome

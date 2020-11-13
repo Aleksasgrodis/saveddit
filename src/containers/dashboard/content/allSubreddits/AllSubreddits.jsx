@@ -1,24 +1,24 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
-import AnchorNavigation from './components/AnchorNavigation';
-import ContentHeader from '../../../../components/ContentHeader';
-import SubredditListItem from './components/SubredditListItem';
+import React, { useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
+import AnchorNavigation from './components/AnchorNavigation'
+import ContentHeader from '../../../../components/ContentHeader'
+import SubredditListItem from './components/SubredditListItem'
 
-const linksSelector = state => state.saved.links;
-const subredditSelector = createSelector(linksSelector, links =>
-  links.map(link => link.subreddit),
-);
+const linksSelector = (state) => state.saved.links
+const subredditSelector = createSelector(linksSelector, (links) =>
+  links.map((link) => link.subreddit),
+)
 
 function AllSubreddits() {
-  const [subredditSearchValue, setSubredditSearchValue] = useState('');
-  const [searchResults, setSearchResults] = useState(null);
-  const search = { subredditSearchValue, setSubredditSearchValue };
-  const duplicateSubreddits = useSelector(subredditSelector);
+  const [subredditSearchValue, setSubredditSearchValue] = useState('')
+  const [searchResults, setSearchResults] = useState(null)
+  const search = { subredditSearchValue, setSubredditSearchValue }
+  const duplicateSubreddits = useSelector(subredditSelector)
   const subreddits = [...new Set(duplicateSubreddits)].sort((a, b) =>
     a.localeCompare(b),
-  );
-  const copy = useMemo(() => [...duplicateSubreddits], [duplicateSubreddits]);
+  )
+  const copy = useMemo(() => [...duplicateSubreddits], [duplicateSubreddits])
 
   const alphabet = [
     'A',
@@ -47,11 +47,11 @@ function AllSubreddits() {
     'X',
     'Y',
     'Z',
-  ];
-  const sortedByLetter = alphabet.map(letter => [
+  ]
+  const sortedByLetter = alphabet.map((letter) => [
     letter,
-    [...subreddits.filter(link => link.toUpperCase().charAt(0) === letter)],
-  ]);
+    [...subreddits.filter((link) => link.toUpperCase().charAt(0) === letter)],
+  ])
   useEffect(() => {
     const alphabetEffect = [
       'A',
@@ -80,34 +80,33 @@ function AllSubreddits() {
       'X',
       'Y',
       'Z',
-    ];
+    ]
     if (copy) {
       const sortedSubreddits = [...new Set(copy)].sort((a, b) =>
         a.localeCompare(b),
-      );
+      )
       setSearchResults(
-        alphabetEffect.map(letter => [
+        alphabetEffect.map((letter) => [
           letter,
           [
             ...sortedSubreddits
-              .filter(sub =>
+              .filter((sub) =>
                 sub.toLowerCase().includes(subredditSearchValue.toLowerCase()),
               )
-              .filter(link => link.toUpperCase().charAt(0) === letter),
+              .filter((link) => link.toUpperCase().charAt(0) === letter),
           ],
         ]),
-      );
+      )
     }
-  }, [subredditSearchValue, copy]);
+  }, [subredditSearchValue, copy])
 
   useEffect(() => {
     if (window.location.hash) {
-      const id = window.location.hash.replace('#', '');
-      const element = document.getElementById(id);
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const id = window.location.hash.replace('#', '')
+      const element = document.getElementById(id)
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
-  }, []);
-
+  }, [])
 
   return (
     <div className="flex flex-col">
@@ -115,7 +114,7 @@ function AllSubreddits() {
       <div className="flex pt-32">
         <div className="">
           {sortedByLetter && !subredditSearchValue.length
-            ? sortedByLetter.map(letter => {
+            ? sortedByLetter.map((letter) => {
                 if (letter[1].length) {
                   return (
                     <section
@@ -125,15 +124,15 @@ function AllSubreddits() {
                     >
                       <h2 className="font-bold text-4xl">{letter[0]}</h2>
                       <div className="flex flex-wrap">
-                        {letter[1].map(sub => (
+                        {letter[1].map((sub) => (
                           <SubredditListItem key={sub} title={sub} />
                         ))}
                       </div>
                     </section>
-                  );
-                } else return null;
+                  )
+                } else return null
               })
-            : searchResults.map(letter => {
+            : searchResults.map((letter) => {
                 if (letter[1].length) {
                   return (
                     <section
@@ -143,19 +142,19 @@ function AllSubreddits() {
                     >
                       <h2 className="font-bold text-4xl">{letter[0]}</h2>
                       <div className="flex flex-wrap">
-                        {letter[1].map(sub => (
+                        {letter[1].map((sub) => (
                           <SubredditListItem key={sub} title={sub} />
                         ))}
                       </div>
                     </section>
-                  );
-                } else return null;
+                  )
+                } else return null
               })}
         </div>
         <AnchorNavigation sortedArray={sortedByLetter} />
       </div>
     </div>
-  );
+  )
 }
 
-export default AllSubreddits;
+export default AllSubreddits

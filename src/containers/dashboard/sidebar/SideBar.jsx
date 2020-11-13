@@ -1,12 +1,9 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { refreshSaved, updateToken } from '../../../redux/actions';
-import ExportAsXlsSelect from './components/ExportAsXlsSelect';
-import RefreshButton from './components/RefreshButton';
-import SideBarNavigation from './components/SideBarNavigation';
-import SignOutButton from './components/SignOutButton';
-import UserInfo from './components/UserInfo';
+import React from 'react'
+import ExportAsXlsSelect from './components/ExportAsXlsSelect'
+import RefreshButton from './components/RefreshButton'
+import SideBarNavigation from './components/SideBarNavigation'
+import SignOutButton from './components/SignOutButton'
+import UserInfo from './components/UserInfo'
 
 function SideBar() {
   return (
@@ -21,7 +18,7 @@ function SideBar() {
         <SignOutButton />
       </div>
     </div>
-  );
+  )
 }
 
-export default SideBar;
+export default SideBar
