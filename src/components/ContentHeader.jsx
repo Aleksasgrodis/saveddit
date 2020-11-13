@@ -1,8 +1,8 @@
-import React from 'react';
-import BackButton from './BackButton';
-import Search from './Search';
-import SortingDropdown from './SortingDropdown';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import BackButton from './BackButton'
+import Search from './Search'
+import SortingDropdown from './SortingDropdown'
 
 function ContentHeader({
   title = 'All Posts',
@@ -22,7 +22,7 @@ function ContentHeader({
         {withSort && <SortingDropdown />}
       </div>
     </header>
-  );
+  )
 }
 
 ContentHeader.propTypes = {
@@ -30,6 +30,6 @@ ContentHeader.propTypes = {
   count: PropTypes.number,
   withHistory: PropTypes.bool,
   withSort: PropTypes.bool,
-};
+}
 
-export default ContentHeader;
+export default ContentHeader

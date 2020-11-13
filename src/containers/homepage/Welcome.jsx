@@ -1,12 +1,12 @@
 import React from 'react';
 import Login from './components/Login';
-import { ReactComponent as Logo } from '../../assets/images/saveddit.svg';
 import Reset from './components/Reset';
-import PreviewImage from '../../assets/images/preview.png'
+import PreviewImage from '../../assets/images/preview.png';
+
 function Welcome() {
   return (
     <div className="w-9/12 lg:mx-auto flex">
-      <div className="container flex h-screen flex-col justify-center">
+      <div className="w-5/12 flex h-screen flex-col justify-center">
         <div className="container flex flex-col justify-between reddit-font welcome-details text-gray-800">
           <div className="relative font-bold h-40">
             <div className="text-6xl">Saveddit</div>
@@ -23,10 +23,7 @@ function Welcome() {
         </div>
       </div>
       <div className="container h-screen flex flex-col justify-center">
-        <img
-          src={PreviewImage}
-          alt="dashboard of product"
-        />
+        <img src={PreviewImage} alt="dashboard of product" />
       </div>
     </div>
   );

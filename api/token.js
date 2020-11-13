@@ -1,17 +1,17 @@
-const { qs } = require('url-parse');
-const { default: fetch } = require('node-fetch');
+const { qs } = require('url-parse')
+const { default: fetch } = require('node-fetch')
 
 module.exports = async (req, res) => {
-  const code = req.query.code;
-  const redirect_uri =
+  const { code } = req.query
+  const redirectUri =
     process.env.NODE_ENV === 'production'
       ? 'https://saveddit.vercel.app/loading'
-      : 'http://localhost:3000/loading';
+      : 'http://localhost:3000/loading'
   const data = qs.stringify({
     grant_type: 'authorization_code',
-    code: code,
-    redirect_uri: redirect_uri,
-  });
+    code,
+    redirect_uri: redirectUri,
+  })
   const config = {
     method: 'post',
     headers: {
@@ -19,15 +19,15 @@ module.exports = async (req, res) => {
       Authorization: `Basic ${process.env.BASIC_AUTH}`,
     },
     body: data,
-  };
+  }
   try {
     const response = await fetch(
       'https://www.reddit.com/api/v1/access_token',
       config,
-    );
-    const data = await response.json();
-    return res.json(data);
+    )
+    const result = await response.json()
+    return res.json(result)
   } catch (error) {
-    return res.json(error);
+    return res.json(error)
   }
-};
+}

@@ -1,8 +1,8 @@
-const { qs } = require('url-parse');
-const { default: fetch } = require('node-fetch');
+const { qs } = require('url-parse')
+const { default: fetch } = require('node-fetch')
 
-const minifyReponse = array => {
-  return array.map(
+const minifyReponse = (array) =>
+  array.map(
     ({
       author,
       archived,
@@ -32,17 +32,16 @@ const minifyReponse = array => {
       title,
       url,
     }),
-  );
-};
+  )
 
 module.exports = async (req, res) => {
-  const { token, username, afterListing } = JSON.parse(req.body);
+  const { token, username, afterListing } = JSON.parse(req.body)
   const config = {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ` + token,
+      Authorization: `Bearer ${token}`,
     },
-  };
+  }
 
   try {
     const response = await fetch(
@@ -50,17 +49,17 @@ module.exports = async (req, res) => {
         afterListing ? `&after=${afterListing}` : ''
       }`,
       config,
-    );
+    )
     const {
       data: { dist, after, children, before },
-    } = await response.json();
+    } = await response.json()
     return res.json({
       dist,
       after,
       before,
-      links: await minifyReponse(children.map(a => a.data)),
-    });
+      links: await minifyReponse(children.map((a) => a.data)),
+    })
   } catch (error) {
-    return res.json(error);
+    return res.json(error)
   }
-};
+}

@@ -1,4 +1,4 @@
-import * as Types from '../actionTypes';
+import * as Types from '../actionTypes'
 
 const initialState = {
   account_created: null,
@@ -9,7 +9,7 @@ const initialState = {
   refresh_token: null,
   token: null,
   verified: null,
-};
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
         ...state,
         token: action.token,
         refresh_token: action.refresh_token,
-      };
+      }
     case Types.SET_USER_DETAILS:
       return {
         ...state,
@@ -28,17 +28,17 @@ export default function (state = initialState, action) {
         karma: action.karma,
         verified: action.verified,
         coins: action.coins,
-      };
+      }
 
     case Types.UPDATE_TOKEN:
       return {
         ...state,
         token: action.token,
-      };
+      }
 
     case Types.CLEAR_STATE:
-      return {};
+      return {}
     default:
-      return state;
+      return state
   }
 }

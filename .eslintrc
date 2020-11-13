@@ -1,0 +1,10 @@
+{
+  "extends": ["@imaginary-cloud/react"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["react"],
+  "parser": "babel-eslint"
+}

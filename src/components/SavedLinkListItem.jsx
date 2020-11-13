@@ -1,51 +1,51 @@
 import {
   faRedditAlien,
   faRedditSquare,
-} from '@fortawesome/free-brands-svg-icons';
+} from '@fortawesome/free-brands-svg-icons'
 import {
   faArrowUp,
   faCalendarAlt,
   faCommentAlt,
   faLink,
   faTrashAlt,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { format, fromUnixTime } from 'date-fns';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import TextTruncate from 'react-text-truncate';
-import { unsavePost } from '../redux/actions';
-import PropTypes from 'prop-types';
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { format, fromUnixTime } from 'date-fns'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import TextTruncate from 'react-text-truncate'
+import PropTypes from 'prop-types'
+import { unsavePost } from '../redux/actions'
 
 function SavedLinkListItem({
   title,
   url,
   permalink,
   score,
-  num_comments,
+  num_comments: numComments,
   author,
-  created_utc,
+  created_utc: createdUTC,
   domain,
-  over_18,
-  subreddit_name_prefixed,
+  over_18: over18,
+  subreddit_name_prefixed: subredditNamePrefixed,
   id,
 }) {
-  const { token } = useSelector(state => state.user);
-  const dispatch = useDispatch();
-  const unsave = id => {
+  const { token } = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+  const unsave = (postID) => {
     fetch('/api/unsave', {
       method: 'post',
       body: JSON.stringify({
-        id: id,
+        id: postID,
         token: token,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
-        dispatch(unsavePost({ id: id }));
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(unsavePost({ id: id }))
       })
-      .catch(err => console.log(err));
-  };
+      .catch((err) => console.log(err))
+  }
   return (
     <article className="rounded-md bg-white xl:w-5/12 lg:w-10/12 md:w-full sm:w-full w-full flex border border-gray-200 shadow-lg mb-4 mr-4 md:h-40 sm:h-56 h-56 overflow-hidden">
       <div className="xl:w-1/12 lg:w-1/12 md:w-1/12 sm:w-12 w-12 flex flex-col justify-around bg-gray-900 text-white ">
@@ -57,7 +57,7 @@ function SavedLinkListItem({
         </div>
         <div className="flex flex-col items-center justify-center h-16">
           <FontAwesomeIcon icon={faCommentAlt} />
-          <span className="sm:text-xs md:text-sm">{num_comments}</span>
+          <span className="sm:text-xs md:text-sm">{numComments}</span>
         </div>
       </div>
       <div className="flex flex-col justify-between"></div>
@@ -73,13 +73,13 @@ function SavedLinkListItem({
                 className="hover:text-gray-900"
                 rel="noopener noreferrer"
                 target="_blank"
-                title={`Open ${subreddit_name_prefixed} in a new tab.`}
-                href={`https://www.reddit.com/${subreddit_name_prefixed}`}
+                title={`Open ${subredditNamePrefixed} in a new tab.`}
+                href={`https://www.reddit.com/${subredditNamePrefixed}`}
               >
-                {subreddit_name_prefixed}
+                {subredditNamePrefixed}
               </a>
             </p>
-            {over_18 && (
+            {over18 && (
               <span
                 title="NOT SAFE FOR WORK"
                 className="text-white bg-red-600 py-px px-1 rounded font-bold text-sm"
@@ -94,7 +94,7 @@ function SavedLinkListItem({
               rel="noopener noreferrer"
               target="_blank"
               className="hover:text-orange-600 text-gray-800"
-              title={`Open Reddit post in new tab.`}
+              title="Open Reddit post in new tab."
             >
               <TextTruncate
                 line={3}
@@ -112,7 +112,7 @@ function SavedLinkListItem({
               icon={faCalendarAlt}
             />
             <span className="text-gray-600 text-sm">
-              Posted on {format(fromUnixTime(created_utc), 'd MMM yyy')} by{' '}
+              Posted on {format(fromUnixTime(createdUTC), 'd MMM yyy')} by{' '}
               {author}
             </span>
           </div>
@@ -129,7 +129,10 @@ function SavedLinkListItem({
           title={`Open linked resource in new tab (${domain}).`}
           className="w-full h-full outline-none bg-transparent"
         >
-          <button className=" w-full h-full rounded bg-transparent text-blue-500 hover:text-white hover:bg-blue-500 text-xl">
+          <button
+            type="button"
+            className=" w-full h-full rounded bg-transparent text-blue-500 hover:text-white hover:bg-blue-500 text-xl"
+          >
             <FontAwesomeIcon icon={faLink} />
           </button>
         </a>
@@ -137,14 +140,18 @@ function SavedLinkListItem({
           href={`https://www.reddit.com${permalink}`}
           rel="noopener noreferrer"
           target="_blank"
-          title={`Open Reddit post in new tab.`}
+          title="Open Reddit post in new tab."
           className="w-full h-full outline-none"
         >
-          <button className="w-full h-full rounded hover:text-white hover:bg-orange-600 text-orange-500 text-xl">
+          <button
+            type="button"
+            className="w-full h-full rounded hover:text-white hover:bg-orange-600 text-orange-500 text-xl"
+          >
             <FontAwesomeIcon icon={faRedditAlien} />
           </button>
         </a>
         <button
+          type="button"
           title="Remove post from saved posts."
           onClick={() => unsave(id)}
           className="w-full h-full outline-none rounded text-red-500 hover:text-white hover:bg-red-500 bg-transparent text-xl"
@@ -153,7 +160,7 @@ function SavedLinkListItem({
         </button>
       </div>
     </article>
-  );
+  )
 }
 
 SavedLinkListItem.propTypes = {
@@ -168,6 +175,6 @@ SavedLinkListItem.propTypes = {
   over_18: PropTypes.bool,
   subreddit_name_prefixed: PropTypes.string,
   id: PropTypes.string,
-};
+}
 
-export default SavedLinkListItem;
+export default SavedLinkListItem

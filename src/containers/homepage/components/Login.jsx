@@ -1,20 +1,20 @@
-import React from 'react';
-import Axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react'
+import Axios from 'axios'
+import { v4 as uuidv4 } from 'uuid'
 
 const Login = () => {
   const handleAuthorize = () => {
-    const seed = uuidv4();
-    localStorage.clear();
-    localStorage.setItem('seed', seed);
+    const seed = uuidv4()
+    localStorage.clear()
+    localStorage.setItem('seed', seed)
     Axios.post('/api/authorize', {
       seed,
     })
-      .then(res => {
-        window.location = res.data.url;
+      .then((res) => {
+        window.location = res.data.url
       })
-      .catch(err => console.log(err));
-  };
+      .catch((err) => console.log(err))
+  }
   return (
     <div className="flex justify-center">
       <button
@@ -25,7 +25,7 @@ const Login = () => {
         Authorize
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

@@ -1,17 +1,17 @@
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setSortingMethod } from '../redux/actions';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { setSortingMethod } from '../redux/actions'
 
 function SortingDropdown() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   return (
     <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-2/12 xl:w-1/6 px-3 mr-4">
       <div className="relative">
         <select
-          onChange={e => {
-            dispatch(setSortingMethod({ method: e.target.value }));
+          onChange={(e) => {
+            dispatch(setSortingMethod({ method: e.target.value }))
           }}
           className="block appearance-none w-full bg-white border border-gray-200 shadow-md text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
           id="sort-select"
@@ -32,7 +32,7 @@ function SortingDropdown() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default SortingDropdown;
+export default SortingDropdown
