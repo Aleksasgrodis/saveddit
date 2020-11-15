@@ -73,10 +73,11 @@ export const resetNsfwFilter = () => ({
   type: Types.RESET_NSFW_FILTER,
 })
 
-export const setTokens = ({ token, refresh_token }) => ({
+export const setTokens = ({ token, refresh_token, expires }) => ({
   type: Types.SET_TOKENS,
   token,
   refresh_token,
+  expires,
 })
 
 export const setUserDetails = ({
@@ -96,7 +97,8 @@ export const setUserDetails = ({
   coins,
 })
 
-export const updateToken = ({ token }) => ({
+export const updateToken = ({ token, expires }) => ({
   type: Types.UPDATE_TOKEN,
   token,
+  expires,
 })

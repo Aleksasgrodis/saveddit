@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react'
 import URLParse from 'url-parse'
 import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import {
   addBatch,
   setLoadingStatus,
   setTokens,
   setUserDetails,
 } from '../../redux/actions'
-import { Redirect } from 'react-router-dom'
 
-//TODO Keep track of token expires
 const LoadingScreen = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user)
@@ -25,10 +24,12 @@ const LoadingScreen = () => {
         fetch(`/api/token?code=${code}`)
           .then((res) => res.json())
           .then((data) => {
+            const expires = Date.now() + 3600000
             dispatch(
               setTokens({
                 token: data.access_token,
                 refresh_token: data.refresh_token,
+                expires,
               }),
             )
             fetchUserName(data.access_token)
@@ -41,7 +42,7 @@ const LoadingScreen = () => {
       fetch(`/api/username`, {
         method: 'POST',
         body: JSON.stringify({
-          token: token,
+          token,
         }),
       })
         .then((res) => res.json())
@@ -77,9 +78,7 @@ const LoadingScreen = () => {
         })
           .then((res) => res.json())
           .then(({ after, dist, links }) => {
-            dispatch(
-              addBatch({ links: links, count: dist, afterListing: after }),
-            )
+            dispatch(addBatch({ links, count: dist, afterListing: after }))
           })
           .catch((err) => console.log(err))
       }
@@ -99,7 +98,7 @@ const LoadingScreen = () => {
       })
         .then((res) => res.json())
         .then(({ after, dist, links }) => {
-          dispatch(addBatch({ links: links, count: dist, afterListing: after }))
+          dispatch(addBatch({ links, count: dist, afterListing: after }))
         })
         .catch((err) => console.log(err))
     }

@@ -26,6 +26,7 @@ module.exports = async (req, res) => {
       config,
     )
     const result = await response.json()
+    console.log(result)
     return res.json(result)
   } catch (error) {
     return res.json(error)
