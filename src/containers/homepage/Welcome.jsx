@@ -1,9 +1,17 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Login from './components/Login'
 import Reset from './components/Reset'
 import PreviewImage from '../../assets/images/preview.png'
 
 function Welcome() {
+  const {
+    user: { name, refresh_token: refreshToken, token },
+    saved: { links },
+  } = useSelector((state) => state)
+  if (name && refreshToken && token && links.length)
+    return <Redirect to="/dashboard/all" />
   return (
     <div className="w-9/12 lg:mx-auto flex">
       <div className="w-5/12 flex h-screen flex-col justify-center">

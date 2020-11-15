@@ -18,6 +18,7 @@ export default function (state = initialState, action) {
         ...state,
         token: action.token,
         refresh_token: action.refresh_token,
+        expires: action.expires,
       }
     case Types.SET_USER_DETAILS:
       return {
@@ -34,6 +35,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         token: action.token,
+        expires: action.token,
       }
 
     case Types.CLEAR_STATE:

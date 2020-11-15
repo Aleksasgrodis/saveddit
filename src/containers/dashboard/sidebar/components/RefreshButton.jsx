@@ -6,14 +6,15 @@ import { refreshSaved, updateToken } from '../../../../redux/actions'
 function RefreshButton() {
   const dispatch = useDispatch()
   const history = useHistory()
-  const { refresh_token } = useSelector((state) => state.user)
+  const { refresh_token: refreshToken } = useSelector((state) => state.user)
 
-  const requestRefreshToken = () => {
-    return fetch(`/api/refresh?token=${refresh_token}`)
+  const requestRefreshToken = () =>
+    fetch(`/api/refresh?token=${refreshToken}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.access_token) {
-          dispatch(updateToken({ token: data.access_token }))
+          const expires = Date.now() + 3600000
+          dispatch(updateToken({ token: data.access_token, expires }))
           history.push('/dashboard')
           dispatch(refreshSaved())
           localStorage.removeItem('saved')
@@ -21,7 +22,7 @@ function RefreshButton() {
         }
       })
       .catch((err) => console.log(err))
-  }
+
   return (
     <button
       type="button"
