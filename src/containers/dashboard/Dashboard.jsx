@@ -16,12 +16,9 @@ function Dashboard() {
       fetch(`/api/refresh?token=${refreshToken}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data.access_token) {
-            const newExpires = Date.now() + 3600000
-            dispatch(
-              updateToken({ token: data.access_token, expires: newExpires }),
-            )
-          }
+          dispatch(
+            updateToken({ token: data.access_token, expires: date + 3600000 }),
+          )
         })
         .catch((err) => console.log(err))
     }

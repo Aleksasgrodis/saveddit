@@ -35,7 +35,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         token: action.token,
-        expires: action.token,
+        expires: action.expires,
       }
 
     case Types.CLEAR_STATE:
