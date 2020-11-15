@@ -26,7 +26,7 @@ function Dashboard() {
         .catch((err) => console.log(err))
     }
     return () => {}
-  }, [])
+  }, [dispatch, refreshToken, expires])
   return (
     <div className="flex w-screen max-w-screen h-screen max-w-screen overflow-hidden">
       <div className="flex-none min-w-200 p-3 bg-gray-100">
