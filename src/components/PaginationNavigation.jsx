@@ -38,7 +38,6 @@ function PaginationNavigation({ total, currentPage }) {
             pageNumbers.map((a, i) => (
               <button
                 type="button"
-                key={uuid()}
                 onClick={() => dispatch(loadNumberedPage({ page: i + 1 }))}
                 className={`${
                   currentPage === total ? 'cursor-not-allowed' : ''
@@ -84,28 +83,20 @@ function PaginationNavigation({ total, currentPage }) {
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
-          <PaginationItem key={uuid()} page={1} currentPage={currentPage} />
-          <PaginationItem key={uuid()} page={2} currentPage={currentPage} />
-          <PaginationItem key={uuid()} page={3} currentPage={currentPage} />
+          <PaginationItem page={1} currentPage={currentPage} />
+          <PaginationItem page={2} currentPage={currentPage} />
+          <PaginationItem page={3} currentPage={currentPage} />
           {currentPage < 4 || currentPage > total - 3 ? (
             <span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
               ...
             </span>
           ) : (
-            <PaginationTriplet />
+            <PaginationTriplet currentPage={currentPage} total={total} />
           )}
 
-          <PaginationItem
-            key={uuid()}
-            page={total - 2}
-            currentPage={currentPage}
-          />
-          <PaginationItem
-            key={uuid()}
-            page={total - 1}
-            currentPage={currentPage}
-          />
-          <PaginationItem key={uuid()} page={total} currentPage={currentPage} />
+          <PaginationItem page={total - 2} currentPage={currentPage} />
+          <PaginationItem page={total - 1} currentPage={currentPage} />
+          <PaginationItem page={total} currentPage={currentPage} />
 
           <button
             type="button"

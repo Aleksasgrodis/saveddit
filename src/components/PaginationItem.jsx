@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { loadNumberedPage } from '../redux/actions'
 
-function PaginationItem({ key, page, currentPage }) {
+function PaginationItem({ page, currentPage }) {
   const dispatch = useDispatch()
   return (
     <button
-      key={key}
       type="button"
       onClick={() => dispatch(loadNumberedPage({ page }))}
       className={`${
@@ -19,7 +18,6 @@ function PaginationItem({ key, page, currentPage }) {
   )
 }
 PaginationItem.propTypes = {
-  key: PropTypes.string,
   page: PropTypes.number,
   currentPage: PropTypes.number,
 }
