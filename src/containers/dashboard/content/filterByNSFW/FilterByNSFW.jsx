@@ -35,11 +35,7 @@ function FilterByNSFW() {
             <SavedLinkListItem key={link.permalink} {...link} />
           ))}
       </div>
-      <PaginationNavigation
-        total={searchPages}
-        action={loadNumberedPage}
-        currentPage={currentPage}
-      />
+      <PaginationNavigation total={searchPages} currentPage={currentPage} />
     </section>
   )
 }

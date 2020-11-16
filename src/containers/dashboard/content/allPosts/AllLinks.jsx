@@ -27,17 +27,13 @@ function AllLinks() {
   )
   return (
     <section className="w-full">
-      <ContentHeader withSort={true} count={total} {...search} />
+      <ContentHeader withSort count={total} {...search} />
       <div className="flex flex-wrap justify-center pt-32">
         {pageResults.map((link) => (
           <SavedLinkListItem key={link.permalink} {...link} />
         ))}
       </div>
-      <PaginationNavigation
-        total={searchPages}
-        action={loadNumberedPage}
-        currentPage={currentPage}
-      />
+      <PaginationNavigation total={searchPages} currentPage={currentPage} />
     </section>
   )
 }

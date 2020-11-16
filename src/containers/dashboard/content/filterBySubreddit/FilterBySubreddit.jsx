@@ -19,7 +19,7 @@ function FilterBySubreddit() {
 
   useEffect(() => {
     batch(() => {
-      dispatch(setSubredditFilter({ subreddit: subreddit }))
+      dispatch(setSubredditFilter({ subreddit }))
       dispatch(setSearchResults({ value: '' }))
     })
     return () => {
@@ -29,21 +29,13 @@ function FilterBySubreddit() {
 
   return (
     <div>
-      <ContentHeader
-        title={`r/${subreddit}`}
-        count={searchTotal}
-        withSort={true}
-      />
+      <ContentHeader title={`r/${subreddit}`} count={searchTotal} withSort />
       <div className="flex flex-wrap justify-center pt-32">
         {pageResults.map((link) => (
           <SavedLinkListItem key={link.permalink} {...link} />
         ))}
       </div>
-      <PaginationNavigation
-        total={searchPages}
-        action={loadNumberedPage}
-        currentPage={currentPage}
-      />
+      <PaginationNavigation total={searchPages} currentPage={currentPage} />
     </div>
   )
 }
