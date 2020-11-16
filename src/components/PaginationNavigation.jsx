@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { v4 as uuid } from 'uuid'
 import { loadNumberedPage } from '../redux/actions'
+import PaginationItem from './PaginationItem'
+import PaginationTriplet from './NavigationTriplet'
 
 function PaginationNavigation({ total, currentPage }) {
   const dispatch = useDispatch()
@@ -82,61 +84,29 @@ function PaginationNavigation({ total, currentPage }) {
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
-          {pageNumbers &&
-            pageNumbers.map((a, i) => {
-              if (i <= 2) {
-                return (
-                  <button
-                    key={uuid()}
-                    type="button"
-                    onClick={() => dispatch(loadNumberedPage({ page: i + 1 }))}
-                    className={`${
-                      i + 1 === currentPage ? 'text-orange-600' : ''
-                    } -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                  >
-                    {i + 1}
-                  </button>
-                )
-              }
-              if (i === 2 || i === total - 5) {
-                return (
-                  <span
-                    key={uuid()}
-                    className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700"
-                  >
-                    ...
-                  </span>
-                )
-              }
-              if (i > total - 4) {
-                return (
-                  <button
-                    type="button"
-                    key={uuid()}
-                    onClick={() => dispatch(loadNumberedPage({ page: i + 1 }))}
-                    className={`${
-                      i + 1 === currentPage ? 'text-orange-600' : ''
-                    } -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                  >
-                    {i + 1}
-                  </button>
-                )
-              }
-              // if (currentPage === 4) {
-              //   return (
-              //     <button
-              //       type="button"
-              //       key={uuid()}
-              //       onClick={() => dispatch(loadNumberedPage({ page: i + 1 }))}
-              //       className={`${
-              //         i + 1 === currentPage ? 'text-orange-600' : ''
-              //       } -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-              //     >
-              //       {i + 1}
-              //     </button>
-              //   )
-              // }
-            })}
+          <PaginationItem key={uuid()} page={1} currentPage={currentPage} />
+          <PaginationItem key={uuid()} page={2} currentPage={currentPage} />
+          <PaginationItem key={uuid()} page={3} currentPage={currentPage} />
+          {currentPage < 4 || currentPage > total - 3 ? (
+            <span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+              ...
+            </span>
+          ) : (
+            <PaginationTriplet />
+          )}
+
+          <PaginationItem
+            key={uuid()}
+            page={total - 2}
+            currentPage={currentPage}
+          />
+          <PaginationItem
+            key={uuid()}
+            page={total - 1}
+            currentPage={currentPage}
+          />
+          <PaginationItem key={uuid()} page={total} currentPage={currentPage} />
+
           <button
             type="button"
             disabled={currentPage === total}
