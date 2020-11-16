@@ -93,26 +93,21 @@ function AllSubreddits() {
         a.localeCompare(b),
       )
       setSearchResults(
-        alphabetEffect.map((letter) => {
-          if (letter === '0-9') {
-            return [
-              letter,
-              [...sortedSubreddits.filter((sub) => /\d/.test(sub.charAt(0)))],
-            ]
-          }
-          return [
-            letter,
-            [
-              ...sortedSubreddits
-                .filter((sub) =>
-                  sub
-                    .toLowerCase()
-                    .includes(subredditSearchValue.toLowerCase()),
-                )
-                .filter((link) => link.toUpperCase().charAt(0) === letter),
-            ],
-          ]
-        }),
+        alphabetEffect.map((letter) => [
+          letter,
+          [
+            ...sortedSubreddits
+              .filter((sub) =>
+                sub.toLowerCase().includes(subredditSearchValue.toLowerCase()),
+              )
+              .filter((link) => {
+                if (letter === '0-9') {
+                  return /\d/.test(link.charAt(0))
+                }
+                return link.toUpperCase().charAt(0) === letter
+              }),
+          ],
+        ]),
       )
     }
   }, [subredditSearchValue, copy])
@@ -148,6 +143,7 @@ function AllSubreddits() {
                     </section>
                   )
                 }
+                return null
               })
             : searchResults.map((letter) => {
                 if (letter[1].length) {
@@ -166,6 +162,7 @@ function AllSubreddits() {
                     </section>
                   )
                 }
+                return null
               })}
         </div>
         <AnchorNavigation sortedArray={sortedByLetter} />
