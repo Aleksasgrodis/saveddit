@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  loadNumberedPage,
-  resetPageNumber,
-  setSearchResults,
-} from '../../../../redux/actions'
+import { loadNumberedPage, setSearchResults } from '../../../../redux/actions'
 import ContentHeader from '../../../../components/ContentHeader'
 import PaginationNavigation from '../../../../components/PaginationNavigation'
 import SavedLinkListItem from '../../../../components/SavedLinkListItem'
@@ -27,17 +23,13 @@ function AllLinks() {
   )
   return (
     <section className="w-full">
-      <ContentHeader withSort={true} count={total} {...search} />
+      <ContentHeader withSort count={total} {...search} />
       <div className="flex flex-wrap justify-center pt-32">
         {pageResults.map((link) => (
           <SavedLinkListItem key={link.permalink} {...link} />
         ))}
       </div>
-      <PaginationNavigation
-        total={searchPages}
-        action={loadNumberedPage}
-        currentPage={currentPage}
-      />
+      <PaginationNavigation total={searchPages} currentPage={currentPage} />
     </section>
   )
 }

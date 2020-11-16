@@ -6,8 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
+import { loadNumberedPage } from '../redux/actions'
+import PaginationItem from './PaginationItem'
+import PaginationTriplet from './NavigationTriplet'
 
-function PaginationNavigation({ action, total, currentPage }) {
+function PaginationNavigation({ total, currentPage }) {
   const dispatch = useDispatch()
   const pageNumbers = new Array(total).fill(0)
   if (total <= 1) {
@@ -24,24 +27,15 @@ function PaginationNavigation({ action, total, currentPage }) {
               currentPage === 1 ? 'cursor-not-allowed' : ''
             }`}
             aria-label="Previous"
-            onClick={() => dispatch(action({ page: currentPage - 1 }))}
+            onClick={() =>
+              dispatch(loadNumberedPage({ page: currentPage - 1 }))
+            }
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           {pageNumbers &&
             pageNumbers.map((a, i) => (
-              <button
-                type="button"
-                key={i}
-                onClick={() => dispatch(action({ page: i + 1 }))}
-                className={`${
-                  currentPage === total ? 'cursor-not-allowed' : ''
-                } ${
-                  i + 1 === currentPage ? 'text-orange-600' : ''
-                } -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-              >
-                {i + 1}
-              </button>
+              <PaginationItem currentPage={currentPage} page={i + 1} />
             ))}
           <button
             type="button"
@@ -50,7 +44,9 @@ function PaginationNavigation({ action, total, currentPage }) {
               currentPage === total ? 'cursor-not-allowed' : ''
             }`}
             aria-label="Next"
-            onClick={() => dispatch(action({ page: currentPage + 1 }))}
+            onClick={() =>
+              dispatch(loadNumberedPage({ page: currentPage + 1 }))
+            }
           >
             <FontAwesomeIcon icon={faChevronRight} />
           </button>
@@ -70,49 +66,27 @@ function PaginationNavigation({ action, total, currentPage }) {
               currentPage === 1 ? 'cursor-not-allowed' : ''
             }`}
             aria-label="Previous"
-            onClick={() => dispatch(action({ page: currentPage - 1 }))}
+            onClick={() =>
+              dispatch(loadNumberedPage({ page: currentPage - 1 }))
+            }
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
-          {pageNumbers &&
-            pageNumbers.map((a, i) => {
-              if (i <= 2) {
-                return (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => dispatch(action({ page: i + 1 }))}
-                    className={`${
-                      i + 1 === currentPage ? 'text-orange-600' : ''
-                    } -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                  >
-                    {i + 1}
-                  </button>
-                )
-              } else if (i === 2 || i === total - 5) {
-                return (
-                  <span
-                    key={Date.now()}
-                    className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700"
-                  >
-                    ...
-                  </span>
-                )
-              } else if (i > total - 4) {
-                return (
-                  <button
-                    type="button"
-                    key={i}
-                    onClick={() => dispatch(action({ page: i + 1 }))}
-                    className={`${
-                      i + 1 === currentPage ? 'text-orange-600' : ''
-                    } -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-                  >
-                    {i + 1}
-                  </button>
-                )
-              }
-            })}
+          <PaginationItem page={1} currentPage={currentPage} />
+          <PaginationItem page={2} currentPage={currentPage} />
+          <PaginationItem page={3} currentPage={currentPage} />
+          {currentPage < 4 || currentPage > total - 3 ? (
+            <span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
+              ...
+            </span>
+          ) : (
+            <PaginationTriplet currentPage={currentPage} total={total} />
+          )}
+
+          <PaginationItem page={total - 2} currentPage={currentPage} />
+          <PaginationItem page={total - 1} currentPage={currentPage} />
+          <PaginationItem page={total} currentPage={currentPage} />
+
           <button
             type="button"
             disabled={currentPage === total}
@@ -120,7 +94,9 @@ function PaginationNavigation({ action, total, currentPage }) {
               currentPage === total ? 'cursor-not-allowed' : ''
             } -ml-px relative inline-flex items-center px-4 py-4 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150`}
             aria-label="Next"
-            onClick={() => dispatch(action({ page: currentPage + 1 }))}
+            onClick={() =>
+              dispatch(loadNumberedPage({ page: currentPage + 1 }))
+            }
           >
             <FontAwesomeIcon icon={faChevronRight} />
           </button>
@@ -131,7 +107,6 @@ function PaginationNavigation({ action, total, currentPage }) {
 }
 
 PaginationNavigation.propTypes = {
-  action: PropTypes.func,
   total: PropTypes.number,
   currentPage: PropTypes.number,
 }

@@ -11,12 +11,9 @@ import {
 
 function FilterByNSFW() {
   const dispatch = useDispatch()
-  const {
-    pageResults,
-    loadNumberedPage,
-    currentPage,
-    searchPages,
-  } = useSelector((state) => state.saved)
+  const { pageResults, currentPage, searchPages } = useSelector(
+    (state) => state.saved,
+  )
 
   useEffect(() => {
     dispatch(setNsfwFilter())
@@ -35,11 +32,7 @@ function FilterByNSFW() {
             <SavedLinkListItem key={link.permalink} {...link} />
           ))}
       </div>
-      <PaginationNavigation
-        total={searchPages}
-        action={loadNumberedPage}
-        currentPage={currentPage}
-      />
+      <PaginationNavigation total={searchPages} currentPage={currentPage} />
     </section>
   )
 }

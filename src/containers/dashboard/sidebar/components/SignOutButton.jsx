@@ -1,7 +1,7 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { clearState } from '../../../../redux/actions'
-import { useHistory } from 'react-router-dom'
 
 function SignOutButton() {
   const dispatch = useDispatch()

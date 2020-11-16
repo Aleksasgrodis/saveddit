@@ -34,7 +34,7 @@
     "redux-storage-engine-indexed-db": "^1.0.0",
     "reselect": "^4.0.0",
     "url-parse": "^1.4.7",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.1"
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",

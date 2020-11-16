@@ -130,7 +130,7 @@ function AllSubreddits() {
                       </div>
                     </section>
                   )
-                } else return null
+                }
               })
             : searchResults.map((letter) => {
                 if (letter[1].length) {
@@ -148,7 +148,7 @@ function AllSubreddits() {
                       </div>
                     </section>
                   )
-                } else return null
+                }
               })}
         </div>
         <AnchorNavigation sortedArray={sortedByLetter} />

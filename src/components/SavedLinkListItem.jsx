@@ -37,12 +37,12 @@ function SavedLinkListItem({
       method: 'post',
       body: JSON.stringify({
         id: postID,
-        token: token,
+        token,
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        dispatch(unsavePost({ id: id }))
+      .then(() => {
+        dispatch(unsavePost({ id }))
       })
       .catch((err) => console.log(err))
   }
