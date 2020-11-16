@@ -11,12 +11,9 @@ import {
 
 function FilterByNSFW() {
   const dispatch = useDispatch()
-  const {
-    pageResults,
-    loadNumberedPage,
-    currentPage,
-    searchPages,
-  } = useSelector((state) => state.saved)
+  const { pageResults, currentPage, searchPages } = useSelector(
+    (state) => state.saved,
+  )
 
   useEffect(() => {
     dispatch(setNsfwFilter())

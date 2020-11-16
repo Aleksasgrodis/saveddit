@@ -1,12 +1,13 @@
 import React from 'react'
 import { NavHashLink } from 'react-router-hash-link'
+import PropTypes from 'prop-types'
 
 function AnchorNavigation({ sortedArray }) {
   return (
     <div className="fixed right-0 inset-y-0 mr-12">
       <nav className="flex flex-col h-full justify-center items-center">
-        {sortedArray.map((letter) => {
-          return letter[1].length ? (
+        {sortedArray.map((letter) =>
+          letter[1].length ? (
             <NavHashLink
               key={letter[0]}
               className="font-bold text-gray-400 hover:text-gray-900"
@@ -18,11 +19,14 @@ function AnchorNavigation({ sortedArray }) {
             >
               {letter[0]}
             </NavHashLink>
-          ) : null
-        })}
+          ) : null,
+        )}
       </nav>
     </div>
   )
 }
 
+AnchorNavigation.propTypes = {
+  sortedArray: PropTypes.array,
+}
 export default AnchorNavigation

@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import { v4 as uuid } from 'uuid'
 import { loadNumberedPage } from '../redux/actions'
 import PaginationItem from './PaginationItem'
 import PaginationTriplet from './NavigationTriplet'
@@ -36,17 +35,7 @@ function PaginationNavigation({ total, currentPage }) {
           </button>
           {pageNumbers &&
             pageNumbers.map((a, i) => (
-              <button
-                type="button"
-                onClick={() => dispatch(loadNumberedPage({ page: i + 1 }))}
-                className={`${
-                  currentPage === total ? 'cursor-not-allowed' : ''
-                } ${
-                  i + 1 === currentPage ? 'text-orange-600' : ''
-                } -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
-              >
-                {i + 1}
-              </button>
+              <PaginationItem currentPage={currentPage} page={i + 1} />
             ))}
           <button
             type="button"

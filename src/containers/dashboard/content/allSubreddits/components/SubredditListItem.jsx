@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
-function SubredditListItem({ title, hits }) {
+import PropTypes from 'prop-types'
+function SubredditListItem({ title }) {
   return (
     <NavLink
       className="flex h-16 rounded border-2 border-orange-600 mr-4 mb-4 text-gray-900 hover:bg-orange-600 hover:text-white hover:border-orange-600"
@@ -12,6 +12,10 @@ function SubredditListItem({ title, hits }) {
       </div>
     </NavLink>
   )
+}
+
+SubredditListItem.propTypes = {
+  title: PropTypes.string,
 }
 
 export default SubredditListItem
