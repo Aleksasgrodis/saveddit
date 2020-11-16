@@ -47,11 +47,17 @@ function AllSubreddits() {
     'X',
     'Y',
     'Z',
+    '0-9',
   ]
-  const sortedByLetter = alphabet.map((letter) => [
-    letter,
-    [...subreddits.filter((link) => link.toUpperCase().charAt(0) === letter)],
-  ])
+  const sortedByLetter = alphabet.map((letter) => {
+    if (letter === '0-9') {
+      return [letter, [...subreddits.filter((sub) => /\d/.test(sub.charAt(0)))]]
+    }
+    return [
+      letter,
+      [...subreddits.filter((sub) => sub.toUpperCase().charAt(0) === letter)],
+    ]
+  })
   useEffect(() => {
     const alphabetEffect = [
       'A',
@@ -80,6 +86,7 @@ function AllSubreddits() {
       'X',
       'Y',
       'Z',
+      '0-9',
     ]
     if (copy) {
       const sortedSubreddits = [...new Set(copy)].sort((a, b) =>
@@ -93,7 +100,12 @@ function AllSubreddits() {
               .filter((sub) =>
                 sub.toLowerCase().includes(subredditSearchValue.toLowerCase()),
               )
-              .filter((link) => link.toUpperCase().charAt(0) === letter),
+              .filter((link) => {
+                if (letter === '0-9') {
+                  return /\d/.test(link.charAt(0))
+                }
+                return link.toUpperCase().charAt(0) === letter
+              }),
           ],
         ]),
       )
@@ -131,6 +143,7 @@ function AllSubreddits() {
                     </section>
                   )
                 }
+                return null
               })
             : searchResults.map((letter) => {
                 if (letter[1].length) {
@@ -149,6 +162,7 @@ function AllSubreddits() {
                     </section>
                   )
                 }
+                return null
               })}
         </div>
         <AnchorNavigation sortedArray={sortedByLetter} />
