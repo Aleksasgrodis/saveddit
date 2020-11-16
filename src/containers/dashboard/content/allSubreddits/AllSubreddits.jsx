@@ -123,7 +123,7 @@ function AllSubreddits() {
   return (
     <div className="flex flex-col">
       <ContentHeader {...search} title="All Subreddits" />
-      <div className="flex pt-32">
+      <div className="flex pt-32 pl-2">
         <div className="">
           {sortedByLetter && !subredditSearchValue.length
             ? sortedByLetter.map((letter) => {
