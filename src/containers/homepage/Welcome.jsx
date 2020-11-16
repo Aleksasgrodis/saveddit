@@ -2,7 +2,6 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Login from './components/Login'
-import Reset from './components/Reset'
 import PreviewImage from '../../assets/images/preview.png'
 
 function Welcome() {
@@ -26,7 +25,6 @@ function Welcome() {
           </div>
           <div className="container flex">
             <Login />
-            <Reset />
           </div>
         </div>
       </div>
