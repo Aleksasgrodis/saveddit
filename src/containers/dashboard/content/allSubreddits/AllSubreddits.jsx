@@ -47,11 +47,17 @@ function AllSubreddits() {
     'X',
     'Y',
     'Z',
+    '0-9',
   ]
-  const sortedByLetter = alphabet.map((letter) => [
-    letter,
-    [...subreddits.filter((link) => link.toUpperCase().charAt(0) === letter)],
-  ])
+  const sortedByLetter = alphabet.map((letter) => {
+    if (letter === '0-9') {
+      return [letter, [...subreddits.filter((sub) => /\d/.test(sub.charAt(0)))]]
+    }
+    return [
+      letter,
+      [...subreddits.filter((sub) => sub.toUpperCase().charAt(0) === letter)],
+    ]
+  })
   useEffect(() => {
     const alphabetEffect = [
       'A',
@@ -80,22 +86,33 @@ function AllSubreddits() {
       'X',
       'Y',
       'Z',
+      '0-9',
     ]
     if (copy) {
       const sortedSubreddits = [...new Set(copy)].sort((a, b) =>
         a.localeCompare(b),
       )
       setSearchResults(
-        alphabetEffect.map((letter) => [
-          letter,
-          [
-            ...sortedSubreddits
-              .filter((sub) =>
-                sub.toLowerCase().includes(subredditSearchValue.toLowerCase()),
-              )
-              .filter((link) => link.toUpperCase().charAt(0) === letter),
-          ],
-        ]),
+        alphabetEffect.map((letter) => {
+          if (letter === '0-9') {
+            return [
+              letter,
+              [...sortedSubreddits.filter((sub) => /\d/.test(sub.charAt(0)))],
+            ]
+          }
+          return [
+            letter,
+            [
+              ...sortedSubreddits
+                .filter((sub) =>
+                  sub
+                    .toLowerCase()
+                    .includes(subredditSearchValue.toLowerCase()),
+                )
+                .filter((link) => link.toUpperCase().charAt(0) === letter),
+            ],
+          ]
+        }),
       )
     }
   }, [subredditSearchValue, copy])
