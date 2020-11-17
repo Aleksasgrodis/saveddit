@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 function AnchorNavigation({ sortedArray }) {
   return (
-    <div className="fixed right-0 inset-y-0 mr-12">
+    <div className="fixed right-0 inset-y-0 md:mr-12 mr-6">
       <nav className="flex flex-col h-full justify-center items-center">
         {sortedArray.map((letter) =>
           letter[1].length ? (
