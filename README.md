@@ -12,16 +12,26 @@ Saveddit is a web application built on top of react and makes use of serverless 
 ReactJS | Redux | TailwindCSS | Vercel
 
 ### `FAQ`
-*Coming Soon*
-
+#### **Q: Are you storing, tracking or selling any data?**
+A: No. Nothing is stored or being sent to a remote database. All of your information is stored locally in your browser.
+<br>
+#### **Q: Can I run this on my own server?**
+A: Yes. The project is open source. Make sure to setup the necessary environment variables (Client ID & Secret).
+<br>
+#### **Q: Why are you only fetching 947 posts even though I have many more?**
+A: That is unfortunately the limitation of the Reddit API, it only allows to fetch said amount of latest saved posts. If you unsave a couple posts you will notice that older saved posts have appeared once again.
+<br>
+#### **Q: It doesn't work (anymore)?**
+A: Most likely an issue with localStorage, try clearing it and giving it another go. If that doesn't fix it try it in incognito mode and if that doesn't fix it please report the issue on this repository.
+<br>
 
 ### `Features`
 - [x] Authorization & Fetching Saved Posts
 - [x] Filter By Subreddit
-- [x] Filter By NSFW
 - [x] Search By Title
 - [x] Sort By: Latest Saved, A-z, z-A, New-Old, Old-New, Popularity
 - [x] Unsave Directly From Saveddit
+- [x] Export Excel Sheet
 - [x] Data Stored Locally (LocalStorage API)
 - [x] Faster than Reddit could ever be
 - [ ] Animations
