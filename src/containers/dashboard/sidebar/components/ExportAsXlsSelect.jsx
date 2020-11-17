@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import exportFromJSON from 'export-from-json'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +14,7 @@ function ExportAsXlsSelect() {
     searchPages,
     total,
   } = useSelector((state) => state.saved)
+  const [selectValue, setSelectValue] = useState('')
 
   const exportAsXLS = (event) => {
     const exportType = 'xls'
@@ -21,7 +22,7 @@ function ExportAsXlsSelect() {
     let data = []
     switch (event.target.value) {
       case 'page':
-        fileName = `Page${currentPage}of${searchPages}`
+        fileName = `Page${currentPage}/${searchPages}`
         data = pageResults
         exportFromJSON({ data, fileName, exportType })
         break
@@ -38,13 +39,13 @@ function ExportAsXlsSelect() {
       default:
         break
     }
-    event.target.value = ''
+    setSelectValue('')
   }
 
   return (
     <div className="relative">
       <select
-        defaultValue=""
+        value={selectValue}
         onChange={(e) => {
           exportAsXLS(e)
         }}
