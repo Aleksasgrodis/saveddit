@@ -147,9 +147,8 @@ export default function saved(state = initialState, action) {
           }
         }
         default:
-          break
+          return {}
       }
-      break
     case Types.SET_SEARCH_RESULTS: {
       let copy = [...state.links]
       if (state.subredditFilter) {

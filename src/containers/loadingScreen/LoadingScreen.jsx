@@ -115,7 +115,7 @@ const LoadingScreen = () => {
   }
 
   return (
-    <div className="container mx-auto h-screen flex flex-col justify-center">
+    <div className="container cursor-wait mx-auto h-screen flex flex-col justify-center">
       <div className="self-center font-mono">
         <h2 className="font-bold text-4xl">
           Welcome, {user.name ? user.name : 'redditor.'}.

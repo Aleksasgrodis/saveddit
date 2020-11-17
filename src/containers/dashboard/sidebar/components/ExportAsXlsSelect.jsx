@@ -49,7 +49,7 @@ function ExportAsXlsSelect() {
         onChange={(e) => {
           exportAsXLS(e)
         }}
-        className="mb-2 font-bold text-white block appearance-none w-full bg-blue-500 py-3 px-4 pr-8 rounded border-b-4 border-blue-700 leading-tight focus:outline-none"
+        className="hover:bg-blue-400 hover:border-blue-500 cursor-pointer mb-2 font-bold text-white block appearance-none w-full bg-blue-500 py-3 px-4 pr-8 rounded border-b-4 border-blue-700 leading-tight focus:outline-none"
       >
         <option value="" disabled>
           Export Excel Sheet
