@@ -51,13 +51,13 @@ function SavedLinkListItem({
       <div className="xl:w-1/12 lg:w-1/12 md:w-1/12 sm:w-12 w-12 flex flex-col justify-around bg-gray-900 text-white ">
         <div className="flex flex-col items-center justify-center h-16">
           <FontAwesomeIcon icon={faArrowUp} />
-          <span className="sm:text-xs md:text-sm">
+          <span className="sm:text-xs md:text-sm text-xs">
             {score > 100000 ? '100K+' : score}
           </span>
         </div>
         <div className="flex flex-col items-center justify-center h-16">
           <FontAwesomeIcon icon={faCommentAlt} />
-          <span className="sm:text-xs md:text-sm">{numComments}</span>
+          <span className="sm:text-xs md:text-sm text-xs">{numComments}</span>
         </div>
       </div>
       <div className="flex flex-col justify-between"></div>
