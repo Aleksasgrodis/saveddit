@@ -104,7 +104,7 @@ export default function saved(state = initialState, action) {
         }
         case 'dateNew': {
           const sorted = state.searchResults.sort((a, b) =>
-            a.created_utc > b.created_utc ? -1 : 1,
+            a.createdUtc > b.createdUtc ? -1 : 1,
           )
           return {
             ...state,
@@ -114,7 +114,7 @@ export default function saved(state = initialState, action) {
         }
         case 'dateOld': {
           const sorted = state.searchResults.sort((a, b) =>
-            a.created_utc > b.created_utc ? 1 : -1,
+            a.createdUtc > b.createdUtc ? 1 : -1,
           )
           return {
             ...state,
@@ -155,7 +155,7 @@ export default function saved(state = initialState, action) {
       if (state.subredditFilter) {
         copy = copy.filter((post) => post.subreddit === state.subredditFilter)
       } else if (state.nsfwFilter === true) {
-        copy = copy.filter((post) => post.over_18 === true)
+        copy = copy.filter((post) => post.over18 === true)
       }
       const searchResults = copy.filter((link) =>
         link.title.toLowerCase().includes(action.value.toLowerCase()),

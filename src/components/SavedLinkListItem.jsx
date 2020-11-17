@@ -22,12 +22,12 @@ function SavedLinkListItem({
   url,
   permalink,
   score,
-  num_comments: numComments,
+  numComments,
   author,
-  created_utc: createdUTC,
+  createdUtc,
   domain,
-  over_18: over18,
-  subreddit_name_prefixed: subredditNamePrefixed,
+  over18,
+  subredditNamePrefixed,
   id,
 }) {
   const { token } = useSelector((state) => state.user)
@@ -112,7 +112,7 @@ function SavedLinkListItem({
               icon={faCalendarAlt}
             />
             <span className="text-gray-600 text-sm">
-              Posted on {format(fromUnixTime(createdUTC), 'd MMM yyy')} by{' '}
+              Posted on {format(fromUnixTime(createdUtc), 'd MMM yyy')} by{' '}
               {author}
             </span>
           </div>
@@ -168,12 +168,12 @@ SavedLinkListItem.propTypes = {
   url: PropTypes.string,
   permalink: PropTypes.string,
   score: PropTypes.number,
-  num_comments: PropTypes.number,
+  numComments: PropTypes.number,
   author: PropTypes.string,
-  created_utc: PropTypes.number,
+  createdUtc: PropTypes.number,
   domain: PropTypes.string,
-  over_18: PropTypes.bool,
-  subreddit_name_prefixed: PropTypes.string,
+  over18: PropTypes.bool,
+  subredditNamePrefixed: PropTypes.string,
   id: PropTypes.string,
 }
 
