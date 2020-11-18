@@ -32,6 +32,8 @@ code {
 
 .sidebar-wrapper {
   //padding less
+  border-right: 1px solid rgb(242, 242, 242);
+  box-shadow: 4px 0px 5px 5px black;
   .sidebar {
     // regular style
     .navigation {

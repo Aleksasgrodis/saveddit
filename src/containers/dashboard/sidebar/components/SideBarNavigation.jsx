@@ -1,4 +1,4 @@
-import { faList } from '@fortawesome/free-solid-svg-icons'
+import { faList, faSortAlphaDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
@@ -22,7 +22,9 @@ function SideBarNavigation() {
         to="/dashboard/subreddits"
       >
         <span className="route-name">Subreddits </span>
-        <span className="icon">r/</span>
+        <span className="icon">
+          <FontAwesomeIcon icon={faSortAlphaDown} />
+        </span>
       </NavLink>
       <NavLink
         className="hover:shadow-inner text-center font-medium block border border-gray-300 bg-white rounded hover:border-gray-400 shadow-sm hover:bg-gray-100 py-2 px-4 mb-2"
