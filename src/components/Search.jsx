@@ -10,7 +10,7 @@ function Search({ subredditSearchValue, setSubredditSearchValue }) {
     dispatch(setSearchResults({ value: searchValue }))
   }, [searchValue, dispatch])
   return (
-    <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-4/12 xl:w-2/6 px-3 mr-5">
+    <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-4/12 xl:w-2/6 px-3">
       <input
         value={subredditSearchValue || searchValue}
         onChange={(e) =>

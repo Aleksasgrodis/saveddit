@@ -7,7 +7,7 @@ import { setSortingMethod } from '../redux/actions'
 function SortingDropdown() {
   const dispatch = useDispatch()
   return (
-    <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-2/12 xl:w-1/6 px-3 mr-4 md:mr-5">
+    <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-2/12 xl:w-1/6 px-3 ">
       <div className="relative">
         <select
           onChange={(e) => {
