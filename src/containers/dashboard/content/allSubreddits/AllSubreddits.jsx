@@ -121,8 +121,8 @@ function AllSubreddits() {
   }, [])
 
   return (
-    <div className="flex flex-col">
-      <div className="flex pl-2 pt-4">
+    <div className="flex flex-col ">
+      <div className="flex p-5">
         <div className="">
           {sortedByLetter && !subredditSearchValue.length
             ? sortedByLetter.map((letter) => {

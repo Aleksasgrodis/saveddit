@@ -32,12 +32,15 @@ code {
 
 .sidebar-wrapper {
   //padding less
-  border-right: 1px solid rgb(242, 242, 242);
-  box-shadow: 4px 0px 5px 5px black;
+  border-right: 1px solid rgb(244, 244, 244);
   .sidebar {
     // regular style
     .navigation {
       a {
+        color: #2b6cb0;
+        &.active {
+          color: white;
+        }
         .route-name {
           display: block;
         }

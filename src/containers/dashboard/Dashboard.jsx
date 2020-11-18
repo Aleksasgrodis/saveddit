@@ -14,9 +14,8 @@ function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = React.useState(true)
 
   const rightMenuAnimation = useSpring({
-    // opacity: sidebarOpen ? 1 : 0,
-    width: sidebarOpen ? '200px' : '80px',
-    // transform: sidebarOpen ? `translateX(0)` : `translateX(100%)`,
+    width: sidebarOpen ? '220px' : '80px',
+    transform: sidebarOpen ? `translateX(0)` : `translateX(100%)`,
   })
   useEffect(() => {
     const date = Date.now()

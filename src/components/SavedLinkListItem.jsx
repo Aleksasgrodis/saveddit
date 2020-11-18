@@ -46,7 +46,7 @@ function SavedLinkListItem({
       .catch((err) => console.log(err))
   }
   return (
-    <article className="rounded-md bg-white xl:w-5/12 lg:w-10/12 md:w-full sm:w-full w-full flex border border-gray-200 shadow-md hover:shadow-lg mb-4 mr-4 sm:h-auto h-auto overflow-hidden">
+    <article className="rounded-md bg-white xl:w-5/12 lg:w-10/12 md:w-full sm:w-full w-full flex border border-gray-200 shadow-md hover:shadow-lg mb-4 mr-0 xl:mr-4 sm:h-auto h-auto overflow-hidden">
       <div className="xl:w-1/12 lg:w-1/12 md:w-1/12 sm:w-12 w-12 flex flex-col justify-around bg-gray-900 text-white ">
         <div className="flex flex-col items-center justify-center h-16">
           <FontAwesomeIcon icon={faArrowUp} />
