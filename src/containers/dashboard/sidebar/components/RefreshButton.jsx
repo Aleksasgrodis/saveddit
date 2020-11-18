@@ -1,3 +1,5 @@
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -26,10 +28,13 @@ function RefreshButton() {
   return (
     <button
       type="button"
-      className="mb-2 bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded"
+      className="refresh mb-2 bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded"
       onClick={() => requestRefreshToken()}
     >
-      Refresh
+      <span className="title">Refresh</span>
+      <span className="icon">
+        <FontAwesomeIcon icon={faSyncAlt} />
+      </span>
     </button>
   )
 }

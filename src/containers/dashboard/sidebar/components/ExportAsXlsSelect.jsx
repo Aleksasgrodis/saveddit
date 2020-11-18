@@ -43,7 +43,7 @@ function ExportAsXlsSelect() {
   }
 
   return (
-    <div className="relative">
+    <div className="relative export">
       <select
         value={selectValue}
         onChange={(e) => {
@@ -60,7 +60,7 @@ function ExportAsXlsSelect() {
         )}
         <option value="everything">Everything</option>
       </select>
-      <div className="pointer-events-none mb-3 mr-1 absolute inset-y-0 right-0 flex items-center px-1 text-white">
+      <div className="icon pointer-events-none mb-3 mr-1 absolute inset-y-0 right-0 flex items-center px-1 text-white">
         <FontAwesomeIcon icon={faDownload} size="1x" />
       </div>
     </div>

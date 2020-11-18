@@ -116,14 +116,13 @@ function AllSubreddits() {
     if (window.location.hash) {
       const id = window.location.hash.replace('#', '')
       const element = document.getElementById(id)
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }, [])
 
   return (
     <div className="flex flex-col">
-      <ContentHeader {...search} title="All Subreddits" />
-      <div className="flex pt-32 pl-2">
+      <div className="flex pl-2 pt-4">
         <div className="">
           {sortedByLetter && !subredditSearchValue.length
             ? sortedByLetter.map((letter) => {

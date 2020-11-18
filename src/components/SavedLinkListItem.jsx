@@ -23,7 +23,6 @@ function SavedLinkListItem({
   permalink,
   score,
   numComments,
-  author,
   createdUtc,
   domain,
   over18,

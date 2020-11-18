@@ -23,8 +23,8 @@ function AllLinks() {
   )
   return (
     <section className="w-full">
-      <ContentHeader withSort count={total} {...search} />
-      <div className="flex flex-wrap justify-center pt-32">
+      {/* <ContentHeader withSort count={total} {...search} /> */}
+      <div className="flex flex-wrap justify-center pt-4">
         {pageResults.map((link) => (
           <SavedLinkListItem key={link.permalink} {...link} />
         ))}

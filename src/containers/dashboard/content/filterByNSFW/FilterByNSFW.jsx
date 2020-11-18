@@ -34,8 +34,7 @@ function FilterByNSFW() {
 
   return (
     <section className="w-full">
-      <ContentHeader title="NSFW" />
-      <div className="flex flex-wrap justify-center pt-32">
+      <div className="flex flex-wrap justify-center pt-4">
         {pageResults &&
           pageResults.map((link) => (
             <SavedLinkListItem key={link.permalink} {...link} />
