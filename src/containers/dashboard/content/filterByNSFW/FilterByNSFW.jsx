@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import ContentHeader from '../../../../components/ContentHeader'
 import PaginationNavigation from '../../../../components/PaginationNavigation'
 import SavedLinkListItem from '../../../../components/SavedLinkListItem'
@@ -14,6 +15,7 @@ function FilterByNSFW() {
   const { pageResults, currentPage, searchPages } = useSelector(
     (state) => state.saved,
   )
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(setNsfwFilter())
@@ -22,6 +24,13 @@ function FilterByNSFW() {
       dispatch(resetNsfwFilter())
     }
   }, [dispatch])
+
+  useEffect(() => {
+    if (pageResults.length === 0) {
+      history.go(-1)
+    }
+    return () => {}
+  }, [pageResults])
 
   return (
     <section className="w-full">
