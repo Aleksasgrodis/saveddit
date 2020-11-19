@@ -1,24 +1,37 @@
 import React from 'react'
+import { animated } from 'react-spring'
+import PropTypes from 'prop-types'
+import CollapseExpandButton from './components/CollapseExpandButton'
 import ExportAsXlsSelect from './components/ExportAsXlsSelect'
 import RefreshButton from './components/RefreshButton'
 import SideBarNavigation from './components/SideBarNavigation'
 import SignOutButton from './components/SignOutButton'
 import UserInfo from './components/UserInfo'
 
-function SideBar() {
+function SideBar({ isOpen, setSidebarOpen }) {
   return (
-    <div className="flex flex-col justify-around h-screen w-full">
+    <animated.div
+      className={`sidebar ${
+        !isOpen && 'closed'
+      } flex flex-col justify-around h-screen w-full`}
+    >
       <div>
         <UserInfo />
       </div>
       <SideBarNavigation />
-      <div className="flex flex-col">
+      <div className="actions flex flex-col">
         <ExportAsXlsSelect />
         <RefreshButton />
         <SignOutButton />
+        <CollapseExpandButton isOpen={isOpen} setSidebarOpen={setSidebarOpen} />
       </div>
-    </div>
+    </animated.div>
   )
+}
+
+SideBar.propTypes = {
+  isOpen: PropTypes.bool,
+  setSidebarOpen: PropTypes.func,
 }
 
 export default SideBar

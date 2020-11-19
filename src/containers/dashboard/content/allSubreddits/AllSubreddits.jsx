@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import AnchorNavigation from './components/AnchorNavigation'
 import ContentHeader from '../../../../components/ContentHeader'
 import SubredditListItem from './components/SubredditListItem'
+import { ComponentContext } from '../../../../context/componentContext'
 
 const linksSelector = (state) => state.saved.links
 const subredditSelector = createSelector(linksSelector, (links) =>
@@ -11,14 +12,30 @@ const subredditSelector = createSelector(linksSelector, (links) =>
 )
 
 function AllSubreddits() {
-  const [subredditSearchValue, setSubredditSearchValue] = useState('')
   const [searchResults, setSearchResults] = useState(null)
-  const search = { subredditSearchValue, setSubredditSearchValue }
+  // const search = { subredditSearchValue, setSubredditSearchValue }
   const duplicateSubreddits = useSelector(subredditSelector)
   const subreddits = [...new Set(duplicateSubreddits)].sort((a, b) =>
     a.localeCompare(b),
   )
   const copy = useMemo(() => [...duplicateSubreddits], [duplicateSubreddits])
+  const {
+    setHeadingTitle,
+    setHeadingSort,
+    subredditSearchValue,
+    setCustomSearch,
+  } = useContext(ComponentContext)
+
+  useEffect(() => {
+    setHeadingTitle('All Subreddits')
+    setHeadingSort(false)
+    setCustomSearch(true)
+    return () => {
+      setHeadingTitle(null)
+      setHeadingSort(true)
+      setCustomSearch(false)
+    }
+  }, [])
 
   const alphabet = [
     'A',
@@ -116,14 +133,13 @@ function AllSubreddits() {
     if (window.location.hash) {
       const id = window.location.hash.replace('#', '')
       const element = document.getElementById(id)
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }, [])
 
   return (
-    <div className="flex flex-col">
-      <ContentHeader {...search} title="All Subreddits" />
-      <div className="flex pt-32 pl-2">
+    <div className="flex flex-col ">
+      <div className="flex p-5">
         <div className="">
           {sortedByLetter && !subredditSearchValue.length
             ? sortedByLetter.map((letter) => {

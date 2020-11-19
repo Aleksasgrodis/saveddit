@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import ContentHeader from '../../../../components/ContentHeader'
 import PaginationNavigation from '../../../../components/PaginationNavigation'
 import SavedLinkListItem from '../../../../components/SavedLinkListItem'
+import { ComponentContext } from '../../../../context/componentContext'
 import {
   resetNsfwFilter,
   setNsfwFilter,
@@ -16,7 +17,9 @@ function FilterByNSFW() {
     (state) => state.saved,
   )
   const history = useHistory()
-
+  const { setHeadingTitle, setSearchValue, searchValue } = useContext(
+    ComponentContext,
+  )
   useEffect(() => {
     dispatch(setNsfwFilter())
     dispatch(setSearchResults({ value: '' }))
@@ -25,17 +28,24 @@ function FilterByNSFW() {
     }
   }, [dispatch])
 
+  // useEffect(() => {
+  //   if (pageResults.length === 0 && searchValue !== '') {
+  //     history.go(-1)
+  //   }
+  //   return () => {}
+  // }, [pageResults, searchValue])
+
   useEffect(() => {
-    if (pageResults.length === 0) {
-      history.go(-1)
+    setSearchValue('')
+    setHeadingTitle('NSFW Posts')
+    return () => {
+      setHeadingTitle(null)
     }
-    return () => {}
-  }, [pageResults])
+  }, [])
 
   return (
     <section className="w-full">
-      <ContentHeader title="NSFW" />
-      <div className="flex flex-wrap justify-center pt-32">
+      <div className="flex flex-wrap justify-center p-5">
         {pageResults &&
           pageResults.map((link) => (
             <SavedLinkListItem key={link.permalink} {...link} />

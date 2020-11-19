@@ -1,30 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useContext, useEffect } from 'react'
+import { batch, useDispatch, useSelector } from 'react-redux'
 import { loadNumberedPage, setSearchResults } from '../../../../redux/actions'
-import ContentHeader from '../../../../components/ContentHeader'
 import PaginationNavigation from '../../../../components/PaginationNavigation'
 import SavedLinkListItem from '../../../../components/SavedLinkListItem'
+import { ComponentContext } from '../../../../context/componentContext'
 
 function AllLinks() {
   const dispatch = useDispatch()
-  const [searchValue, setSearchValue] = useState('')
-  const search = { searchValue, setSearchValue }
+  const { setSearchValue } = useContext(ComponentContext)
 
   useEffect(() => {
-    dispatch(loadNumberedPage({ page: 1 }))
+    setSearchValue('')
+    batch(() => {
+      dispatch(loadNumberedPage({ page: 1 }))
+      dispatch(setSearchResults({ value: '' }))
+    })
   }, [dispatch])
 
-  useEffect(() => {
-    dispatch(setSearchResults({ value: searchValue }))
-  }, [searchValue, dispatch])
-
-  const { pageResults, currentPage, searchPages, total } = useSelector(
+  const { pageResults, currentPage, searchPages } = useSelector(
     (state) => state.saved,
   )
   return (
     <section className="w-full">
-      <ContentHeader withSort count={total} {...search} />
-      <div className="flex flex-wrap justify-center pt-32">
+      <div className="flex flex-wrap justify-center p-5">
         {pageResults.map((link) => (
           <SavedLinkListItem key={link.permalink} {...link} />
         ))}
