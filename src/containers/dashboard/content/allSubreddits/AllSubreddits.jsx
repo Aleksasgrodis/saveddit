@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import AnchorNavigation from './components/AnchorNavigation'
 import ContentHeader from '../../../../components/ContentHeader'
 import SubredditListItem from './components/SubredditListItem'
+import { ComponentContext } from '../../../../context/componentContext'
 
 const linksSelector = (state) => state.saved.links
 const subredditSelector = createSelector(linksSelector, (links) =>
@@ -19,6 +20,14 @@ function AllSubreddits() {
     a.localeCompare(b),
   )
   const copy = useMemo(() => [...duplicateSubreddits], [duplicateSubreddits])
+  const { setHeadingTitle } = useContext(ComponentContext)
+
+  useEffect(() => {
+    setHeadingTitle('All Subreddits')
+    return () => {
+      setHeadingTitle(null)
+    }
+  }, [])
 
   const alphabet = [
     'A',

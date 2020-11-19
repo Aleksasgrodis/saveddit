@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import ContentHeader from '../../../../components/ContentHeader'
 import PaginationNavigation from '../../../../components/PaginationNavigation'
 import SavedLinkListItem from '../../../../components/SavedLinkListItem'
+import { ComponentContext } from '../../../../context/componentContext'
 import {
   resetNsfwFilter,
   setNsfwFilter,
@@ -16,7 +17,7 @@ function FilterByNSFW() {
     (state) => state.saved,
   )
   const history = useHistory()
-
+  const { setHeadingTitle } = useContext(ComponentContext)
   useEffect(() => {
     dispatch(setNsfwFilter())
     dispatch(setSearchResults({ value: '' }))
@@ -31,6 +32,13 @@ function FilterByNSFW() {
     }
     return () => {}
   }, [pageResults])
+
+  useEffect(() => {
+    setHeadingTitle('NSFW Posts')
+    return () => {
+      setHeadingTitle(null)
+    }
+  }, [])
 
   return (
     <section className="w-full">
