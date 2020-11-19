@@ -7,9 +7,10 @@ import SideBar from './sidebar/SideBar'
 import ContentHeader from '../../components/ContentHeader'
 
 function Dashboard() {
-  const { expires, refresh_token: refreshToken } = useSelector(
-    (state) => state.user,
-  )
+  const {
+    user: { expires, refresh_token: refreshToken },
+    saved: { total, subredditFilter, nsfwFilter },
+  } = useSelector((state) => state)
   const dispatch = useDispatch()
   const [sidebarOpen, setSidebarOpen] = React.useState(true)
 
@@ -39,16 +40,9 @@ function Dashboard() {
       >
         <SideBar isOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       </animated.div>
-      <div
-        className={`w-full ${
-          sidebarOpen ? 'max-w-full-sidebar' : 'w-screen'
-        } flex-none overflow-y-scroll bg-gray-100`}
-      >
-        <div className="flex flex-col">
-          <ContentHeader withSort count={100} />
-
-          <Content />
-        </div>
+      <div className="w-full overflow-y-scroll bg-gray-100">
+        <ContentHeader withSort count={total} />
+        <Content />
       </div>
     </div>
   )
