@@ -17,7 +17,9 @@ function FilterByNSFW() {
     (state) => state.saved,
   )
   const history = useHistory()
-  const { setHeadingTitle } = useContext(ComponentContext)
+  const { setHeadingTitle, setSearchValue, searchValue } = useContext(
+    ComponentContext,
+  )
   useEffect(() => {
     dispatch(setNsfwFilter())
     dispatch(setSearchResults({ value: '' }))
@@ -26,14 +28,15 @@ function FilterByNSFW() {
     }
   }, [dispatch])
 
-  useEffect(() => {
-    if (pageResults.length === 0) {
-      history.go(-1)
-    }
-    return () => {}
-  }, [pageResults])
+  // useEffect(() => {
+  //   if (pageResults.length === 0 && searchValue !== '') {
+  //     history.go(-1)
+  //   }
+  //   return () => {}
+  // }, [pageResults, searchValue])
 
   useEffect(() => {
+    setSearchValue('')
     setHeadingTitle('NSFW Posts')
     return () => {
       setHeadingTitle(null)

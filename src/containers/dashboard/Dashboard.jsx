@@ -17,6 +17,7 @@ function Dashboard() {
   const [headingTitle, setHeadingTitle] = useState('All Posts')
   const [headingSort, setHeadingSort] = useState(true)
   const [customSearch, setCustomSearch] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
   const [subredditSearchValue, setSubredditSearchValue] = useState('')
   const contextValues = {
     headingTitle,
@@ -27,6 +28,8 @@ function Dashboard() {
     setSubredditSearchValue,
     customSearch,
     setCustomSearch,
+    searchValue,
+    setSearchValue,
   }
 
   const rightMenuAnimation = useSpring({

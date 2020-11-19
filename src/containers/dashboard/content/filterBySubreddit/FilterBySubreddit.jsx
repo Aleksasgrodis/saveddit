@@ -23,12 +23,12 @@ function FilterBySubreddit() {
     }
   }, [dispatch, subreddit])
 
-  useEffect(() => {
-    if (pageResults.length === 0) {
-      history.go(-1)
-    }
-    return () => {}
-  }, [pageResults])
+  // useEffect(() => {
+  //   if (pageResults.length === 0) {
+  //     history.go(-1)
+  //   }
+  //   return () => {}
+  // }, [pageResults])
 
   return (
     <div>

@@ -1,19 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setSearchResults } from '../redux/actions'
 import { ComponentContext } from '../context/componentContext'
 
 function Search() {
-  const [searchValue, setSearchValue] = useState('')
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(setSearchResults({ value: searchValue }))
-  }, [searchValue, dispatch])
   const {
     customSearch,
     subredditSearchValue,
     setSubredditSearchValue,
+    searchValue,
+    setSearchValue,
   } = useContext(ComponentContext)
+
+  useEffect(() => {
+    dispatch(setSearchResults({ value: searchValue }))
+  }, [searchValue, dispatch])
 
   return (
     <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-4/12 xl:w-2/6 px-3">
