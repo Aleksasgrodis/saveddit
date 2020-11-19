@@ -1,20 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import PropTypes from 'prop-types'
 import { setSearchResults } from '../redux/actions'
+import { ComponentContext } from '../context/componentContext'
 
-function Search({ subredditSearchValue, setSubredditSearchValue }) {
+function Search() {
   const [searchValue, setSearchValue] = useState('')
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(setSearchResults({ value: searchValue }))
   }, [searchValue, dispatch])
+  const {
+    customSearch,
+    subredditSearchValue,
+    setSubredditSearchValue,
+  } = useContext(ComponentContext)
+
   return (
     <div className="w-3/6 sm:w-3/6 md:w-2/6 lg:w-4/12 xl:w-2/6 px-3">
       <input
-        value={subredditSearchValue || searchValue}
+        value={customSearch ? subredditSearchValue : searchValue}
         onChange={(e) =>
-          setSubredditSearchValue
+          customSearch
             ? setSubredditSearchValue(e.target.value)
             : setSearchValue(e.target.value)
         }
@@ -22,18 +28,11 @@ function Search({ subredditSearchValue, setSubredditSearchValue }) {
         id="search-input"
         type="text"
         placeholder={
-          setSubredditSearchValue
-            ? 'Search for subreddit title..'
-            : 'Search for title..'
+          customSearch ? 'Search for subreddit title..' : 'Search for title..'
         }
       />
     </div>
   )
-}
-
-Search.propTypes = {
-  subredditSearchValue: PropTypes.string,
-  setSubredditSearchValue: PropTypes.func,
 }
 
 export default Search

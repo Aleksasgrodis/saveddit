@@ -5,14 +5,8 @@ import Search from './Search'
 import SortingDropdown from './SortingDropdown'
 import { ComponentContext } from '../context/componentContext'
 
-function ContentHeader({
-  title = 'All Posts',
-  count,
-  withHistory,
-  withSort,
-  ...props
-}) {
-  const { headingTitle } = useContext(ComponentContext)
+function ContentHeader({ count, withHistory, withSort, ...props }) {
+  const { headingTitle, headingSort } = useContext(ComponentContext)
   return (
     <header className="sticky top-0 w-full p-5 shadow-sm bg-gray-100">
       <div className="w-full relative">
@@ -22,7 +16,7 @@ function ContentHeader({
             {headingTitle || 'All Posts'}
           </h2>
           <Search {...props} />
-          {withSort && <SortingDropdown />}
+          {headingSort && <SortingDropdown />}
         </div>
       </div>
     </header>
@@ -30,7 +24,6 @@ function ContentHeader({
 }
 
 ContentHeader.propTypes = {
-  title: PropTypes.string,
   count: PropTypes.number,
   withHistory: PropTypes.bool,
   withSort: PropTypes.bool,

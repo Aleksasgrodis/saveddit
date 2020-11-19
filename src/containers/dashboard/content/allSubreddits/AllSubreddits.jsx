@@ -12,20 +12,28 @@ const subredditSelector = createSelector(linksSelector, (links) =>
 )
 
 function AllSubreddits() {
-  const [subredditSearchValue, setSubredditSearchValue] = useState('')
   const [searchResults, setSearchResults] = useState(null)
-  const search = { subredditSearchValue, setSubredditSearchValue }
+  // const search = { subredditSearchValue, setSubredditSearchValue }
   const duplicateSubreddits = useSelector(subredditSelector)
   const subreddits = [...new Set(duplicateSubreddits)].sort((a, b) =>
     a.localeCompare(b),
   )
   const copy = useMemo(() => [...duplicateSubreddits], [duplicateSubreddits])
-  const { setHeadingTitle } = useContext(ComponentContext)
+  const {
+    setHeadingTitle,
+    setHeadingSort,
+    subredditSearchValue,
+    setCustomSearch,
+  } = useContext(ComponentContext)
 
   useEffect(() => {
     setHeadingTitle('All Subreddits')
+    setHeadingSort(false)
+    setCustomSearch(true)
     return () => {
       setHeadingTitle(null)
+      setHeadingSort(true)
+      setCustomSearch(false)
     }
   }, [])
 

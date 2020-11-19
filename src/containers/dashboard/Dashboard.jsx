@@ -15,7 +15,19 @@ function Dashboard() {
   const dispatch = useDispatch()
   const [sidebarOpen, setSidebarOpen] = React.useState(true)
   const [headingTitle, setHeadingTitle] = useState('All Posts')
-  const contextValues = { headingTitle, setHeadingTitle }
+  const [headingSort, setHeadingSort] = useState(true)
+  const [customSearch, setCustomSearch] = useState(false)
+  const [subredditSearchValue, setSubredditSearchValue] = useState('')
+  const contextValues = {
+    headingTitle,
+    setHeadingTitle,
+    headingSort,
+    setHeadingSort,
+    subredditSearchValue,
+    setSubredditSearchValue,
+    customSearch,
+    setCustomSearch,
+  }
 
   const rightMenuAnimation = useSpring({
     width: sidebarOpen ? '220px' : '80px',
