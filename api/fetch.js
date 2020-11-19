@@ -1,28 +1,65 @@
-// https://oauth.reddit.com
+const { qs } = require('url-parse')
+const { default: fetch } = require('node-fetch')
 
-const { qs } = require('url-parse');
-const { default: fetch } = require('node-fetch');
+const minifyReponse = (array) =>
+  array.map(
+    ({
+      author,
+      archived,
+      created_utc: createdUtc,
+      domain,
+      id,
+      num_comments: numComments,
+      over_18: over18,
+      permalink,
+      score,
+      subreddit_name_prefixed: subredditNamePrefixed,
+      subreddit,
+      title,
+      url,
+    }) => ({
+      author,
+      archived,
+      createdUtc,
+      domain,
+      id,
+      numComments,
+      over18,
+      permalink,
+      score,
+      subredditNamePrefixed,
+      subreddit,
+      title,
+      url,
+    }),
+  )
 
-module.exports = (req, res) => {
-  const { token, username, after } = JSON.parse(req.body);
-  console.log(token, username, after);
-  var config = {
+module.exports = async (req, res) => {
+  const { token, username, afterListing } = JSON.parse(req.body)
+  const config = {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ` + token,
+      Authorization: `Bearer ${token}`,
     },
-  };
+  }
 
-  fetch(
-    `https://oauth.reddit.com/user/${username.toLowerCase()}/saved/?limit=100${
-      after ? `&after=${after}` : ''
-    }`,
-    config,
-  )
-    .then(response => {
-      console.log(response);
-      return response.json(response);
+  try {
+    const response = await fetch(
+      `https://oauth.reddit.com/user/${username.toLowerCase()}/saved/?limit=100${
+        afterListing ? `&after=${afterListing}` : ''
+      }`,
+      config,
+    )
+    const {
+      data: { dist, after, children, before },
+    } = await response.json()
+    return res.json({
+      dist,
+      after,
+      before,
+      links: await minifyReponse(children.map((a) => a.data)),
     })
-    .then(data => res.json(data))
-    .catch(error => console.log(error));
-};
+  } catch (error) {
+    return res.json(error)
+  }
+}
