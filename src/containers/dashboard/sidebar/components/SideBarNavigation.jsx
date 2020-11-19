@@ -10,6 +10,7 @@ function SideBarNavigation() {
         className="hover:shadow-inner text-center font-medium text-md block border border-gray-300 bg-white rounded hover:border-gray-400 shadow-sm hover:bg-gray-100 py-2 px-4 mb-2"
         activeClassName="text-white active text-lg font-bold block border border-blue-500 bg-blue-500 hover:bg-blue-600 shadow-md"
         to="/dashboard/all"
+        title="All Posts"
       >
         <span className="route-name">All</span>
         <span className="icon">
@@ -20,6 +21,7 @@ function SideBarNavigation() {
         className="hover:shadow-inner text-center font-medium block border border-gray-300 bg-white rounded hover:border-gray-400 shadow-sm hover:bg-gray-100 py-2 px-4 mb-2"
         activeClassName="text-white active text-lg font-bold block border border-blue-500 bg-blue-500 hover:bg-blue-600 shadow-md"
         to="/dashboard/subreddits"
+        title="Subreddits"
       >
         <span className="route-name">Subreddits</span>
         <span className="icon">
@@ -30,6 +32,7 @@ function SideBarNavigation() {
         className="hover:shadow-inner text-center font-medium block border border-gray-300 bg-white rounded hover:border-gray-400 shadow-sm hover:bg-gray-100 py-2 px-4 mb-2"
         activeClassName="text-white active text-lg font-bold block border border-blue-500 bg-blue-500 hover:bg-blue-600 shadow-md"
         to="/dashboard/nsfw"
+        title="NSFW"
       >
         <span className="route-name">NSFW</span>
         <span className="icon">

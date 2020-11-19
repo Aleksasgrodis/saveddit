@@ -46,6 +46,7 @@ function ExportAsXlsSelect() {
     <div className="relative export">
       <select
         value={selectValue}
+        title="Export Excel Sheet"
         onChange={(e) => {
           exportAsXLS(e)
         }}
