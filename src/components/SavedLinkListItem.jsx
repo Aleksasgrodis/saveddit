@@ -167,7 +167,6 @@ SavedLinkListItem.propTypes = {
   permalink: PropTypes.string,
   score: PropTypes.number,
   numComments: PropTypes.number,
-  author: PropTypes.string,
   createdUtc: PropTypes.number,
   domain: PropTypes.string,
   over18: PropTypes.bool,

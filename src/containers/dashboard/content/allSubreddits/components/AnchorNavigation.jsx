@@ -15,7 +15,7 @@ function AnchorNavigation({ sortedArray }) {
               scroll={(el) =>
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' })
               }
-              activeClassName="text-orange-600 text-3xl font-bolder"
+              activeClassName="text-blue-600 text-3xl font-bolder"
             >
               {letter[0]}
             </NavHashLink>

@@ -10,7 +10,6 @@ import { ComponentContext } from '../../context/componentContext'
 function Dashboard() {
   const {
     user: { expires, refresh_token: refreshToken },
-    saved: { total, subredditFilter, nsfwFilter },
   } = useSelector((state) => state)
   const dispatch = useDispatch()
   const [sidebarOpen, setSidebarOpen] = React.useState(true)
@@ -62,7 +61,7 @@ function Dashboard() {
           <SideBar isOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         </animated.div>
         <div className="w-full overflow-y-scroll bg-gray-100">
-          <ContentHeader withSort count={total} />
+          <ContentHeader withSort />
           <Content />
         </div>
       </div>
