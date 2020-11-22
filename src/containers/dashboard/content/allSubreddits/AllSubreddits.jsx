@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import AnchorNavigation from './components/AnchorNavigation'
-import ContentHeader from '../../../../components/ContentHeader'
 import SubredditListItem from './components/SubredditListItem'
 import { ComponentContext } from '../../../../context/componentContext'
 
