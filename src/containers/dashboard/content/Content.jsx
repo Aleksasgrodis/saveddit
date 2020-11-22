@@ -15,6 +15,9 @@ function Content() {
         <Route path="/dashboard/all/:page">
           <AllLinks />
         </Route>
+        <Route exact path="/dashboard/nsfw">
+          <FilterByNSFW />
+        </Route>
         <Route exact path="/dashboard/subreddits">
           <AllSubreddits />
         </Route>
@@ -23,9 +26,6 @@ function Content() {
         </Route>
         <Route path="/dashboard/:subreddit/:page">
           <FilterBySubreddit />
-        </Route>
-        <Route path="/dashboard/nsfw">
-          <FilterByNSFW />
         </Route>
       </Switch>
     </div>
