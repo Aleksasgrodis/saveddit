@@ -19,7 +19,10 @@ function Content() {
         <Route exact path="/dashboard/subreddits">
           <AllSubreddits />
         </Route>
-        <Route path="/dashboard/subreddits/:subreddit">
+        <Route exact path="/dashboard/subreddits/:subreddit">
+          <FilterBySubreddit />
+        </Route>
+        <Route path="/dashboard/subreddits/:subreddit/:page">
           <FilterBySubreddit />
         </Route>
         <Route path="/dashboard/nsfw">
