@@ -15,14 +15,13 @@ function Content() {
         <Route path="/dashboard/all/:page">
           <AllLinks />
         </Route>
-        <Route path="/dashboard/categories">cata</Route>
         <Route exact path="/dashboard/subreddits">
           <AllSubreddits />
         </Route>
-        <Route exact path="/dashboard/subreddits/:subreddit">
+        <Route exact path="/dashboard/:subreddit">
           <FilterBySubreddit />
         </Route>
-        <Route path="/dashboard/subreddits/:subreddit/:page">
+        <Route path="/dashboard/:subreddit/:page">
           <FilterBySubreddit />
         </Route>
         <Route path="/dashboard/nsfw">

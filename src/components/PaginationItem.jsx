@@ -2,17 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory } from 'react-router-dom'
 import { loadNumberedPage } from '../redux/actions'
 
 function PaginationItem({ page, currentPage }) {
   const dispatch = useDispatch()
-  const location = useLocation()
-  console.log(location)
+  const history = useHistory()
+  const { pathname } = useLocation()
+  const path = pathname.split('/').slice(1, 3).join('/')
   return (
     <button
       type="button"
       onClick={() => {
         dispatch(loadNumberedPage({ page }))
+        history.push(`/${path}/${page}`)
       }}
       className={`${
         page === currentPage ? 'text-blue-600' : ''

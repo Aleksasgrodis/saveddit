@@ -12,7 +12,6 @@ const subredditSelector = createSelector(linksSelector, (links) =>
 
 function AllSubreddits() {
   const [searchResults, setSearchResults] = useState(null)
-  // const search = { subredditSearchValue, setSubredditSearchValue }
   const duplicateSubreddits = useSelector(subredditSelector)
   const subreddits = [...new Set(duplicateSubreddits)].sort((a, b) =>
     a.localeCompare(b),
