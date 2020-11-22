@@ -1,22 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector, batch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
-import { setSearchResults, setSubredditFilter } from '../../../../redux/actions'
+import {
+  loadNumberedPage,
+  setSearchResults,
+  setSubredditFilter,
+} from '../../../../redux/actions'
 import PaginationNavigation from '../../../../components/PaginationNavigation'
 import SavedLinkListItem from '../../../../components/SavedLinkListItem'
+import { ComponentContext } from '../../../../context/componentContext'
 
 function FilterBySubreddit() {
-  const { subreddit } = useParams()
+  const { subreddit, page } = useParams()
   const dispatch = useDispatch()
   const history = useHistory()
   const { pageResults, currentPage, searchPages } = useSelector(
     (state) => state.saved,
   )
+  const { setSubredditSearchValue } = useContext(ComponentContext)
 
   useEffect(() => {
+    setSubredditSearchValue('')
     batch(() => {
       dispatch(setSubredditFilter({ subreddit }))
       dispatch(setSearchResults({ value: '' }))
+      dispatch(loadNumberedPage({ page: page * 1 || 1 }))
     })
     return () => {
       dispatch(setSubredditFilter({ subreddit: null }))

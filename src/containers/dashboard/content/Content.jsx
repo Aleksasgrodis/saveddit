@@ -9,18 +9,23 @@ function Content() {
   return (
     <div className="">
       <Switch>
-        <Route path="/dashboard/all">
+        <Route exact path="/dashboard/all">
           <AllLinks />
         </Route>
-        <Route path="/dashboard/categories">cata</Route>
+        <Route path="/dashboard/all/:page">
+          <AllLinks />
+        </Route>
+        <Route exact path="/dashboard/nsfw">
+          <FilterByNSFW />
+        </Route>
         <Route exact path="/dashboard/subreddits">
           <AllSubreddits />
         </Route>
-        <Route path="/dashboard/subreddits/:subreddit">
+        <Route exact path="/dashboard/:subreddit">
           <FilterBySubreddit />
         </Route>
-        <Route path="/dashboard/nsfw">
-          <FilterByNSFW />
+        <Route path="/dashboard/:subreddit/:page">
+          <FilterBySubreddit />
         </Route>
       </Switch>
     </div>

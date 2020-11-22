@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { batch, useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { loadNumberedPage, setSearchResults } from '../../../../redux/actions'
 import PaginationNavigation from '../../../../components/PaginationNavigation'
 import SavedLinkListItem from '../../../../components/SavedLinkListItem'
@@ -8,12 +9,13 @@ import { ComponentContext } from '../../../../context/componentContext'
 function AllLinks() {
   const dispatch = useDispatch()
   const { setSearchValue } = useContext(ComponentContext)
+  const { page } = useParams()
 
   useEffect(() => {
     setSearchValue('')
     batch(() => {
-      dispatch(loadNumberedPage({ page: 1 }))
       dispatch(setSearchResults({ value: '' }))
+      dispatch(loadNumberedPage({ page: page * 1 || 1 }))
     })
   }, [dispatch])
 

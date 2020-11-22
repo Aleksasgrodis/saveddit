@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import AnchorNavigation from './components/AnchorNavigation'
-import ContentHeader from '../../../../components/ContentHeader'
 import SubredditListItem from './components/SubredditListItem'
 import { ComponentContext } from '../../../../context/componentContext'
 
@@ -13,7 +12,6 @@ const subredditSelector = createSelector(linksSelector, (links) =>
 
 function AllSubreddits() {
   const [searchResults, setSearchResults] = useState(null)
-  // const search = { subredditSearchValue, setSubredditSearchValue }
   const duplicateSubreddits = useSelector(subredditSelector)
   const subreddits = [...new Set(duplicateSubreddits)].sort((a, b) =>
     a.localeCompare(b),

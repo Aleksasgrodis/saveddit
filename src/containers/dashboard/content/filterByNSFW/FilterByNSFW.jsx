@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import ContentHeader from '../../../../components/ContentHeader'
 import PaginationNavigation from '../../../../components/PaginationNavigation'
 import SavedLinkListItem from '../../../../components/SavedLinkListItem'
 import { ComponentContext } from '../../../../context/componentContext'
