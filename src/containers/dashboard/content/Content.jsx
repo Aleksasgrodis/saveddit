@@ -9,7 +9,10 @@ function Content() {
   return (
     <div className="">
       <Switch>
-        <Route path="/dashboard/all">
+        <Route exact path="/dashboard/all">
+          <AllLinks />
+        </Route>
+        <Route path="/dashboard/all/:page">
           <AllLinks />
         </Route>
         <Route path="/dashboard/categories">cata</Route>
