@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import PaginationNavigation from '../../../../components/PaginationNavigation'
 import SavedLinkListItem from '../../../../components/SavedLinkListItem'
 import { ComponentContext } from '../../../../context/componentContext'
@@ -15,10 +14,8 @@ function FilterByNSFW() {
   const { pageResults, currentPage, searchPages } = useSelector(
     (state) => state.saved,
   )
-  const history = useHistory()
-  const { setHeadingTitle, setSearchValue, searchValue } = useContext(
-    ComponentContext,
-  )
+
+  const { setHeadingTitle, setSearchValue } = useContext(ComponentContext)
   useEffect(() => {
     dispatch(setNsfwFilter())
     dispatch(setSearchResults({ value: '' }))

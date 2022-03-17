@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector, batch } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
   loadNumberedPage,
   setSearchResults,
@@ -13,7 +13,6 @@ import { ComponentContext } from '../../../../context/componentContext'
 function FilterBySubreddit() {
   const { subreddit, page } = useParams()
   const dispatch = useDispatch()
-  const history = useHistory()
   const { pageResults, currentPage, searchPages } = useSelector(
     (state) => state.saved,
   )
