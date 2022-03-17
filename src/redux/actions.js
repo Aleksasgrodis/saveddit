@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import * as Types from './actionTypes'
 
 export const addLinks = ({ links }) => ({

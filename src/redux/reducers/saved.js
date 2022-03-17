@@ -157,7 +157,7 @@ export default function saved(state = initialState, action) {
         copy = copy.filter((post) => post.over18 === true)
       }
       const searchResults = copy.filter((link) =>
-        link.title.toLowerCase().includes(action.value.toLowerCase()),
+        link.title?.toLowerCase().includes(action.value.toLowerCase()),
       )
       return {
         ...state,

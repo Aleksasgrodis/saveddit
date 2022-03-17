@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { createStore } from 'redux'
 import throttle from 'lodash.throttle'
 import { loadState, saveState } from './localStorage'
